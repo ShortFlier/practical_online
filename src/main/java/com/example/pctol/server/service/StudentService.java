@@ -1,6 +1,6 @@
 package com.example.pctol.server.service;
 
-import com.example.pctol.pojo.DTO.LoginVO;
+import com.example.pctol.pojo.DTO.LoginDTO;
 import com.example.pctol.pojo.VO.Result;
 
 /**
@@ -8,5 +8,5 @@ import com.example.pctol.pojo.VO.Result;
  * @date 2024/3/24
  */
 public interface StudentService {
-    Result login(LoginVO loginInfo);
+    Result login(LoginDTO loginInfo);
 }

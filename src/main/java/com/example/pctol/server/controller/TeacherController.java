@@ -1,6 +1,6 @@
 package com.example.pctol.server.controller;
 
-import com.example.pctol.pojo.DTO.LoginVO;
+import com.example.pctol.pojo.DTO.LoginDTO;
 import com.example.pctol.pojo.VO.Result;
 import com.example.pctol.server.service.TeacherService;
 import lombok.extern.slf4j.Slf4j;
@@ -22,7 +22,7 @@ public class TeacherController {
     private TeacherService teacherService;
 
     @PostMapping("/login")
-    public Result login(@RequestBody LoginVO loginInfo) {
+    public Result login(@RequestBody LoginDTO loginInfo) {
         log.info("teacher login--account: {}, password: {}",loginInfo.getAccount(),loginInfo.getPassword());
         Result result=teacherService.login(loginInfo);
         return result;

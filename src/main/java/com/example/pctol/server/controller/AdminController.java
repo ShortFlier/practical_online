@@ -1,8 +1,7 @@
 package com.example.pctol.server.controller;
 
-import com.example.pctol.pojo.DTO.LoginVO;
+import com.example.pctol.pojo.DTO.LoginDTO;
 import com.example.pctol.pojo.VO.Result;
-import com.example.pctol.pojo.entity.Admin;
 import com.example.pctol.server.service.AdminService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -22,7 +21,7 @@ public class AdminController {
     @Autowired
     private AdminService adminService;
     @PostMapping("/login")
-    public Result login(@RequestBody LoginVO admin){
+    public Result login(@RequestBody LoginDTO admin){
         log.info("admin login--account: {}, password: {}",admin.getAccount(),admin.getPassword());
         Result result=adminService.login(admin);
         return result;
