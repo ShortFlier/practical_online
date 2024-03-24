@@ -16,12 +16,12 @@ import java.time.LocalDateTime;
 @NoArgsConstructor
 @Data
 public class Student {
-    public Long stuId;
-    public String account;
-    public String name;
-    public String password;
-    public String email;
-    public String phone;
-    public LocalDateTime create_time;
-    public LocalDateTime update_time;
+    private Long stuId;
+    private String account;
+    private String name;
+    private String password;
+    private String email;
+    private String phone;
+    private LocalDateTime create_time;
+    private LocalDateTime update_time;
 }

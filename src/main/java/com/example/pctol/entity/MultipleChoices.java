@@ -16,21 +16,21 @@ import java.time.LocalDateTime;
 @NoArgsConstructor
 @Data
 public class MultipleChoices {
-    public Long id;
-    public String question;
-    public String optionA;
-    public String optionB;
-    public String optionC;
-    public String optionD;
-    public String optionE;
-    public String optionF;
-    public String answer;
-    public String analyse;
-    public LocalDateTime createTime;
-    public LocalDateTime updateTime;
-    public String launcher;
-    public Integer auditState;
-    public LocalDateTime auditTime;
-    public Long subjectId;
-    public char difficulty;
+    private Long id;
+    private String question;
+    private String optionA;
+    private String optionB;
+    private String optionC;
+    private String optionD;
+    private String optionE;
+    private String optionF;
+    private String answer;
+    private String analyse;
+    private LocalDateTime createTime;
+    private LocalDateTime updateTime;
+    private String launcher;
+    private Integer auditState;
+    private LocalDateTime auditTime;
+    private Long subjectId;
+    private char difficulty;
 }

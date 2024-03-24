@@ -16,9 +16,9 @@ import java.time.LocalDateTime;
 @NoArgsConstructor
 @Data
 public class Admin {
-    public String account;
-    public String name;
-    public String password;
-    public LocalDateTime create_time;
-    public LocalDateTime update_time;
+    private String account;
+    private String name;
+    private String password;
+    private LocalDateTime create_time;
+    private LocalDateTime update_time;
 }

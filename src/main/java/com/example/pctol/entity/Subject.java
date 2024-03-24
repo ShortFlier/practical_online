@@ -16,14 +16,14 @@ import java.time.LocalDateTime;
 @NoArgsConstructor
 @Data
 public class Subject {
-    public Long id;
-    public String name;
-    public LocalDateTime create_time;
-    public LocalDateTime update_time;
+    private Long id;
+    private String name;
+    private LocalDateTime create_time;
+    private LocalDateTime update_time;
 //    创建者
-    public String launcher;
+    private String launcher;
 //    审核状态
-    public Integer auditState;
+    private Integer auditState;
 //    审核日期
-    public LocalDateTime auditTime;
+    private LocalDateTime auditTime;
 }
