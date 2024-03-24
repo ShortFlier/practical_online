@@ -1,4 +1,4 @@
-package com.example.pctol.entity;
+package com.example.pctol.pojo.entity;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -7,7 +7,7 @@ import lombok.NoArgsConstructor;
 import java.time.LocalDateTime;
 
 /**
- * 学科表全字段
+ * 应用题表全字段
  *
  * @author hp
  * @date 2024/3/24
@@ -15,15 +15,16 @@ import java.time.LocalDateTime;
 @AllArgsConstructor
 @NoArgsConstructor
 @Data
-public class Subject {
+public class VocabularyQst {
     private Long id;
-    private String name;
-    private LocalDateTime create_time;
-    private LocalDateTime update_time;
-//    创建者
+    private String question;
+    private String answer;
+    private String analyse;
+    private LocalDateTime createTime;
+    private LocalDateTime updateTime;
     private String launcher;
-//    审核状态
     private Integer auditState;
-//    审核日期
     private LocalDateTime auditTime;
+    private Long subjectId;
+    private char difficulty;
 }

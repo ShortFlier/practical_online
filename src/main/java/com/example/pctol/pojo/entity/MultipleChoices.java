@@ -1,4 +1,4 @@
-package com.example.pctol.entity;
+package com.example.pctol.pojo.entity;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;

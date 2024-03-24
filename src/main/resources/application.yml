@@ -1,10 +1,14 @@
 #
 spring:
+  profiles:
+    active: dev
+  main:
+    allow-circular-references: true
   datasource:
-    url: jdbc:mysql://localhost:3306/practical_online?useUnicode=true&characterEncoding=UTF-8&serverTimezone=UTC
-    username: root
-    password: Administrator
-    driver-class-name: com.mysql.cj.jdbc.Driver
+    driver-class-name: ${pctol.datasource.driver-class-name}
+    url: jdbc:mysql://${pctol.datasource.host}:${pctol.datasource.port}/${pctol.datasource.database}?serverTimezone=Asia/Shanghai&useUnicode=true&characterEncoding=utf-8&zeroDateTimeBehavior=convertToNull&useSSL=false&allowPublicKeyRetrieval=true
+    username: ${pctol.datasource.username}
+    password: ${pctol.datasource.password}
 #
 mybatis:
   configuration:

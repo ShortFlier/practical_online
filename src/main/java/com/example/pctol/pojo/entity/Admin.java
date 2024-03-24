@@ -1,4 +1,4 @@
-package com.example.pctol.entity;
+package com.example.pctol.pojo.entity;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -19,6 +19,6 @@ public class Admin {
     private String account;
     private String name;
     private String password;
-    private LocalDateTime create_time;
-    private LocalDateTime update_time;
+    private LocalDateTime createTime;
+    private LocalDateTime updateTime;
 }
