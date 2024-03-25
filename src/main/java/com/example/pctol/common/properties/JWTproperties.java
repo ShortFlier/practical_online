@@ -1,7 +1,6 @@
 package com.example.pctol.common.properties;
 
 import lombok.Data;
-import org.springframework.boot.context.properties.ConfigurationProperties;
 import org.springframework.stereotype.Component;
 
 /**
@@ -11,6 +10,7 @@ import org.springframework.stereotype.Component;
 @Component
 @Data
 public class JWTproperties {
+    private String publicSecretKey="practical_online_login";
     /**
      * 管理端员工生成jwt令牌相关配置
      */
@@ -19,19 +19,19 @@ public class JWTproperties {
 //    设置jwt过期时间(1天)
     private long adminTtl=86400000;
 //    设置前端传递过来的令牌名称
-    private String adminTokenName="admintoken";
+    private String adminTokenName="token";
 
     /**
      * 教师生成jwt令牌相关配置
      */
     private String teacherSecretKey="practical_online_login";
     private long teacherTtl=86400000;
-    private String teacherTokenName="teachertoken";
+    private String teacherTokenName="token";
 
     /**
      * 学生生成jwt令牌相关配置
      */
     private String studentSecretKey="practical_online_login";
     private long studentTtl=86400000;
-    private String studentTokenName="studenttoken";
+    private String studentTokenName="token";
 }

@@ -35,7 +35,7 @@ public class TeacherServiceImpl implements TeacherService {
         if(loginInfo.getPassword().equals(teacher.getPassword())){
             //登录成功后，生成jwt令牌
             Map<String, Object> claims = new HashMap<>();
-            claims.put(JwtClaimsConstant.TEACHER_ID, teacher.getThId());
+            claims.put(JwtClaimsConstant.TEACHER_ID,"[teacher]:"+teacher.getThId());
             String token = JwtUtil.createJWT(
                     jwtProperties.getTeacherSecretKey(),
                     jwtProperties.getTeacherTtl(),

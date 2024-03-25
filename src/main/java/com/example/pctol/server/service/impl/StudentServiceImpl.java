@@ -34,7 +34,7 @@ public class StudentServiceImpl implements StudentService {
         if(loginInfo.getPassword().equals(student.getPassword())){
             //登录成功后，生成jwt令牌
             Map<String, Object> claims = new HashMap<>();
-            claims.put(JwtClaimsConstant.STUDENT_ID, student.getStuId());
+            claims.put(JwtClaimsConstant.STUDENT_ID,"[student]:"+student.getStuId());
             String token = JwtUtil.createJWT(
                     jwtProperties.getStudentSecretKey(),
                     jwtProperties.getStudentTtl(),
