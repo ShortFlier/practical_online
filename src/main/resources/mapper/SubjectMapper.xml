@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.example.pctol.server.mapper.SubjectMapper">
+    <select id="getDataAct" parameterType="com.example.pctol.pojo.DTO.SubSearchDTO" resultType="java.lang.Integer">
+        select count(*)
+        from subject
+        <where>
+            <if test="key!=null">
+                name like concat('%',#{key},'%')
+            </if>
+        </where>
+    </select>
+
+    <select id="getData" parameterType="com.example.pctol.pojo.DTO.SubSearchDTO" resultType="com.example.pctol.pojo.VO.SubInfoVo">
+        SELECT
+            subject.name,
+            subject.create_time,
+            subject.launcher,
+            COUNT(judgment.id) as judgment_number,
+            COUNT(radioes.id) as radioes_number,
+            COUNT(multiple_choices.id) as m_choices_number,
+            COUNT(fill_in_the_blank.id) as fitb_number,
+            COUNT(vocabulary_qst.id) as voca_number
+        FROM
+            subject
+                LEFT JOIN judgment ON subject.id = judgment.subject_id AND judgment.audit_state = 1
+                LEFT JOIN radioes ON subject.id = radioes.subject_id AND radioes.audit_state = 1
+                LEFT JOIN multiple_choices ON subject.id = multiple_choices.subject_id AND multiple_choices.audit_state = 1
+                left join fill_in_the_blank on subject.id = fill_in_the_blank.id AND fill_in_the_blank.audit_state = 1
+                left join vocabulary_qst on subject.id = vocabulary_qst.id AND vocabulary_qst.audit_state = 1
+        <where>
+                subject.audit_state=1
+            <if test="subSearchDTO.key!=null">
+                and subject.name LIKE concat('%',#{subSearchDTO.key},'%')
+            </if>
+        </where>
+        GROUP BY
+            subject.name, subject.create_time, subject.launcher
+        limit #{start},#{pageSize}
+    </select>
+</mapper>

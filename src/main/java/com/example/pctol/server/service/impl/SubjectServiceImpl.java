@@ -2,11 +2,16 @@ package com.example.pctol.server.service.impl;
 
 import com.example.pctol.common.constant.AuditState;
 import com.example.pctol.common.properties.BaseContext;
+import com.example.pctol.pojo.DTO.SubSearchDTO;
+import com.example.pctol.pojo.VO.PageResult;
+import com.example.pctol.pojo.VO.SubInfoVo;
 import com.example.pctol.pojo.entity.Subject;
 import com.example.pctol.server.mapper.SubjectMapper;
 import com.example.pctol.server.service.SubjectService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+
+import java.util.List;
 
 /**
  * @author hp
@@ -22,5 +27,16 @@ public class SubjectServiceImpl implements SubjectService {
         subject.setLauncher(BaseContext.getLoginInfo());
         subject.setAuditState(AuditState.AWAIT);
         subjectMapper.add(subject);
+    }
+
+    @Override
+    public PageResult getData(SubSearchDTO subSearchDTO) {
+        //查询符合的数目，返回list
+        int total=subjectMapper.getDataAct(subSearchDTO);
+        List<SubInfoVo> rows=subjectMapper.getData(subSearchDTO,subSearchDTO.getStart(),subSearchDTO.getPageSize());
+        for (SubInfoVo item: rows) {
+            item.computeTopicNumber();
+        }
+        return new PageResult(total, rows);
     }
 }
