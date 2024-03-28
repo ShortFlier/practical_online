@@ -39,6 +39,7 @@ public class StudentServiceImpl implements StudentService {
                     jwtProperties.getStudentSecretKey(),
                     jwtProperties.getStudentTtl(),
                     claims);
+            student.setPassword(null);
             return new Result(StateCode.SUCCESS,token, student);
         }else //密码错误
             return new Result(StateCode.PASSWORD_ERROR,"密码错误");

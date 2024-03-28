@@ -39,6 +39,7 @@ public class AdminServiceImpl implements AdminService {
                     jwtProperties.getAdminSecretKey(),
                     jwtProperties.getAdminTtl(),
                     claims);
+            adminInfo.setPassword(null);
             return new Result(StateCode.SUCCESS,token, adminInfo);
         }else //密码错误
             return new Result(StateCode.PASSWORD_ERROR,"密码错误");

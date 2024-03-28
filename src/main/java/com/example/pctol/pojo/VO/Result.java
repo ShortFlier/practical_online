@@ -1,5 +1,6 @@
 package com.example.pctol.pojo.VO;
 
+import com.example.pctol.common.constant.StateCode;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 
@@ -28,5 +29,16 @@ public class Result {
 
     public Result(int code){
         this.code=code;
+    }
+
+    public static Result success(String msg){
+        return new Result(StateCode.SUCCESS,msg);
+    }
+    public static Result success(){
+        return new Result(StateCode.SUCCESS,"操作成功!");
+    }
+
+    public static Result success(String msg,Object object){
+        return new Result(StateCode.SUCCESS,msg, object);
     }
 }

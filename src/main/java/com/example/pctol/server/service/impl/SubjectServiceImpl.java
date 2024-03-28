@@ -1,9 +1,11 @@
 package com.example.pctol.server.service.impl;
 
 import com.example.pctol.common.constant.AuditState;
+import com.example.pctol.common.constant.StateCode;
 import com.example.pctol.common.properties.BaseContext;
 import com.example.pctol.pojo.DTO.SubSearchDTO;
 import com.example.pctol.pojo.VO.PageResult;
+import com.example.pctol.pojo.VO.Result;
 import com.example.pctol.pojo.VO.SubInfoVo;
 import com.example.pctol.pojo.entity.Subject;
 import com.example.pctol.server.mapper.SubjectMapper;
@@ -29,6 +31,8 @@ public class SubjectServiceImpl implements SubjectService {
         subjectMapper.add(subject);
     }
 
+
+
     @Override
     public PageResult getData(SubSearchDTO subSearchDTO) {
         //查询符合的数目，返回list
@@ -38,5 +42,23 @@ public class SubjectServiceImpl implements SubjectService {
             item.computeTopicNumber();
         }
         return new PageResult(total, rows);
+    }
+
+    @Override
+    public void adminAdd(Subject subject) {
+        subject.setLauncher(BaseContext.getLoginInfo());
+        subject.setAuditState(AuditState.ACCESS);
+        subjectMapper.add(subject);
+    }
+
+    @Override
+    public Result getLikeName(String name) {
+        List<String> list=subjectMapper.getLikeName(name);
+        return new Result(StateCode.SUCCESS,list);
+    }
+
+    @Override
+    public void dle(String name) {
+        subjectMapper.dle(name);
     }
 }

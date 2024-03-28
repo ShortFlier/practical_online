@@ -7,6 +7,7 @@
         select count(*)
         from subject
         <where>
+            subject.audit_state=1
             <if test="key!=null">
                 name like concat('%',#{key},'%')
             </if>
@@ -39,5 +40,10 @@
         GROUP BY
             subject.name, subject.create_time, subject.launcher
         limit #{start},#{pageSize}
+    </select>
+    <select id="getLikeName" parameterType="java.lang.String" resultType="java.lang.String">
+        select name
+        from subject
+        where audit_state=1 and lower(name) like concat('%', lower(#{name}), '%')
     </select>
 </mapper>

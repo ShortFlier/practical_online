@@ -5,6 +5,7 @@ import com.example.pctol.pojo.DTO.SubSearchDTO;
 import com.example.pctol.pojo.VO.SubInfoVo;
 import com.example.pctol.pojo.entity.Subject;
 import com.example.pctol.server.annotation.AutoFill;
+import org.apache.ibatis.annotations.Delete;
 import org.apache.ibatis.annotations.Insert;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Select;
@@ -25,4 +26,10 @@ public interface SubjectMapper {
     Integer getDataAct(SubSearchDTO subSearchDTO);
 
     List<SubInfoVo> getData(SubSearchDTO subSearchDTO, int start, int pageSize);
+
+
+    List<String> getLikeName(String name);
+
+    @Delete("delete from subject where name=#{name}")
+    void dle(String name);
 }

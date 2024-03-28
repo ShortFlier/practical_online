@@ -40,6 +40,7 @@ public class TeacherServiceImpl implements TeacherService {
                     jwtProperties.getTeacherSecretKey(),
                     jwtProperties.getTeacherTtl(),
                     claims);
+            teacher.setPassword(null);
             return new Result(StateCode.SUCCESS,token,teacher);
         }else //密码错误
             return new Result(StateCode.PASSWORD_ERROR,"密码错误");
