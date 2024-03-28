@@ -34,6 +34,9 @@ public class Result {
     public static Result success(String msg){
         return new Result(StateCode.SUCCESS,msg);
     }
+    public static Result success(Object object){
+        return new Result(StateCode.SUCCESS,"操作成功!",object);
+    }
     public static Result success(){
         return new Result(StateCode.SUCCESS,"操作成功!");
     }

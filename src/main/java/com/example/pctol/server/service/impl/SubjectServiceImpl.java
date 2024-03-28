@@ -1,6 +1,7 @@
 package com.example.pctol.server.service.impl;
 
 import com.example.pctol.common.constant.AuditState;
+import com.example.pctol.common.constant.MsgConstant;
 import com.example.pctol.common.constant.StateCode;
 import com.example.pctol.common.properties.BaseContext;
 import com.example.pctol.pojo.DTO.SubSearchDTO;
@@ -34,9 +35,11 @@ public class SubjectServiceImpl implements SubjectService {
 
 
     @Override
-    public PageResult getData(SubSearchDTO subSearchDTO) {
+    public PageResult getData(SubSearchDTO subSearchDTO) throws Exception {
         //查询符合的数目，返回list
         int total=subjectMapper.getDataAct(subSearchDTO);
+        if(total==0)
+            throw new Exception(MsgConstant.NO_DATA);
         List<SubInfoVo> rows=subjectMapper.getData(subSearchDTO,subSearchDTO.getStart(),subSearchDTO.getPageSize());
         for (SubInfoVo item: rows) {
             item.computeTopicNumber();

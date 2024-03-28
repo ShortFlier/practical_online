@@ -9,7 +9,7 @@
         <where>
             subject.audit_state=1
             <if test="key!=null">
-                name like concat('%',#{key},'%')
+                and lower(name) like concat('%', lower(#{key}), '%')
             </if>
         </where>
     </select>
@@ -34,7 +34,7 @@
         <where>
                 subject.audit_state=1
             <if test="subSearchDTO.key!=null">
-                and subject.name LIKE concat('%',#{subSearchDTO.key},'%')
+                and lower(subject.name) LIKE concat('%',lower(#{subSearchDTO.key}),'%')
             </if>
         </where>
         GROUP BY

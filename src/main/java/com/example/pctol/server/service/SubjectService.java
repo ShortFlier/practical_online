@@ -12,7 +12,7 @@ import com.example.pctol.pojo.entity.Subject;
 public interface SubjectService {
     void add(Subject subject);
 
-    PageResult getData(SubSearchDTO subSearchDTO);
+    PageResult getData(SubSearchDTO subSearchDTO) throws Exception;
 
     void adminAdd(Subject subject);
 

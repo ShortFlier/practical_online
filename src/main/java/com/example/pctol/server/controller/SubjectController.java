@@ -37,7 +37,7 @@ public class SubjectController {
 
     //分页查询获取匹配的学科（审核通过)
     @PostMapping("/gets")
-    public Result getData(@RequestBody SubSearchDTO subSearchDTO){
+    public Result getData(@RequestBody SubSearchDTO subSearchDTO) throws Exception {
         PageResult pageResult=subjectService.getData(subSearchDTO);
         return new Result(StateCode.SUCCESS, pageResult);
     }

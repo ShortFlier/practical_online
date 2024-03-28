@@ -1,6 +1,7 @@
 package com.example.pctol.server.service;
 
 import com.example.pctol.pojo.DTO.LoginDTO;
+import com.example.pctol.pojo.DTO.ThSearchDTO;
 import com.example.pctol.pojo.VO.Result;
 
 /**
@@ -9,4 +10,8 @@ import com.example.pctol.pojo.VO.Result;
  */
 public interface TeacherService {
     Result login(LoginDTO loginInfo);
+
+    Result pageGet(ThSearchDTO thSearchDTO) throws Exception;
+
+    Integer getAct();
 }

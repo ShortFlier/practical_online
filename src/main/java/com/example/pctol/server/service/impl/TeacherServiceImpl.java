@@ -1,9 +1,12 @@
 package com.example.pctol.server.service.impl;
 
 import com.example.pctol.common.constant.JwtClaimsConstant;
+import com.example.pctol.common.constant.MsgConstant;
 import com.example.pctol.common.constant.StateCode;
 import com.example.pctol.common.properties.JWTproperties;
 import com.example.pctol.pojo.DTO.LoginDTO;
+import com.example.pctol.pojo.DTO.ThSearchDTO;
+import com.example.pctol.pojo.VO.PageResult;
 import com.example.pctol.pojo.VO.Result;
 import com.example.pctol.server.mapper.TeacherMapper;
 import com.example.pctol.server.service.TeacherService;
@@ -13,6 +16,7 @@ import org.springframework.stereotype.Service;
 import com.example.pctol.pojo.entity.Teacher;
 
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 /**
@@ -44,5 +48,21 @@ public class TeacherServiceImpl implements TeacherService {
             return new Result(StateCode.SUCCESS,token,teacher);
         }else //密码错误
             return new Result(StateCode.PASSWORD_ERROR,"密码错误");
+    }
+
+    @Override
+    public Result pageGet(ThSearchDTO thSearchDTO) throws Exception {
+        int total=teacherMapper.getAct(thSearchDTO);
+        if(total==0)
+            throw new Exception(MsgConstant.NO_DATA);
+        List<Teacher> list=teacherMapper.pageGet(thSearchDTO,thSearchDTO.getStart(),thSearchDTO.getPageSize());
+        PageResult pageResult = new PageResult(total,list);
+        return Result.success(pageResult);
+    }
+
+    @Override
+    public Integer getAct() {
+        int total=teacherMapper.getAct(new ThSearchDTO());
+        return total;
     }
 }
