@@ -14,4 +14,6 @@ public interface TeacherService {
     Result pageGet(ThSearchDTO thSearchDTO) throws Exception;
 
     Integer getAct();
+
+    Result getInfoByAct(String account);
 }

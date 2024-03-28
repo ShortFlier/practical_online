@@ -18,5 +18,5 @@ public interface SubjectService {
 
     Result getLikeName(String name);
 
-    void dle(String name);
+    void dle(String name) throws Exception;
 }

@@ -37,4 +37,10 @@ public class TeacherController {
         Integer total=teacherService.getAct();
         return Result.success(total);
     }
+
+    @GetMapping("/{account}")
+    public Result getInfo(@PathVariable String account){
+        Result result=teacherService.getInfoByAct(account);
+        return result;
+    }
 }

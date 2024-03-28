@@ -65,4 +65,11 @@ public class TeacherServiceImpl implements TeacherService {
         int total=teacherMapper.getAct(new ThSearchDTO());
         return total;
     }
+
+    @Override
+    public Result getInfoByAct(String account) {
+        Teacher teacher=teacherMapper.login(account);
+        teacher.setPassword(null);
+        return Result.success(teacher);
+    }
 }

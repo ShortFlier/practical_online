@@ -13,7 +13,7 @@ import java.util.List;
  */
 @Mapper
 public interface TeacherMapper {
-    @Select("select th_id,account,password,name,email,phone,create_time from teacher where account=#{account}")
+    @Select("select th_id,account,password,name,email,phone,create_time,update_time from teacher where account=#{account}")
     Teacher login(String account);
 
     int getAct(ThSearchDTO thSearchDTO);

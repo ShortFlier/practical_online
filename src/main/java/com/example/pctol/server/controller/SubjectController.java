@@ -49,7 +49,7 @@ public class SubjectController {
     }
 
     @DeleteMapping("/dle/{name}")
-    public Result subDle(@PathVariable String name){
+    public Result subDle(@PathVariable String name) throws Exception {
         subjectService.dle(name);
         return Result.success();
     }

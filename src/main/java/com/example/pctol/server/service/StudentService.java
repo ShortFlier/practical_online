@@ -14,4 +14,6 @@ public interface StudentService {
     Result pageGet(StuSearchDTO stuSearchDTO) throws Exception;
 
     Result getAct() throws Exception;
+
+    Result getInfoByAct(String account);
 }

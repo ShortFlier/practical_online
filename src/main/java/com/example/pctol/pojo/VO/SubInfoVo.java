@@ -28,7 +28,8 @@ public class SubInfoVo {
     private int fitbNumber;
     private int vocaNumber;
 
-    public void computeTopicNumber(){
+    public SubInfoVo computeTopicNumber(){
         topicNumber=radioesNumber+judgmentNumber+mChoicesNumber+fitbNumber+vocaNumber;
+        return this;
     }
 }

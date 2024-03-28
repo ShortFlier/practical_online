@@ -37,4 +37,10 @@ public class StudentController {
         Result result=studentService.getAct();
         return result;
     }
+
+    @GetMapping("/{account}")
+    public Result getInfo(@PathVariable String account){
+        Result result=studentService.getInfoByAct(account);
+        return result;
+    }
 }

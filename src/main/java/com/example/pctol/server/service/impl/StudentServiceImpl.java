@@ -66,4 +66,10 @@ public class StudentServiceImpl implements StudentService {
             throw new Exception(MsgConstant.NO_DATA);
         return Result.success(total);
     }
+
+    @Override
+    public Result getInfoByAct(String account) {
+        Student student=studentMapper.login(account);
+        return Result.success(student);
+    }
 }

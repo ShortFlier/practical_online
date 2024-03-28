@@ -1,6 +1,7 @@
 package com.example.pctol.server.service.impl;
 
 import com.example.pctol.common.constant.AuditState;
+import com.example.pctol.common.constant.Constant;
 import com.example.pctol.common.constant.MsgConstant;
 import com.example.pctol.common.constant.StateCode;
 import com.example.pctol.common.properties.BaseContext;
@@ -61,7 +62,13 @@ public class SubjectServiceImpl implements SubjectService {
     }
 
     @Override
-    public void dle(String name) {
+    public void dle(String name) throws Exception {
+        SubSearchDTO subSearchDTO=new SubSearchDTO(name,null);
+        List<SubInfoVo> list=subjectMapper.getData(subSearchDTO, Constant.DEFAULT_PAGE_START,Constant.DEFAULT_PAGE_SIZE);
+        SubInfoVo subInfoVo=list.get(0);
+        if(subInfoVo.computeTopicNumber().getTopicNumber()>Constant.LIMIT_TOPIC_NUMBER)
+            throw new Exception(MsgConstant.SUBJECT_DELETE_NOT_ALLOWED);
+//        删除学科，解除与题目的关联，并且将与之关联的题目设为待审核
         subjectMapper.dle(name);
     }
 }
