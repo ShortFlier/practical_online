@@ -1,7 +1,9 @@
 package com.example.pctol.server.controller;
 
+import com.example.pctol.common.constant.MsgConstant;
 import com.example.pctol.common.constant.StateCode;
 import com.example.pctol.pojo.DTO.SubSearchDTO;
+import com.example.pctol.pojo.DTO.SubUpdateInfo;
 import com.example.pctol.pojo.VO.PageResult;
 import com.example.pctol.pojo.VO.Result;
 import com.example.pctol.pojo.entity.Subject;
@@ -52,5 +54,12 @@ public class SubjectController {
     public Result subDle(@PathVariable String name) throws Exception {
         subjectService.dle(name);
         return Result.success();
+    }
+
+    @PostMapping("/update")
+    public Result update(@RequestBody SubUpdateInfo subUpdateInfo) throws Exception {
+        System.out.println("subUpdateInfo:"+subUpdateInfo);
+        subjectService.update(subUpdateInfo);
+        return Result.success(MsgConstant.SUCCESS);
     }
 }

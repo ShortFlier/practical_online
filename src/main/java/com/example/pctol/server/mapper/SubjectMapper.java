@@ -2,6 +2,7 @@ package com.example.pctol.server.mapper;
 
 import com.example.pctol.common.constant.OperationType;
 import com.example.pctol.pojo.DTO.SubSearchDTO;
+import com.example.pctol.pojo.DTO.SubUpdateInfo;
 import com.example.pctol.pojo.VO.SubInfoVo;
 import com.example.pctol.pojo.entity.Subject;
 import com.example.pctol.server.annotation.AutoFill;
@@ -19,8 +20,8 @@ import java.util.List;
 @Mapper
 public interface SubjectMapper {
     @AutoFill(value = OperationType.INSERT)
-    @Insert("insert into subject(id,name,create_time,update_time,launcher,audit_state)" +
-            "values (#{id},#{name},#{createTime},#{updateTime},#{launcher},#{auditState})")
+    @Insert("insert into subject(name,create_time,update_time,launcher,audit_state,audit_time)" +
+            "values (#{name},#{createTime},#{updateTime},#{launcher},#{auditState},#{auditTime})")
     void add(Subject subject);
 
     Integer getDataAct(SubSearchDTO subSearchDTO);
@@ -32,4 +33,10 @@ public interface SubjectMapper {
 
     @Delete("delete from subject where name=#{name}")
     void dle(String name);
+
+    @AutoFill(OperationType.UPDATE)
+    void update(SubUpdateInfo subUpdateInfo);
+
+    @Select("select id,name,create_time,update_time,launcher,audit_state,audit_time from subject where id=#{id}")
+    Subject getById(Integer id);
 }

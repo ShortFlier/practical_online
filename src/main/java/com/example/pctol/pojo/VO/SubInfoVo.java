@@ -17,6 +17,7 @@ import java.time.LocalDateTime;
 @NoArgsConstructor
 @Data
 public class SubInfoVo {
+    private Integer id;
     private String name;
     private LocalDateTime createTime;
     private String launcher;

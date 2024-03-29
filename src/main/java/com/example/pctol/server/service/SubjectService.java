@@ -1,6 +1,7 @@
 package com.example.pctol.server.service;
 
 import com.example.pctol.pojo.DTO.SubSearchDTO;
+import com.example.pctol.pojo.DTO.SubUpdateInfo;
 import com.example.pctol.pojo.VO.PageResult;
 import com.example.pctol.pojo.VO.Result;
 import com.example.pctol.pojo.entity.Subject;
@@ -19,4 +20,6 @@ public interface SubjectService {
     Result getLikeName(String name);
 
     void dle(String name) throws Exception;
+
+    void update(SubUpdateInfo subUpdateInfo) throws Exception;
 }
