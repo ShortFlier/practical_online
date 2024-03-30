@@ -8,10 +8,12 @@ import com.example.pctol.pojo.VO.PageResult;
 import com.example.pctol.pojo.VO.Result;
 import com.example.pctol.pojo.entity.Subject;
 import com.example.pctol.server.service.SubjectService;
+import lombok.extern.slf4j.Slf4j;
 import org.apache.ibatis.annotations.Delete;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
+import java.time.LocalDateTime;
 import java.util.List;
 
 /**
@@ -20,6 +22,7 @@ import java.util.List;
  */
 @RestController
 @RequestMapping("/subject")
+@Slf4j
 public class SubjectController {
     @Autowired
     SubjectService subjectService;
@@ -59,7 +62,15 @@ public class SubjectController {
     @PostMapping("/update")
     public Result update(@RequestBody SubUpdateInfo subUpdateInfo) throws Exception {
         System.out.println("subUpdateInfo:"+subUpdateInfo);
+        subUpdateInfo.setAuditTime(LocalDateTime.now());
         subjectService.update(subUpdateInfo);
         return Result.success(MsgConstant.SUCCESS);
+    }
+
+    @GetMapping("/get")
+    public Result getByAudit(Integer auditState,Integer page, Integer pageSize){
+        log.info("state:{},page：{},pageSize:{}",auditState,page,pageSize);
+        Result result=subjectService.getByAudit(auditState, page, pageSize);
+        return result;
     }
 }

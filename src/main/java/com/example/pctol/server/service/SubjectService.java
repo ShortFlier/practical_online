@@ -22,4 +22,6 @@ public interface SubjectService {
     void dle(String name) throws Exception;
 
     void update(SubUpdateInfo subUpdateInfo) throws Exception;
+
+    Result getByAudit(Integer auditState, Integer page, Integer pageSize);
 }

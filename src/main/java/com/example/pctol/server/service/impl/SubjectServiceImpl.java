@@ -87,6 +87,14 @@ public class SubjectServiceImpl implements SubjectService {
         subjectMapper.update(subUpdateInfo);
     }
 
+    @Override
+    public Result getByAudit(Integer auditState, Integer page, Integer pageSize) {
+        List<Subject> list=subjectMapper.getByAudit(auditState,(page-1)*pageSize,pageSize);
+        Integer total=subjectMapper.getTotalByAudit(auditState);
+        PageResult pageResult=new PageResult(total,list);
+        return Result.success(pageResult);
+    }
+
     private SubInfoVo selectNotNull(String name) throws Exception {
         SubSearchDTO subSearchDTO=new SubSearchDTO(name,null);
         List<SubInfoVo> list=subjectMapper.getData(subSearchDTO, Constant.DEFAULT_PAGE_START,Constant.DEFAULT_PAGE_SIZE);

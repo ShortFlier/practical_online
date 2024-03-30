@@ -5,16 +5,18 @@
 <mapper namespace="com.example.pctol.server.mapper.SubjectMapper">
     <update id="update" parameterType="com.example.pctol.pojo.DTO.SubUpdateInfo">
         update subject
-        set update_time=#{updateTime}
-        <if test="name!=null">
-            ,name=#{name}
-        </if>
-        <if test="auditState!=null">
-            ,audit_state=#{auditState}
-        </if>
-        <if test="auditTime!=null">
-            ,audit_time=#{auditTime}
-        </if>
+        <set>
+            update_time=#{updateTime}
+            <if test="name!=null">
+                ,name=#{name}
+            </if>
+            <if test="auditState!=null">
+                ,audit_state=#{auditState}
+            </if>
+            <if test="auditTime!=null">
+                ,audit_time=#{auditTime}
+            </if>
+        </set>
         where   id=#{id}
     </update>
 

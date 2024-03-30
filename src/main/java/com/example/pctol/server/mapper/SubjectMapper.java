@@ -39,4 +39,11 @@ public interface SubjectMapper {
 
     @Select("select id,name,create_time,update_time,launcher,audit_state,audit_time from subject where id=#{id}")
     Subject getById(Integer id);
+
+
+    @Select("select id,name,create_time,update_time,launcher,audit_state,audit_time from subject where audit_state=#{auditState} limit #{start},#{pageSize}")
+    List<Subject> getByAudit(Integer auditState, int start, Integer pageSize);
+
+    @Select("select count(*) from subject where audit_state=#{auditState}")
+    Integer getTotalByAudit(Integer auditState);
 }
