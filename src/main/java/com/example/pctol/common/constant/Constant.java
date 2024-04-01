@@ -9,5 +9,8 @@ public class Constant {
     public static final int DEFAULT_PAGE_START=0;
     public static final int DEFAULT_PAGE_SIZE=5;
 
+    //关联题目限制
     public static final int LIMIT_TOPIC_NUMBER=10;
+
+
 }
