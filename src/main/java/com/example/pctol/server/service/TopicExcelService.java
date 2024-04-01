@@ -10,5 +10,5 @@ import org.springframework.web.multipart.MultipartFile;
 public interface TopicExcelService {
     void insert(TopicExcel topicExcel);
 
-    void readExcel(MultipartFile file, Integer type);
+    void readExcel(String path, Integer type) throws Exception;
 }

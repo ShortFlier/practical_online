@@ -7,7 +7,6 @@ import org.springframework.boot.system.ApplicationHome;
 import org.springframework.web.multipart.MultipartFile;
 import java.io.File;
 import java.io.IOException;
-
 import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
@@ -32,7 +31,7 @@ public class ExcelOp {
                 .getParentFile().getAbsolutePath() + "\\src\\main\\resources\\static\\excel";
     }
 
-    public List<String> save(MultipartFile file, Integer type, String msg) throws Exception{
+    public String save(MultipartFile file, Integer type, String msg) throws Exception{
         if (file.isEmpty()) {
             throw new Exception(FileConstant.NULL_FILE);
         }
@@ -40,11 +39,8 @@ public class ExcelOp {
             throw new Exception(FileConstant.NOT_AN_EXCEL);
         }
         // 给文件重命名
-//        String fileName = UUID.randomUUID() + "." + file.getContentType()
-//                .substring(file.getContentType().lastIndexOf("/") + 1);
         String fileName=(msg==null?"":(msg+"&"))+BaseContext.getLoginInfo()+"&"+type+"&"+UUID.randomUUID()+"&"+file.getOriginalFilename();
         fileName=fileName.replace(":","");
-        String newFileName="已处理&"+fileName;
         log.info("path:{}",fileName);
         try {
             // 获取保存路径
@@ -52,17 +48,13 @@ public class ExcelOp {
             File files = new File(path, fileName);
             file.transferTo(files);
             List<String> paths=new ArrayList<>();
-            paths.add(fileName);
-            paths.add(newFileName);
-            return paths;
+            return fileName;
         } catch (IOException e) {
             throw e;
         }
     }
 
-    public void delete(String name){
 
-    }
 
 
 }

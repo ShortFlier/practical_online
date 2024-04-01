@@ -1,8 +1,10 @@
 package com.example.pctol.server.service.impl;
 
+import com.example.pctol.common.constant.MsgConstant;
 import com.example.pctol.common.constant.TopicConstant;
 import com.example.pctol.common.properties.BaseContext;
 import com.example.pctol.common.utils.ExcelOp;
+import com.example.pctol.pojo.entity.Radioes;
 import com.example.pctol.pojo.entity.TopicExcel;
 import com.example.pctol.server.mapper.*;
 import com.example.pctol.server.service.TopicExcelService;
@@ -52,11 +54,31 @@ public class TopicServiceImpl implements TopicService {
     @Transactional(rollbackFor = Exception.class)
     public void excelHandler(MultipartFile file, Integer type) throws Exception {
         //保存到本地
-        List<String> paths=new ExcelOp().save(file,type,null);
+        String path=new ExcelOp().save(file,type,null);
         //记录此次存储
-        TopicExcel topicExcel=new TopicExcel(null,file.getOriginalFilename(),paths.get(0), BaseContext.getLoginInfo(),LocalDateTime.now(),null);
+        TopicExcel topicExcel=new TopicExcel(null,file.getOriginalFilename(),path, BaseContext.getLoginInfo(),LocalDateTime.now(),null);
         topicExcelService.insert(topicExcel);
         //读取excel
-        topicExcelService.readExcel(file,type);
+        topicExcelService.readExcel(path,type);
+        //更新数据库，写入错误行开始(如果有)
+    }
+
+    //excel存入数据库
+    @Override
+    public <T> void save(List<T> cachedDataList, int type) throws Exception {
+        if(type==TopicConstant.RADIOES){
+            System.out.println(cachedDataList);
+            Radioes.getList(cachedDataList);
+        } else if (type==TopicConstant.MULTIPLE_CHOICES) {
+
+        }else if(type==TopicConstant.JUDGMENT){
+
+        } else if (type==TopicConstant.FILL_IN_THE_BLANK) {
+
+        } else if (type==TopicConstant.VOCABULARY_QST) {
+
+        }else {
+            throw new Exception(TopicConstant.FAILED_TYPE);
+        }
     }
 }

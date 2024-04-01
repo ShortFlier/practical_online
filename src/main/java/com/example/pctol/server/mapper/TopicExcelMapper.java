@@ -10,6 +10,6 @@ import org.apache.ibatis.annotations.Mapper;
  */
 @Mapper
 public interface TopicExcelMapper {
-    @Insert("insert into topic_excel(name,url,launcher,create_time,excel_id) values (#{name},#{url},#{launcher},#{create_time},#{excelId})")
+    @Insert("insert into topic_excel(name,url,launcher,create_time,error_row) values (#{name},#{url},#{launcher},#{create_time},#{errorRow})")
     void insert(TopicExcel topicExcel);
 }
