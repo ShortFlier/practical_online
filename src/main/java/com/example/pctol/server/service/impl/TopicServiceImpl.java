@@ -1,16 +1,17 @@
 package com.example.pctol.server.service.impl;
 
 import com.example.pctol.common.constant.ExcelConstant;
-import com.example.pctol.common.constant.MsgConstant;
 import com.example.pctol.common.constant.TopicConstant;
 import com.example.pctol.common.properties.BaseContext;
 import com.example.pctol.common.utils.ExcelOp;
+import com.example.pctol.pojo.DTO.TopicSearchInfo;
+import com.example.pctol.pojo.VO.Result;
+import com.example.pctol.pojo.VO.TopicTotal;
 import com.example.pctol.pojo.entity.*;
 import com.example.pctol.server.mapper.*;
 import com.example.pctol.server.service.TopicExcelService;
 import com.example.pctol.server.service.TopicService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.core.io.ResourceLoader;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.multipart.MultipartFile;
@@ -24,9 +25,6 @@ import java.util.List;
  */
 @Service
 public class TopicServiceImpl implements TopicService {
-
-    @Autowired
-    private ResourceLoader resourceLoader;
 
     @Autowired
     private RadioesMapper radioesMapper;
@@ -66,33 +64,60 @@ public class TopicServiceImpl implements TopicService {
     //excel存入数据库
     @Override
     public <T> void save(List<T> cachedDataList, int type) throws Exception {
+        List list;
         if(type==TopicConstant.RADIOES){
             System.out.print("单选excel:");
-            List list=Radioes.getList(cachedDataList);
-            System.out.println(list.size());
-            System.out.println(list);
+            list=Radioes.getList(cachedDataList);
+            //存入数据库
+            radioesMapper.insert(list);
         } else if (type==TopicConstant.MULTIPLE_CHOICES) {
             System.out.print("多选excel:");
-            List list= MultipleChoices.getList(cachedDataList);
-            System.out.println(list.size());
-            System.out.println(list);
+            list= MultipleChoices.getList(cachedDataList);
+            //存入数据库
+            mulChoMapper.insert(list);
         }else if(type==TopicConstant.JUDGMENT){
             System.out.print("判断excel:");
-            List list= Judgment.getList(cachedDataList);
-            System.out.println(list.size());
-            System.out.println(list);
+            list= Judgment.getList(cachedDataList);
+            //存入数据库
+            judgMapper.insert(list);
         } else if (type==TopicConstant.FILL_IN_THE_BLANK) {
             System.out.print("填空excel:");
-            List list= FillInTheBlank.getList(cachedDataList);
-            System.out.println(list.size());
-            System.out.println(list);
+            list= FillInTheBlank.getList(cachedDataList);
+            //存入数据库
+            fitbMapper.insert(list);
         } else if (type==TopicConstant.VOCABULARY_QST) {
             System.out.print("应用excel:");
-            List list=VocabularyQst.getList(cachedDataList);
-            System.out.println(list.size());
-            System.out.println(list);
+            list=VocabularyQst.getList(cachedDataList);
+            //存入数据库
+            vocaMapper.insert(list);
         }else {
             throw new Exception(ExcelConstant.FAILED_TYPE);
         }
+        System.out.println(list.size());
+        System.out.println(list);
+    }
+
+    @Override
+    public Result statistic(int type) throws Exception {
+        TopicTotal total=new TopicTotal();
+        TopicSearchInfo topicSearchInfo=new TopicSearchInfo();
+        if(type==TopicConstant.ALL_TOPIC){
+            total.setTopicTotal(radioesMapper.getNumber(topicSearchInfo),mulChoMapper.getNumber(topicSearchInfo),
+                    judgMapper.getNumber(topicSearchInfo),fitbMapper.getNumber(topicSearchInfo),
+                    vocaMapper.getNumber(topicSearchInfo));
+        }else if(type==TopicConstant.RADIOES){
+            total.setRdsNumber(radioesMapper.getNumber(topicSearchInfo));
+        } else if (type==TopicConstant.MULTIPLE_CHOICES) {
+            total.setMltNumber(mulChoMapper.getNumber(topicSearchInfo));
+        }else if(type==TopicConstant.JUDGMENT){
+            total.setJdgeNumber(judgMapper.getNumber(topicSearchInfo));
+        } else if (type==TopicConstant.FILL_IN_THE_BLANK) {
+            total.setFitbNumber(fitbMapper.getNumber(topicSearchInfo));
+        } else if (type==TopicConstant.VOCABULARY_QST) {
+            total.setVocaNumber(vocaMapper.getNumber(topicSearchInfo));
+        }else {
+            throw new Exception(ExcelConstant.FAILED_TYPE);
+        }
+        return Result.success(total);
     }
 }

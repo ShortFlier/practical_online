@@ -5,6 +5,7 @@ package com.example.pctol.common.constant;
  * @date 2024/4/1
  */
 public class TopicConstant {
+    public static final int ALL_TOPIC=0;
     //单选题
     public static final int RADIOES=1;
     //多选题

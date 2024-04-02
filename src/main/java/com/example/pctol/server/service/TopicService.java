@@ -1,5 +1,6 @@
 package com.example.pctol.server.service;
 
+import com.example.pctol.pojo.VO.Result;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.io.IOException;
@@ -18,4 +19,6 @@ public interface TopicService {
     void excelHandler(MultipartFile file, Integer type) throws Exception;
 
     <T> void save(List<T> cachedDataList, int type) throws Exception;
+
+    Result statistic(int type) throws Exception;
 }

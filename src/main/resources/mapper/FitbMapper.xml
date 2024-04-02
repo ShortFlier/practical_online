@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.example.pctol.server.mapper.FitbMapper">
+
+    <insert id="insert" parameterType="java.util.List">
+        INSERT INTO fill_in_the_blank
+        VALUES
+        <foreach collection="list" item="item" separator=",">
+            (#{item.id}, #{item.question}, #{item.answer}, #{item.analyse}, #{item.createTime}, #{item.updateTime}, #{item.launcher}, #{item.auditState}, #{item.auditTime}, #{item.subjectId}, #{item.difficulty})
+        </foreach>
+    </insert>
+
+    <select id="getNumber" resultType="java.lang.Integer">
+        select count(*)
+        from fill_in_the_blank
+        <where>
+            <if test="id!=null">
+                and id=#{id}
+            </if>
+            <if test="question!=null">
+                and question like concat('%',#{question},'%')
+            </if>
+            <if test="launcher!=null">
+                and launcher=#{launcher}
+            </if>
+            <if test="auditState!=null">
+                and audit_state=#{auditState}
+            </if>
+            <if test="subjectId!=null">
+                and subject_id=#{subjectId}
+            </if>
+            <if test="difficulty!=null">
+                and difficulty=#{difficulty}
+            </if>
+        </where>
+    </select>
+</mapper>
