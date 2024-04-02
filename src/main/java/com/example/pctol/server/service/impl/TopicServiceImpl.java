@@ -1,11 +1,11 @@
 package com.example.pctol.server.service.impl;
 
+import com.example.pctol.common.constant.ExcelConstant;
 import com.example.pctol.common.constant.MsgConstant;
 import com.example.pctol.common.constant.TopicConstant;
 import com.example.pctol.common.properties.BaseContext;
 import com.example.pctol.common.utils.ExcelOp;
-import com.example.pctol.pojo.entity.Radioes;
-import com.example.pctol.pojo.entity.TopicExcel;
+import com.example.pctol.pojo.entity.*;
 import com.example.pctol.server.mapper.*;
 import com.example.pctol.server.service.TopicExcelService;
 import com.example.pctol.server.service.TopicService;
@@ -67,18 +67,32 @@ public class TopicServiceImpl implements TopicService {
     @Override
     public <T> void save(List<T> cachedDataList, int type) throws Exception {
         if(type==TopicConstant.RADIOES){
-            System.out.println(cachedDataList);
-            Radioes.getList(cachedDataList);
+            System.out.print("单选excel:");
+            List list=Radioes.getList(cachedDataList);
+            System.out.println(list.size());
+            System.out.println(list);
         } else if (type==TopicConstant.MULTIPLE_CHOICES) {
-
+            System.out.print("多选excel:");
+            List list= MultipleChoices.getList(cachedDataList);
+            System.out.println(list.size());
+            System.out.println(list);
         }else if(type==TopicConstant.JUDGMENT){
-
+            System.out.print("判断excel:");
+            List list= Judgment.getList(cachedDataList);
+            System.out.println(list.size());
+            System.out.println(list);
         } else if (type==TopicConstant.FILL_IN_THE_BLANK) {
-
+            System.out.print("填空excel:");
+            List list= FillInTheBlank.getList(cachedDataList);
+            System.out.println(list.size());
+            System.out.println(list);
         } else if (type==TopicConstant.VOCABULARY_QST) {
-
+            System.out.print("应用excel:");
+            List list=VocabularyQst.getList(cachedDataList);
+            System.out.println(list.size());
+            System.out.println(list);
         }else {
-            throw new Exception(TopicConstant.FAILED_TYPE);
+            throw new Exception(ExcelConstant.FAILED_TYPE);
         }
     }
 }

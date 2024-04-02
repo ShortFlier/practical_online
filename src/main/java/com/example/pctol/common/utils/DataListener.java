@@ -3,11 +3,13 @@ package com.example.pctol.common.utils;
 import com.alibaba.excel.context.AnalysisContext;
 import com.alibaba.excel.read.listener.ReadListener;
 import com.alibaba.excel.util.ListUtils;
+import com.alibaba.excel.util.StringUtils;
 import com.alibaba.fastjson.JSON;
 import com.example.pctol.server.service.TopicService;
 import lombok.SneakyThrows;
 import lombok.extern.slf4j.Slf4j;
 
+import java.lang.reflect.Field;
 import java.util.List;
 
 /**
@@ -21,7 +23,7 @@ public class DataListener<T> implements ReadListener<T> {
     /**
      * 每隔5条存储数据库，实际使用中可以100条，然后清理list ，方便内存回收
      */
-    private static final int BATCH_COUNT = 100;
+    public static final int BATCH_COUNT = 100;
     /**
      * 缓存的数据
      */
@@ -47,6 +49,7 @@ public class DataListener<T> implements ReadListener<T> {
     @Override
     public void invoke(T data, AnalysisContext analysisContext) {
         log.info("解析到一条数据:{}", JSON.toJSONString(data));
+
         cachedDataList.add(data);
         // 达到BATCH_COUNT了，需要去存储一次数据库，防止数据几万条数据在内存，容易OOM
         if (cachedDataList.size() >= BATCH_COUNT) {
