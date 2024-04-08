@@ -1,6 +1,6 @@
 package com.example.pctol.server.mapper;
 
-import com.example.pctol.pojo.DTO.TopicSearchInfo;
+import com.example.pctol.pojo.DTO.TopicSearchInfoDTO;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Update;
 
@@ -21,5 +21,5 @@ public interface RadioesMapper {
 
     void insert(List list);
 
-    int getNumber(TopicSearchInfo topicSearchInfo);
+    int getNumber(TopicSearchInfoDTO topicSearchInfoDTO);
 }

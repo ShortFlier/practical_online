@@ -11,4 +11,6 @@ public interface TopicExcelService {
     void insert(TopicExcel topicExcel);
 
     void readExcel(String path, Integer type) throws Exception;
+
+    void updateEor(Integer id, String msg);
 }

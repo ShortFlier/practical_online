@@ -11,7 +11,7 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @NoArgsConstructor
 @Data
-public class TopicTotal {
+public class TopicTotalVO {
     private Integer total;
     private Integer rdsNumber;
     private Integer mltNumber;
@@ -19,7 +19,7 @@ public class TopicTotal {
     private Integer fitbNumber;
     private Integer vocaNumber;
 
-    public TopicTotal(Integer rdsNumber, Integer mltNumber, Integer jdgeNumber, Integer fitbNumber, Integer vocaNumber){
+    public TopicTotalVO(Integer rdsNumber, Integer mltNumber, Integer jdgeNumber, Integer fitbNumber, Integer vocaNumber){
         this.rdsNumber=rdsNumber;
         this.mltNumber=mltNumber;
         this.jdgeNumber=jdgeNumber;
@@ -28,7 +28,7 @@ public class TopicTotal {
         total=rdsNumber+mltNumber+jdgeNumber+fitbNumber+vocaNumber;
     }
 
-    public TopicTotal setTopicTotal(Integer rdsNumber, Integer mltNumber, Integer jdgeNumber, Integer fitbNumber, Integer vocaNumber){
+    public TopicTotalVO setTopicTotal(Integer rdsNumber, Integer mltNumber, Integer jdgeNumber, Integer fitbNumber, Integer vocaNumber){
         this.rdsNumber=rdsNumber;
         this.mltNumber=mltNumber;
         this.jdgeNumber=jdgeNumber;

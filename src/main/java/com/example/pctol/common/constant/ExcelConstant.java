@@ -5,7 +5,7 @@ package com.example.pctol.common.constant;
  * @date 2024/4/2
  */
 public class ExcelConstant {
-    public static final String FAILED_TYPE="类型错误";
+    public static final String FAILED_TYPE="excel类型错误";
 
     //单选excel列数
     public static final int RADIOES_COLUMN=8;

@@ -11,7 +11,7 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @NoArgsConstructor
 @Data
-public class TopicSearchInfo {
+public class TopicSearchInfoDTO {
     private Integer id;
     private String question;
     private String launcher;

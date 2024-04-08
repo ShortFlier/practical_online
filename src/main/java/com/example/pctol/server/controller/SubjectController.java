@@ -3,18 +3,16 @@ package com.example.pctol.server.controller;
 import com.example.pctol.common.constant.MsgConstant;
 import com.example.pctol.common.constant.StateCode;
 import com.example.pctol.pojo.DTO.SubSearchDTO;
-import com.example.pctol.pojo.DTO.SubUpdateInfo;
+import com.example.pctol.pojo.DTO.SubUpdateInfoDTO;
 import com.example.pctol.pojo.VO.PageResult;
 import com.example.pctol.pojo.VO.Result;
 import com.example.pctol.pojo.entity.Subject;
 import com.example.pctol.server.service.SubjectService;
 import lombok.extern.slf4j.Slf4j;
-import org.apache.ibatis.annotations.Delete;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 import java.time.LocalDateTime;
-import java.util.List;
 
 /**
  * @author hp
@@ -60,10 +58,10 @@ public class SubjectController {
     }
 
     @PostMapping("/update")
-    public Result update(@RequestBody SubUpdateInfo subUpdateInfo) throws Exception {
-        System.out.println("subUpdateInfo:"+subUpdateInfo);
-        subUpdateInfo.setAuditTime(LocalDateTime.now());
-        subjectService.update(subUpdateInfo);
+    public Result update(@RequestBody SubUpdateInfoDTO subUpdateInfoDTO) throws Exception {
+        System.out.println("subUpdateInfo:"+ subUpdateInfoDTO);
+        subUpdateInfoDTO.setAuditTime(LocalDateTime.now());
+        subjectService.update(subUpdateInfoDTO);
         return Result.success(MsgConstant.SUCCESS);
     }
 

@@ -19,5 +19,5 @@ public class TopicExcel {
     private String url;
     private String launcher;
     private LocalDateTime create_time;
-    private Integer errorRow;
+    private Integer errorMsg;
 }

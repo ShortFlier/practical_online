@@ -10,7 +10,6 @@ import com.example.pctol.server.service.TopicExcelService;
 import com.example.pctol.server.service.TopicService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import org.springframework.web.multipart.MultipartFile;
 
 import java.io.File;
 
@@ -31,11 +30,16 @@ public class TopicExcelServiceImpl implements TopicExcelService {
     }
 
     @Override
-    public void readExcel(String path, Integer type) throws Exception {
+    public void readExcel(String path, Integer type) {
         ExcelOp excelOp=new ExcelOp();
         String headPath= excelOp.getSavePath();
         File file=new File(headPath,path);
         EasyExcel.read(file,new DataListener(topicService,type)).sheet().doRead();
+    }
+
+    @Override
+    public void updateEor(Integer id ,String msg) {
+        topicExcelMapper.updateEor(id,msg);
     }
 
 

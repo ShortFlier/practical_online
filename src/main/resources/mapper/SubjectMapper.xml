@@ -3,7 +3,7 @@
         PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.example.pctol.server.mapper.SubjectMapper">
-    <update id="update" parameterType="com.example.pctol.pojo.DTO.SubUpdateInfo">
+    <update id="update" parameterType="com.example.pctol.pojo.DTO.SubUpdateInfoDTO">
         update subject
         <set>
             update_time=#{updateTime}

@@ -14,13 +14,13 @@ import lombok.NoArgsConstructor;
 public class ThSearchDTO {
     private String account;
     private String name;
-    private PageInfo pageInfo;
+    private PageInfoDTO pageInfoDTO;
 
     public int getPageSize(){
-        return pageInfo.getPageSize();
+        return pageInfoDTO.getPageSize();
     }
 
     public int getStart(){
-        return pageInfo.getStart();
+        return pageInfoDTO.getStart();
     }
 }

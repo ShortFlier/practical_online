@@ -4,16 +4,16 @@ import com.example.pctol.common.constant.ExcelConstant;
 import com.example.pctol.common.constant.TopicConstant;
 import com.example.pctol.common.properties.BaseContext;
 import com.example.pctol.common.utils.ExcelOp;
-import com.example.pctol.pojo.DTO.TopicSearchInfo;
+import com.example.pctol.pojo.DTO.TopicSearchInfoDTO;
 import com.example.pctol.pojo.VO.Result;
-import com.example.pctol.pojo.VO.TopicTotal;
+import com.example.pctol.pojo.VO.TopicTotalVO;
 import com.example.pctol.pojo.entity.*;
 import com.example.pctol.server.mapper.*;
 import com.example.pctol.server.service.TopicExcelService;
 import com.example.pctol.server.service.TopicService;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.time.LocalDateTime;
@@ -24,6 +24,7 @@ import java.util.List;
  * @date 2024/3/29
  */
 @Service
+@Slf4j
 public class TopicServiceImpl implements TopicService {
 
     @Autowired
@@ -49,13 +50,15 @@ public class TopicServiceImpl implements TopicService {
     }
 
     @Override
-    @Transactional(rollbackFor = Exception.class)
+//    @Transactional(rollbackFor = Exception.class)
     public void excelHandler(MultipartFile file, Integer type) throws Exception {
         //保存到本地
         String path=new ExcelOp().save(file,type,null);
         //记录此次存储
         TopicExcel topicExcel=new TopicExcel(null,file.getOriginalFilename(),path, BaseContext.getLoginInfo(),LocalDateTime.now(),null);
         topicExcelService.insert(topicExcel);
+        log.info("插入数据库id:{}",topicExcel.getId());
+        BaseContext.setLoginInfo(topicExcel.getId()+"#"+BaseContext.getLoginInfo());
         //读取excel
         topicExcelService.readExcel(path,type);
         //更新数据库，写入错误行开始(如果有)
@@ -99,22 +102,22 @@ public class TopicServiceImpl implements TopicService {
 
     @Override
     public Result statistic(int type) throws Exception {
-        TopicTotal total=new TopicTotal();
-        TopicSearchInfo topicSearchInfo=new TopicSearchInfo();
+        TopicTotalVO total=new TopicTotalVO();
+        TopicSearchInfoDTO topicSearchInfoDTO =new TopicSearchInfoDTO();
         if(type==TopicConstant.ALL_TOPIC){
-            total.setTopicTotal(radioesMapper.getNumber(topicSearchInfo),mulChoMapper.getNumber(topicSearchInfo),
-                    judgMapper.getNumber(topicSearchInfo),fitbMapper.getNumber(topicSearchInfo),
-                    vocaMapper.getNumber(topicSearchInfo));
+            total.setTopicTotal(radioesMapper.getNumber(topicSearchInfoDTO),mulChoMapper.getNumber(topicSearchInfoDTO),
+                    judgMapper.getNumber(topicSearchInfoDTO),fitbMapper.getNumber(topicSearchInfoDTO),
+                    vocaMapper.getNumber(topicSearchInfoDTO));
         }else if(type==TopicConstant.RADIOES){
-            total.setRdsNumber(radioesMapper.getNumber(topicSearchInfo));
+            total.setRdsNumber(radioesMapper.getNumber(topicSearchInfoDTO));
         } else if (type==TopicConstant.MULTIPLE_CHOICES) {
-            total.setMltNumber(mulChoMapper.getNumber(topicSearchInfo));
+            total.setMltNumber(mulChoMapper.getNumber(topicSearchInfoDTO));
         }else if(type==TopicConstant.JUDGMENT){
-            total.setJdgeNumber(judgMapper.getNumber(topicSearchInfo));
+            total.setJdgeNumber(judgMapper.getNumber(topicSearchInfoDTO));
         } else if (type==TopicConstant.FILL_IN_THE_BLANK) {
-            total.setFitbNumber(fitbMapper.getNumber(topicSearchInfo));
+            total.setFitbNumber(fitbMapper.getNumber(topicSearchInfoDTO));
         } else if (type==TopicConstant.VOCABULARY_QST) {
-            total.setVocaNumber(vocaMapper.getNumber(topicSearchInfo));
+            total.setVocaNumber(vocaMapper.getNumber(topicSearchInfoDTO));
         }else {
             throw new Exception(ExcelConstant.FAILED_TYPE);
         }

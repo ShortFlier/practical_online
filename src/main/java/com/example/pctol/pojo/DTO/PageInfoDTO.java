@@ -11,7 +11,7 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @NoArgsConstructor
 @Data
-public class PageInfo {
+public class PageInfoDTO {
     private Integer page;
     private Integer pageSize;
 

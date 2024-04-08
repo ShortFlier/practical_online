@@ -6,7 +6,7 @@ import com.example.pctol.common.constant.MsgConstant;
 import com.example.pctol.common.constant.StateCode;
 import com.example.pctol.common.properties.BaseContext;
 import com.example.pctol.pojo.DTO.SubSearchDTO;
-import com.example.pctol.pojo.DTO.SubUpdateInfo;
+import com.example.pctol.pojo.DTO.SubUpdateInfoDTO;
 import com.example.pctol.pojo.VO.PageResult;
 import com.example.pctol.pojo.VO.Result;
 import com.example.pctol.pojo.VO.SubInfoVo;
@@ -18,10 +18,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDateTime;
-import java.util.Arrays;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 /**
  * @author hp
@@ -81,10 +78,10 @@ public class SubjectServiceImpl implements SubjectService {
     }
 
     @Override
-    public void update(SubUpdateInfo subUpdateInfo) throws Exception {
-        String name=subjectMapper.getById(subUpdateInfo.getId()).getName();
+    public void update(SubUpdateInfoDTO subUpdateInfoDTO) throws Exception {
+        String name=subjectMapper.getById(subUpdateInfoDTO.getId()).getName();
         selectNotNull(name);
-        subjectMapper.update(subUpdateInfo);
+        subjectMapper.update(subUpdateInfoDTO);
     }
 
     @Override

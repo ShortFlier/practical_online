@@ -53,7 +53,7 @@ public class VocabularyQst {
 
     public VocabularyQst setPublic(){
         createTime=updateTime=LocalDateTime.now();
-        launcher= BaseContext.getLoginInfo();
+        launcher= BaseContext.getLoginInfo().split("#")[1];
         auditState= AuditState.AWAIT;
         return this;
     }
@@ -67,7 +67,7 @@ public class VocabularyQst {
                 //如果列数不正确，说明类型不对
                 linkedHashMap= (LinkedHashMap) cachedDataList.get(i);
                 if(linkedHashMap.size()!= ExcelConstant.ELSE_COLUMN)
-                    throw new ExcelFormatException("n*"+ DataListener.BATCH_COUNT +"+"+i+"#"+ExcelConstant.FAILED_TYPE+ linkedHashMap);
+                    throw new ExcelFormatException(BaseContext.getLoginInfo()+"#n*"+ DataListener.BATCH_COUNT +"+"+i+"#"+ExcelConstant.FAILED_TYPE+ linkedHashMap);
                 Character difficulty = (linkedHashMap.get(3) != null) ? ((String) linkedHashMap.get(3)).charAt(0) : null;
 
                 list.add(new VocabularyQst((String) linkedHashMap.get(0), (String) linkedHashMap.get(1),

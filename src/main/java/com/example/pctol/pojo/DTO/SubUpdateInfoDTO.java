@@ -13,7 +13,7 @@ import java.time.LocalDateTime;
 @AllArgsConstructor
 @NoArgsConstructor
 @Data
-public class SubUpdateInfo {
+public class SubUpdateInfoDTO {
     Integer id;
     String name;
     LocalDateTime updateTime;
