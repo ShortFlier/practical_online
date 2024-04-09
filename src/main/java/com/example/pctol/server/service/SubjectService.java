@@ -24,4 +24,6 @@ public interface SubjectService {
     void update(SubUpdateInfoDTO subUpdateInfoDTO) throws Exception;
 
     Result getByAudit(Integer auditState, Integer page, Integer pageSize);
+
+    Result getList();
 }

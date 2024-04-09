@@ -12,10 +12,18 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @Data
 public class TopicSearchInfoDTO {
+    private Integer type;
     private Integer id;
     private String question;
     private String launcher;
     private Integer auditState;
     private Integer subjectId;
     private Character difficulty;
+    private Integer page;
+    private Integer pageSize;
+    private Integer start;
+
+    public void cptStart(){
+        start=(page-1)*pageSize;
+    }
 }

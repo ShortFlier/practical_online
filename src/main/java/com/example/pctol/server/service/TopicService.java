@@ -1,5 +1,7 @@
 package com.example.pctol.server.service;
 
+import com.example.pctol.pojo.DTO.TopicSearchInfoDTO;
+import com.example.pctol.pojo.DTO.TopicUpdateDTO;
 import com.example.pctol.pojo.VO.Result;
 import org.springframework.web.multipart.MultipartFile;
 
@@ -21,4 +23,8 @@ public interface TopicService {
     <T> void save(List<T> cachedDataList, int type) throws Exception;
 
     Result statistic(int type) throws Exception;
+
+    Result gets(TopicSearchInfoDTO topicSearchInfoDTO);
+
+    void update(TopicUpdateDTO topicUpdateDTO);
 }

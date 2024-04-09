@@ -71,4 +71,10 @@ public class SubjectController {
         Result result=subjectService.getByAudit(auditState, page, pageSize);
         return result;
     }
+
+    @GetMapping("/list")
+    public Result getSubList(){
+        Result result=subjectService.getList();
+        return result;
+    }
 }

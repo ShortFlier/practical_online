@@ -1,6 +1,10 @@
 package com.example.pctol.server.mapper;
 
+import com.example.pctol.common.constant.OperationType;
 import com.example.pctol.pojo.DTO.TopicSearchInfoDTO;
+import com.example.pctol.pojo.DTO.TopicUpdateDTO;
+import com.example.pctol.pojo.VO.TopicVO;
+import com.example.pctol.server.annotation.AutoFill;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Update;
 
@@ -21,4 +25,9 @@ public interface JudgMapper {
     void insert(List list);
 
     int getNumber(TopicSearchInfoDTO topicSearchInfoDTO);
+
+    List<TopicVO> getList(TopicSearchInfoDTO topicSearchInfoDTO);
+
+    @AutoFill(OperationType.UPDATE)
+    void update(TopicUpdateDTO topicUpdateDTO);
 }

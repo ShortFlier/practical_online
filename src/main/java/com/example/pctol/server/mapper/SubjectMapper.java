@@ -4,6 +4,7 @@ import com.example.pctol.common.constant.OperationType;
 import com.example.pctol.pojo.DTO.SubSearchDTO;
 import com.example.pctol.pojo.DTO.SubUpdateInfoDTO;
 import com.example.pctol.pojo.VO.SubInfoVo;
+import com.example.pctol.pojo.VO.SubVO;
 import com.example.pctol.pojo.entity.Subject;
 import com.example.pctol.server.annotation.AutoFill;
 import org.apache.ibatis.annotations.Delete;
@@ -46,4 +47,7 @@ public interface SubjectMapper {
 
     @Select("select count(*) from subject where audit_state=#{auditState}")
     Integer getTotalByAudit(Integer auditState);
+
+    @Select("select id,name from subject where audit_state=1")
+    List<SubVO> getList();
 }

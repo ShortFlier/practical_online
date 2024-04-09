@@ -12,6 +12,28 @@
         </foreach>
     </insert>
 
+    <update id="update">
+        update radioes
+        <set>
+            <if test="updateTime!=null">
+                update_time=#{updateTime}
+            </if>
+            <if test="auditState!=null">
+                ,audit_state=#{auditState}
+            </if>
+            <if test="auditTime!=null">
+                ,audit_time=#{auditTime}
+            </if>
+            <if test="subjectId!=null">
+                ,subject_id=#{subjectId}
+            </if>
+            <if test="difficulty!=null">
+                ,difficulty=#{difficulty}
+            </if>
+        </set>
+        where id=#{id}
+    </update>
+
     <select id="getNumber" resultType="java.lang.Integer">
         select count(*)
         from radioes
@@ -35,6 +57,34 @@
                 and difficulty=#{difficulty}
             </if>
         </where>
+    </select>
+
+    <select id="getList" resultType="com.example.pctol.pojo.VO.TopicVO">
+        select id,question
+        from radioes
+        <where>
+            <if test="id!=null">
+                and id=#{id}
+            </if>
+            <if test="question!=null">
+                and question like concat('%',#{question},'%')
+            </if>
+            <if test="launcher!=null">
+                and launcher=#{launcher}
+            </if>
+            <if test="auditState!=null">
+                and audit_state=#{auditState}
+            </if>
+            <if test="subjectId!=null">
+                and subject_id=#{subjectId}
+            </if>
+            <if test="difficulty!=null">
+                and difficulty=#{difficulty}
+            </if>
+        </where>
+            <if test="page!=null">
+                limit #{start},#{pageSize}
+            </if>
     </select>
 
 </mapper>

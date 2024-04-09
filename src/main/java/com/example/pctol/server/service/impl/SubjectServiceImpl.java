@@ -10,6 +10,7 @@ import com.example.pctol.pojo.DTO.SubUpdateInfoDTO;
 import com.example.pctol.pojo.VO.PageResult;
 import com.example.pctol.pojo.VO.Result;
 import com.example.pctol.pojo.VO.SubInfoVo;
+import com.example.pctol.pojo.VO.SubVO;
 import com.example.pctol.pojo.entity.Subject;
 import com.example.pctol.server.mapper.SubjectMapper;
 import com.example.pctol.server.service.SubjectService;
@@ -90,6 +91,12 @@ public class SubjectServiceImpl implements SubjectService {
         Integer total=subjectMapper.getTotalByAudit(auditState);
         PageResult pageResult=new PageResult(total,list);
         return Result.success(pageResult);
+    }
+
+    @Override
+    public Result getList() {
+        List<SubVO> list=subjectMapper.getList();
+        return Result.success(list);
     }
 
     private SubInfoVo selectNotNull(String name) throws Exception {

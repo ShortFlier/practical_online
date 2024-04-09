@@ -67,7 +67,7 @@ public class Judgment {
             for (int i = 0; i < cachedDataList.size(); i++) {
                 //如果列数不正确，说明类型不对
                 linkedHashMap= (LinkedHashMap) cachedDataList.get(i);
-                if(linkedHashMap.size()!= ExcelConstant.ELSE_COLUMN)
+                if(linkedHashMap.size()!= ExcelConstant.ELSE_COLUMN||((String) linkedHashMap.get(1)).length()>1)
                     throw new ExcelFormatException(BaseContext.getLoginInfo()+"#n*"+ DataListener.BATCH_COUNT +"+"+i+"#"+ExcelConstant.FAILED_TYPE+ linkedHashMap);
                 Character answer = (linkedHashMap.get(1) != null) ? ((String) linkedHashMap.get(1)).charAt(0) : null;
                 Character difficulty = (linkedHashMap.get(3) != null) ? ((String) linkedHashMap.get(3)).charAt(0) : null;
