@@ -22,6 +22,7 @@ public class AdminController {
     private AdminService adminService;
     @PostMapping("/login")
     public Result login(@RequestBody LoginDTO admin){
+        log.info("**********************************[/admin/login]************************************");
         log.info("admin login--account: {}, password: {}",admin.getAccount(),admin.getPassword());
         Result result=adminService.login(admin);
         return result;

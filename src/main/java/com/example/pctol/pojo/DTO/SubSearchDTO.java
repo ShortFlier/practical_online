@@ -13,13 +13,13 @@ import lombok.NoArgsConstructor;
 @Data
 public class SubSearchDTO {
     private String key;
-    private PageInfoDTO pageInfoDTO;
+    private PageInfo pageInfo;
 
     public int getPageSize(){
-        return pageInfoDTO.getPageSize();
+        return pageInfo.getPageSize();
     }
 
     public int getStart(){
-        return pageInfoDTO.getStart();
+        return pageInfo.getStart();
     }
 }

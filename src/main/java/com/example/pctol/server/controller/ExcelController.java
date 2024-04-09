@@ -26,6 +26,7 @@ public class ExcelController {
 
     @PostMapping("/topic/excel")
     public Result topicExcel(@RequestParam("file") MultipartFile file, @RequestParam("type") Integer type)throws Exception{
+        log.info("**********************************[/upload/topic/excel]************************************");
         log.info("接受excel文件：{},类型：{}",file.getOriginalFilename(),type);
         topicService.excelHandler(file,type);
         return Result.success(MsgConstant.SUCCESS);

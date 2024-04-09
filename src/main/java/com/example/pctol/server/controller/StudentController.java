@@ -21,6 +21,7 @@ public class StudentController {
 
     @PostMapping("/login")
     public Result login(@RequestBody LoginDTO loginInfo){
+        log.info("**********************************[/student/login]************************************");
         log.info("student login--account: {}, password: {}",loginInfo.getAccount(),loginInfo.getPassword());
         Result result=studentService.login(loginInfo);
         return result;
@@ -28,18 +29,21 @@ public class StudentController {
 
     @PostMapping("/gets")
     public Result pageGet(@RequestBody StuSearchDTO stuSearchDTO) throws Exception {
+        log.info("**********************************[/student/gets]************************************");
         Result result=studentService.pageGet(stuSearchDTO);
         return result;
     }
 
     @GetMapping("/getActs")
     public Result getAct() throws Exception {
+        log.info("**********************************[/student/getActs]************************************");
         Result result=studentService.getAct();
         return result;
     }
 
     @GetMapping("/{account}")
     public Result getInfo(@PathVariable String account){
+        log.info("**********************************[/student/account]************************************");
         Result result=studentService.getInfoByAct(account);
         return result;
     }

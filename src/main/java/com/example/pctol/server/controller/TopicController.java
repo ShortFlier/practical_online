@@ -25,6 +25,7 @@ public class TopicController {
     //统计题数
     @GetMapping("/statistic/{type}")
     public Result statistic(@PathVariable int type) throws Exception {
+        log.info("**********************************[/topic/statistic/]************************************");
         Result result=topicService.statistic(type);
         return result;
     }
@@ -32,6 +33,7 @@ public class TopicController {
     //获取未审核的题目
     @GetMapping("/audit")
     public Result gets(TopicSearchInfoDTO topicSearchInfoDTO){
+        log.info("**********************************[/topic/audit]************************************");
         log.info("查询信息：{}",topicSearchInfoDTO);
         Result result=topicService.gets(topicSearchInfoDTO);
         return result;
@@ -40,6 +42,7 @@ public class TopicController {
     //更新状态
     @PutMapping("/update")
     public Result update(@RequestBody TopicUpdateDTO topicUpdateDTO){
+        log.info("**********************************[/topic/update]************************************");
         log.info("更新信息：{}",topicUpdateDTO);
         topicService.update(topicUpdateDTO);
         return Result.success(MsgConstant.SUCCESS);

@@ -21,6 +21,7 @@ public class TeacherController {
 
     @PostMapping("/login")
     public Result login(@RequestBody LoginDTO loginInfo) {
+        log.info("**********************************[/teacher/login]************************************");
         log.info("teacher login--account: {}, password: {}",loginInfo.getAccount(),loginInfo.getPassword());
         Result result=teacherService.login(loginInfo);
         return result;
@@ -28,18 +29,22 @@ public class TeacherController {
 
     @PostMapping("/gets")
     public Result pageGet(@RequestBody ThSearchDTO thSearchDTO) throws Exception {
+        log.info("**********************************[/teacher/gets]************************************");
+        System.out.println(thSearchDTO);
         Result result=teacherService.pageGet(thSearchDTO);
         return result;
     }
 
     @GetMapping("/getActs")
     public Result getAct(){
+        log.info("**********************************[/teacher/getActs]************************************");
         Integer total=teacherService.getAct();
         return Result.success(total);
     }
 
     @GetMapping("/{account}")
     public Result getInfo(@PathVariable String account){
+        log.info("**********************************[/teacher/account]************************************");
         Result result=teacherService.getInfoByAct(account);
         return result;
     }

@@ -48,6 +48,7 @@ public class SubjectServiceImpl implements SubjectService {
         if(total==0)
             throw new Exception(MsgConstant.NO_DATA);
         List<SubInfoVo> rows=subjectMapper.getData(subSearchDTO,subSearchDTO.getStart(),subSearchDTO.getPageSize());
+        System.out.println(rows);
         for (SubInfoVo item: rows) {
             item.computeTopicNumber();
         }
