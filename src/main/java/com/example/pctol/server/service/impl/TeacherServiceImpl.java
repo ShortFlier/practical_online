@@ -4,6 +4,7 @@ import com.example.pctol.common.constant.JwtClaimsConstant;
 import com.example.pctol.common.constant.MsgConstant;
 import com.example.pctol.common.constant.StateCode;
 import com.example.pctol.common.properties.JWTproperties;
+import com.example.pctol.common.utils.FormatCheck;
 import com.example.pctol.pojo.DTO.LoginDTO;
 import com.example.pctol.pojo.DTO.ThSearchDTO;
 import com.example.pctol.pojo.VO.PageResult;
@@ -71,5 +72,15 @@ public class TeacherServiceImpl implements TeacherService {
         Teacher teacher=teacherMapper.login(account);
         teacher.setPassword(null);
         return Result.success(teacher);
+    }
+
+    @Override
+    public Result regit(Teacher teacher) throws Exception {
+        //校验账号、密码、邮箱是否合法
+        FormatCheck.checkAccount(teacher.getAccount());
+        FormatCheck.checkPsd(teacher.getPassword());
+        FormatCheck.checkEmail(teacher.getEmail());
+        teacherMapper.insert(teacher);
+        return Result.success(MsgConstant.SUCCESS);
     }
 }

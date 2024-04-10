@@ -29,8 +29,9 @@ public class GlobalExceptionHandler {
             }
             if((lastException.getCause() != null))
                 lastException = lastException.getCause();
+            else
+                break;
         }
-
         if (excelException != null) {
             try{
                 int id= Integer.parseInt(excelException.getMessage().split("#")[0]);
@@ -40,8 +41,8 @@ public class GlobalExceptionHandler {
             log.error("ExcelFormatException occurred: " + excelException.getMessage());
             return new Result(StateCode.SUCCESS, excelException.getMessage());
         } else {
-            log.error("Case:" + ex.getMessage());
-            return new Result(StateCode.FAILED, ex.getMessage());
+            log.error("Case:" + lastException.getMessage());
+            return new Result(StateCode.FAILED, lastException.getMessage());
         }
     }
 

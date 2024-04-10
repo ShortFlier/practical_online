@@ -3,6 +3,7 @@ package com.example.pctol.server.controller;
 import com.example.pctol.pojo.DTO.LoginDTO;
 import com.example.pctol.pojo.DTO.StuSearchDTO;
 import com.example.pctol.pojo.VO.Result;
+import com.example.pctol.pojo.entity.Student;
 import com.example.pctol.server.service.StudentService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -45,6 +46,14 @@ public class StudentController {
     public Result getInfo(@PathVariable String account){
         log.info("**********************************[/student/account]************************************");
         Result result=studentService.getInfoByAct(account);
+        return result;
+    }
+
+    @PostMapping("/register")
+    public Result regist(@RequestBody Student student) throws Exception {
+        log.info("**********************************[/student/register]************************************");
+        log.info("学生注册信息：{}",student);
+        Result result=studentService.regist(student);
         return result;
     }
 }

@@ -3,6 +3,7 @@ package com.example.pctol.server.service.impl;
 import com.example.pctol.common.constant.MsgConstant;
 import com.example.pctol.common.constant.StateCode;
 import com.example.pctol.common.properties.JWTproperties;
+import com.example.pctol.common.utils.FormatCheck;
 import com.example.pctol.pojo.DTO.LoginDTO;
 import com.example.pctol.pojo.DTO.StuSearchDTO;
 import com.example.pctol.pojo.VO.PageResult;
@@ -71,5 +72,15 @@ public class StudentServiceImpl implements StudentService {
     public Result getInfoByAct(String account) {
         Student student=studentMapper.login(account);
         return Result.success(student);
+    }
+
+    @Override
+    public Result regist(Student student) throws Exception {
+        //校验账号、密码、邮箱是否合法
+        FormatCheck.checkAccount(student.getAccount());
+        FormatCheck.checkPsd(student.getPassword());
+        FormatCheck.checkEmail(student.getEmail());
+        studentMapper.insert(student);
+        return Result.success(MsgConstant.SUCCESS);
     }
 }

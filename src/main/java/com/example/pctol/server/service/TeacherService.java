@@ -3,6 +3,7 @@ package com.example.pctol.server.service;
 import com.example.pctol.pojo.DTO.LoginDTO;
 import com.example.pctol.pojo.DTO.ThSearchDTO;
 import com.example.pctol.pojo.VO.Result;
+import com.example.pctol.pojo.entity.Teacher;
 
 /**
  * @author hp
@@ -16,4 +17,6 @@ public interface TeacherService {
     Integer getAct();
 
     Result getInfoByAct(String account);
+
+    Result regit(Teacher teacher) throws Exception;
 }

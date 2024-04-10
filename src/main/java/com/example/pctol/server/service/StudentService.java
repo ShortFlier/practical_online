@@ -3,6 +3,7 @@ package com.example.pctol.server.service;
 import com.example.pctol.pojo.DTO.LoginDTO;
 import com.example.pctol.pojo.DTO.StuSearchDTO;
 import com.example.pctol.pojo.VO.Result;
+import com.example.pctol.pojo.entity.Student;
 
 /**
  * @author hp
@@ -16,4 +17,6 @@ public interface StudentService {
     Result getAct() throws Exception;
 
     Result getInfoByAct(String account);
+
+    Result regist(Student student) throws Exception;
 }
