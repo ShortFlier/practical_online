@@ -86,4 +86,19 @@
         </set>
         where id=#{id}
     </update>
+    <!--//随机获取题目-->
+    <select id="getRandom" resultType="com.example.pctol.pojo.entity.MultipleChoices">
+        select id, question, option_a, option_b, option_c, option_d, option_e,option_f,answer, analyse,subject_id, difficulty
+        from multiple_choices
+        <where>
+            <if test="subjectId!=null">
+                subject_id=#{subjectId}
+            </if>
+            <if test="difficulty!=null">
+                and  difficulty=#{difficulty}
+            </if>
+        </where>
+        order by rand()
+        limit 1
+    </select>
 </mapper>

@@ -27,7 +27,7 @@ import java.util.List;
 @NoArgsConstructor
 @Data
 @Slf4j
-public class Radioes {
+public class Radioes extends Topic{
     private Long id;
     private String question;
     private String optionA;

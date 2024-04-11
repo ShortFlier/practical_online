@@ -24,7 +24,7 @@ import java.util.List;
 @AllArgsConstructor
 @NoArgsConstructor
 @Data
-public class VocabularyQst {
+public class VocabularyQst extends Topic{
     private Long id;
     private String question;
     private String answer;

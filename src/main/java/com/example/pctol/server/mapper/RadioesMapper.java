@@ -1,9 +1,11 @@
 package com.example.pctol.server.mapper;
 
 import com.example.pctol.common.constant.OperationType;
+import com.example.pctol.pojo.DTO.PracticalDTO;
 import com.example.pctol.pojo.DTO.TopicSearchInfoDTO;
 import com.example.pctol.pojo.DTO.TopicUpdateDTO;
 import com.example.pctol.pojo.VO.TopicVO;
+import com.example.pctol.pojo.entity.Topic;
 import com.example.pctol.server.annotation.AutoFill;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Update;
@@ -18,7 +20,7 @@ import java.util.List;
  * @date 2024/3/29
  */
 @Mapper
-public interface RadioesMapper {
+public interface RadioesMapper extends TopicPublic{
 
     @Update("update radioes set update_time=#{localDateTime},subject_id=#{newId} where subject_id=#{id}")
     void updateSubject(Integer id, LocalDateTime localDateTime, Integer newId);
@@ -31,4 +33,7 @@ public interface RadioesMapper {
 
     @AutoFill(OperationType.UPDATE)
     void update(TopicUpdateDTO topicUpdateDTO);
+
+    //随机获取一个题目
+    Topic getRandom(PracticalDTO practicalDTO);
 }

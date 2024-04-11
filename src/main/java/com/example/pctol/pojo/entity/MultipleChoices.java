@@ -25,7 +25,7 @@ import java.util.stream.Collectors;
 @AllArgsConstructor
 @NoArgsConstructor
 @Data
-public class MultipleChoices {
+public class MultipleChoices extends Topic{
     private Long id;
     private String question;
     private String optionA;

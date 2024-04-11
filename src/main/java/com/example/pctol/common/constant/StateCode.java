@@ -14,4 +14,6 @@ public class StateCode {
     public static final  int PASSWORD_ERROR=207;
 
     public static final int NOT_LOGIN=250;
+
+    public static final int NOT_DATA=303;
 }

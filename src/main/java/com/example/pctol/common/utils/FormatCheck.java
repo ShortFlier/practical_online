@@ -1,6 +1,8 @@
 package com.example.pctol.common.utils;
 
 import com.example.pctol.common.constant.MsgConstant;
+import com.example.pctol.common.constant.TopicConstant;
+import org.springframework.boot.autoconfigure.kafka.KafkaProperties;
 
 /**
  * @author hp
@@ -26,5 +28,22 @@ public class FormatCheck {
             throw new Exception(MsgConstant.EMAIL_FORMAT_ERROR);
         if (!email.matches("^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\\.[a-zA-Z]{2,}$"))
             throw new Exception(MsgConstant.EMAIL_FORMAT_ERROR);
+    }
+    //题目类型type检查
+    public static boolean checkTopicType(Integer type){
+        if(type==null)
+            return false;
+        if(type<(TopicConstant.RADIOES-1)&type>(TopicConstant.VOCABULARY_QST+1))
+            return false;
+        return true;
+    }
+
+    //难度difficulty检查
+    public static boolean checkDifficulty(Character difficulty){
+        if(difficulty == null || difficulty < '1' || difficulty > '5') {
+            return false;
+        } else {
+            return true;
+        }
     }
 }

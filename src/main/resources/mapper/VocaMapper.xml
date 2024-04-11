@@ -87,4 +87,19 @@
         </set>
         where id=#{id}
     </update>
+    <!--//随机获取题目-->
+    <select id="getRandom" resultType="com.example.pctol.pojo.entity.VocabularyQst">
+        select id, question, answer, analyse,subject_id, difficulty
+        from vocabulary_qst
+        <where>
+            <if test="subjectId!=null">
+                subject_id=#{subjectId}
+            </if>
+            <if test="difficulty!=null">
+                and  difficulty=#{difficulty}
+            </if>
+        </where>
+        order by rand()
+        limit 1
+    </select>
 </mapper>

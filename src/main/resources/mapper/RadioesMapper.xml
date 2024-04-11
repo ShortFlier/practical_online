@@ -86,5 +86,19 @@
                 limit #{start},#{pageSize}
             </if>
     </select>
-
+<!--//随机获取题目-->
+    <select id="getRandom" resultType="com.example.pctol.pojo.entity.Radioes">
+        select id, question, option_a, option_b, option_c, option_d, answer, analyse,subject_id, difficulty
+        from radioes
+        <where>
+            <if test="subjectId!=null">
+                subject_id=#{subjectId}
+            </if>
+            <if test="difficulty!=null">
+              and  difficulty=#{difficulty}
+            </if>
+        </where>
+        order by rand()
+        limit 1
+    </select>
 </mapper>

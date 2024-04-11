@@ -1,5 +1,6 @@
 package com.example.pctol.server.service;
 
+import com.example.pctol.pojo.DTO.PracticalDTO;
 import com.example.pctol.pojo.DTO.TopicSearchInfoDTO;
 import com.example.pctol.pojo.DTO.TopicUpdateDTO;
 import com.example.pctol.pojo.VO.Result;
@@ -27,4 +28,6 @@ public interface TopicService {
     Result gets(TopicSearchInfoDTO topicSearchInfoDTO);
 
     void update(TopicUpdateDTO topicUpdateDTO);
+
+    Result practice(PracticalDTO practicalDTO);
 }

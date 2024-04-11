@@ -24,7 +24,7 @@ import java.util.List;
 @AllArgsConstructor
 @NoArgsConstructor
 @Data
-public class Judgment {
+public class Judgment extends Topic{
     private Long id;
     private String question;
     private char answer;

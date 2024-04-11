@@ -1,6 +1,7 @@
 package com.example.pctol.server.controller;
 
 import com.example.pctol.common.constant.MsgConstant;
+import com.example.pctol.pojo.DTO.PracticalDTO;
 import com.example.pctol.pojo.DTO.TopicSearchInfoDTO;
 import com.example.pctol.pojo.DTO.TopicUpdateDTO;
 import com.example.pctol.pojo.VO.Result;
@@ -46,5 +47,14 @@ public class TopicController {
         log.info("更新信息：{}",topicUpdateDTO);
         topicService.update(topicUpdateDTO);
         return Result.success(MsgConstant.SUCCESS);
+    }
+
+    //随机练习
+    @GetMapping("/practice")
+    public Result practice(PracticalDTO practicalDTO){
+        log.info("**********************************[/topic/update]************************************");
+        log.info("搜索信息：{}",practicalDTO);
+        Result result=topicService.practice(practicalDTO);
+        return result;
     }
 }

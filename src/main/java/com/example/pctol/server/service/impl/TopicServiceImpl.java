@@ -1,9 +1,14 @@
 package com.example.pctol.server.service.impl;
 
 import com.example.pctol.common.constant.ExcelConstant;
+import com.example.pctol.common.constant.MsgConstant;
+import com.example.pctol.common.constant.StateCode;
 import com.example.pctol.common.constant.TopicConstant;
 import com.example.pctol.common.properties.BaseContext;
 import com.example.pctol.common.utils.ExcelOp;
+import com.example.pctol.common.utils.FormatCheck;
+import com.example.pctol.common.utils.Util;
+import com.example.pctol.pojo.DTO.PracticalDTO;
 import com.example.pctol.pojo.DTO.TopicSearchInfoDTO;
 import com.example.pctol.pojo.DTO.TopicUpdateDTO;
 import com.example.pctol.pojo.VO.PageResult;
@@ -43,6 +48,22 @@ public class TopicServiceImpl implements TopicService {
     private VocaMapper vocaMapper;
     @Autowired
     private TopicExcelService topicExcelService;
+
+    public  TopicPublic getTopicMapper(int type){
+        if(type==TopicConstant.RADIOES){
+            return radioesMapper;
+        } else if (type==TopicConstant.MULTIPLE_CHOICES) {
+            return mulChoMapper;
+        }else if(type==TopicConstant.JUDGMENT){
+            return judgMapper;
+        } else if (type==TopicConstant.FILL_IN_THE_BLANK) {
+            return fitbMapper;
+        } else if (type==TopicConstant.VOCABULARY_QST) {
+            return vocaMapper;
+        }else {
+            return null;
+        }
+    }
 
     @Override
     public void dleSubject(Integer id, LocalDateTime localDateTime,Integer newId) {
@@ -221,5 +242,25 @@ public class TopicServiceImpl implements TopicService {
             vocaMapper.update(topicUpdateDTO);
         }else {
         }
+    }
+
+    //根据前端的信息，返回一个题目
+    @Override
+    public Result practice(PracticalDTO practicalDTO) {
+        //题目类型
+        int type;
+        if(FormatCheck.checkTopicType(practicalDTO.getType()))
+            type=practicalDTO.getType();
+        else
+            type= Util.getRandomIntInRange(1,5);
+        practicalDTO.setType(type);
+        //难度
+        if(!FormatCheck.checkDifficulty(practicalDTO.getDifficulty()))
+            practicalDTO.setDifficulty(null);
+        //查询
+        Topic topic=getTopicMapper(practicalDTO.getType()).getRandom(practicalDTO);
+        if(topic==null)
+            return new Result(StateCode.NOT_DATA, MsgConstant.NO_DATA,null);
+        return Result.success(topic);
     }
 }
