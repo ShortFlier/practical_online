@@ -23,5 +23,7 @@ public class TopicConstant {
 
     public static final String DIFFICULTY_LIST="12345";
 
+    public static final String ANSWER_APART="#answer#";
+
 
 }

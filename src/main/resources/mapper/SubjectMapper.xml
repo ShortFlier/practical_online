@@ -33,31 +33,29 @@
 
     <select id="getData" parameterType="com.example.pctol.pojo.DTO.SubSearchDTO" resultType="com.example.pctol.pojo.VO.SubInfoVo">
         SELECT
-            subject.id,
-            subject.name,
-            subject.create_time,
-            subject.launcher,
-            COUNT(judgment.id) as judgment_number,
-            COUNT(radioes.id) as radioes_number,
-            COUNT(multiple_choices.id) as m_choices_number,
-            COUNT(fill_in_the_blank.id) as fitb_number,
-            COUNT(vocabulary_qst.id) as voca_number
-        FROM
-            subject
-                LEFT JOIN judgment ON subject.id = judgment.subject_id AND judgment.audit_state = 1
-                LEFT JOIN radioes ON subject.id = radioes.subject_id AND radioes.audit_state = 1
-                LEFT JOIN multiple_choices ON subject.id = multiple_choices.subject_id AND multiple_choices.audit_state = 1
-                LEFT JOIN fill_in_the_blank ON subject.id = fill_in_the_blank.subject_id AND fill_in_the_blank.audit_state = 1
-                LEFT JOIN vocabulary_qst ON subject.id = vocabulary_qst.subject_id AND vocabulary_qst.audit_state = 1
+        subject.id,
+        subject.name,
+        subject.create_time,
+        subject.launcher,
+        COUNT(DISTINCT judgment.id) as judgment_number,
+        COUNT(DISTINCT radioes.id) as radioes_number,
+        COUNT(DISTINCT multiple_choices.id) as m_choices_number,
+        COUNT(DISTINCT fill_in_the_blank.id) as fitb_number,
+        COUNT(DISTINCT vocabulary_qst.id) as voca_number
+        FROM subject
+        LEFT JOIN judgment ON subject.id = judgment.subject_id AND judgment.audit_state = 1
+        LEFT JOIN radioes ON subject.id = radioes.subject_id AND radioes.audit_state = 1
+        LEFT JOIN multiple_choices ON subject.id = multiple_choices.subject_id AND multiple_choices.audit_state = 1
+        LEFT JOIN fill_in_the_blank ON subject.id = fill_in_the_blank.subject_id AND fill_in_the_blank.audit_state = 1
+        LEFT JOIN vocabulary_qst ON subject.id = vocabulary_qst.subject_id AND vocabulary_qst.audit_state = 1
+        WHERE subject.audit_state = 1
         <where>
-                subject.audit_state=1
             <if test="subSearchDTO.key!=null">
                 and lower(subject.name) LIKE concat('%',lower(#{subSearchDTO.key}),'%')
             </if>
         </where>
-        GROUP BY
-            subject.name, subject.create_time, subject.launcher
-        limit #{start},#{pageSize}
+        GROUP BY subject.id, subject.name, subject.create_time, subject.launcher
+        LIMIT #{start}, #{pageSize}
     </select>
 
     <select id="getLikeName" parameterType="java.lang.String" resultType="java.lang.String">

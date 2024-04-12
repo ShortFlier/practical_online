@@ -1,7 +1,11 @@
 package com.example.pctol.server.mapper;
 
 import com.example.pctol.pojo.DTO.PracticalDTO;
+import com.example.pctol.pojo.DTO.TopicSearchInfoDTO;
+import com.example.pctol.pojo.VO.TopicVO;
 import com.example.pctol.pojo.entity.Topic;
+
+import java.util.List;
 
 /**
  * 对5个表的公共sql查询
@@ -11,4 +15,8 @@ import com.example.pctol.pojo.entity.Topic;
 
 public interface TopicPublic {
     Topic getRandom(PracticalDTO practicalDTO);
+
+    List<TopicVO> getList(TopicSearchInfoDTO topicSearchInfoDTO);
+
+    List<Topic> getByIds(List<Integer> ids);
 }

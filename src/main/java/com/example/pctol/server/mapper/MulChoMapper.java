@@ -35,4 +35,6 @@ public interface MulChoMapper extends TopicPublic{
 
     //随机获取一个题目
     Topic getRandom(PracticalDTO practicalDTO);
+
+    List<Topic> getByIds(List<Integer> ids);
 }

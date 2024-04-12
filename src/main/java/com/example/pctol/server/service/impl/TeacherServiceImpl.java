@@ -81,6 +81,8 @@ public class TeacherServiceImpl implements TeacherService {
         FormatCheck.checkPsd(teacher.getPassword());
         FormatCheck.checkEmail(teacher.getEmail());
         teacherMapper.insert(teacher);
-        return Result.success(MsgConstant.SUCCESS);
+        //获取id
+        long id=teacherMapper.login(teacher.getAccount()).getThId();
+        return Result.success(MsgConstant.SUCCESS,id);
     }
 }

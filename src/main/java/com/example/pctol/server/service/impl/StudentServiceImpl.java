@@ -81,6 +81,8 @@ public class StudentServiceImpl implements StudentService {
         FormatCheck.checkPsd(student.getPassword());
         FormatCheck.checkEmail(student.getEmail());
         studentMapper.insert(student);
-        return Result.success(MsgConstant.SUCCESS);
+        //获取id
+        long id=studentMapper.login(student.getAccount()).getStuId();
+        return Result.success(MsgConstant.SUCCESS,id);
     }
 }

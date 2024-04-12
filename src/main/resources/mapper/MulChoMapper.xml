@@ -101,4 +101,15 @@
         order by rand()
         limit 1
     </select>
+
+    <select id="getByIds" resultType="com.example.pctol.pojo.entity.MultipleChoices">
+        select id, question, option_a, option_b, option_c, option_d, option_e,option_f,answer, analyse,subject_id, difficulty
+        from multiple_choices
+        <where>
+            id in
+            <foreach collection="ids" item="id" open="(" separator="," close=")">
+                #{id}
+            </foreach>
+        </where>
+    </select>
 </mapper>

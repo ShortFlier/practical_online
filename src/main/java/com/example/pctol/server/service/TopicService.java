@@ -4,6 +4,7 @@ import com.example.pctol.pojo.DTO.PracticalDTO;
 import com.example.pctol.pojo.DTO.TopicSearchInfoDTO;
 import com.example.pctol.pojo.DTO.TopicUpdateDTO;
 import com.example.pctol.pojo.VO.Result;
+import com.example.pctol.server.mapper.TopicPublic;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.io.IOException;
@@ -30,4 +31,6 @@ public interface TopicService {
     void update(TopicUpdateDTO topicUpdateDTO);
 
     Result practice(PracticalDTO practicalDTO);
+
+     TopicPublic getTopicMapper(int type);
 }

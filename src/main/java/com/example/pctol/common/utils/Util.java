@@ -1,6 +1,7 @@
 package com.example.pctol.common.utils;
 
 import java.util.Random;
+import java.util.stream.Collectors;
 
 /**
  * @author hp
@@ -14,5 +15,16 @@ public class Util {
 
     public static char getRandomCharInRange(char bottom, char top) {
         return (char) (random.nextInt(top - bottom+ 1) + bottom);
+    }
+
+    public static String formatMluChoices(String answer){
+        // 将字符串转换为小写，去除重复字符，排序
+        String sortedStr = answer.toLowerCase()
+                .chars()
+                .distinct()
+                .sorted()
+                .mapToObj(c -> String.valueOf((char) c))
+                .collect(Collectors.joining());
+        return sortedStr;
     }
 }
