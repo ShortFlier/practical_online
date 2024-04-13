@@ -37,6 +37,8 @@ public class GlobalExceptionHandler {
                 int id= Integer.parseInt(excelException.getMessage().split("#")[0]);
                 topicExcelService.updateEor(id,excelException.getMessage());
             } catch (NumberFormatException e) {
+                log.error("Error while updating Eor: " + e.getMessage());
+                return new Result(StateCode.FAILED, "Error while updating Eor: " + e.getMessage());
             }
             log.error("ExcelFormatException occurred: " + excelException.getMessage());
             return new Result(StateCode.SUCCESS, excelException.getMessage());

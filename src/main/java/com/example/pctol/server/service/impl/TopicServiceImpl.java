@@ -261,6 +261,7 @@ public class TopicServiceImpl implements TopicService {
         Topic topic=getTopicMapper(practicalDTO.getType()).getRandom(practicalDTO);
         if(topic==null)
             return new Result(StateCode.NOT_DATA, MsgConstant.NO_DATA,null);
+        log.info("返回题目：{}",topic);
         return Result.success(topic);
     }
 }

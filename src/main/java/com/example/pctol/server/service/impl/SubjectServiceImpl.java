@@ -81,8 +81,11 @@ public class SubjectServiceImpl implements SubjectService {
 
     @Override
     public void update(SubUpdateInfoDTO subUpdateInfoDTO) throws Exception {
-        String name=subjectMapper.getById(subUpdateInfoDTO.getId()).getName();
-        selectNotNull(name);
+//        String name=subjectMapper.getById(subUpdateInfoDTO.getId()).getName();
+//        selectNotNull(name);
+        Subject subject=subjectMapper.getById(subUpdateInfoDTO.getId());
+        if(subject.getAuditState()==AuditState.ACCESS)
+            throw new Exception(MsgConstant.FAILED);
         subjectMapper.update(subUpdateInfoDTO);
     }
 
