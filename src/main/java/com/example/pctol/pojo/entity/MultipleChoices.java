@@ -46,7 +46,7 @@ public class MultipleChoices extends Topic{
 
 
     //为excel而备的构造函数
-    public MultipleChoices(String question,String answer,String analyse,Character difficulty,String optionA,String optionB,String optionC,String optionD,String optionE,String optionF) throws ExcelFormatException {
+    public MultipleChoices(String question,String answer,String analyse,Character difficulty,String optionA,String optionB,String optionC,String optionD,String optionE,String optionF,Long subjectId) throws ExcelFormatException {
         this.question=question;
         answer=answer.toLowerCase();
         if(answer!=null) {
@@ -65,6 +65,7 @@ public class MultipleChoices extends Topic{
         this.optionD=optionD;
         this.optionE=optionE;
         this.optionF=optionF;
+        this.subjectId=subjectId;
     }
 
     public MultipleChoices setPublic() throws ExcelFormatException {
@@ -100,7 +101,7 @@ public class MultipleChoices extends Topic{
                         (String)linkedHashMap.get(2) , difficulty,
                         (String) linkedHashMap.get(4), (String) linkedHashMap.get(5),
                         (String) linkedHashMap.get(6), (String) linkedHashMap.get(7),
-                        (String) linkedHashMap.get(8),(String) linkedHashMap.get(9)).setPublic());
+                        (String) linkedHashMap.get(8),(String) linkedHashMap.get(9),Long.parseLong((String) linkedHashMap.get(10))).setPublic());
             }
             return list;
         }else

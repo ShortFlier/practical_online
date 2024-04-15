@@ -30,7 +30,7 @@ public interface SubjectMapper {
     List<SubInfoVo> getData(SubSearchDTO subSearchDTO, int start, int pageSize);
 
 
-    List<String> getLikeName(String name);
+    List<SubVO> getLikeName(String name);
 
     @Delete("delete from subject where name=#{name}")
     void dle(String name);

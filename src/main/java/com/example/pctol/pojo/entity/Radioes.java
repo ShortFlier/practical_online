@@ -45,7 +45,7 @@ public class Radioes extends Topic{
     private Character difficulty;
 
     //为excel而备的构造函数
-    public Radioes(String question,char answer,String analyse,Character difficulty,String optionA,String optionB,String optionC,String optionD) throws ExcelFormatException {
+    public Radioes(String question,char answer,String analyse,Character difficulty,String optionA,String optionB,String optionC,String optionD,Long subjectId) throws ExcelFormatException {
         this.question=question;
         answer=Character.toLowerCase(answer);
         if(TopicConstant.RADIOES_ANSWER_LIST.contains(String.valueOf(answer)))
@@ -61,6 +61,7 @@ public class Radioes extends Topic{
         this.optionB=optionB;
         this.optionC=optionC;
         this.optionD=optionD;
+        this.subjectId=subjectId;
     }
 
     public Radioes setPublic(){
@@ -86,7 +87,7 @@ public class Radioes extends Topic{
                 list.add(new Radioes((String) linkedHashMap.get(0), answer,
                         (String)linkedHashMap.get(2) , difficulty,
                         (String) linkedHashMap.get(4), (String) linkedHashMap.get(5),
-                        (String) linkedHashMap.get(6), (String) linkedHashMap.get(7)).setPublic());
+                        (String) linkedHashMap.get(6), (String) linkedHashMap.get(7),Long.parseLong((String) linkedHashMap.get(8))).setPublic());
             }
             return list;
         }else

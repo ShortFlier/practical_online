@@ -38,7 +38,7 @@ public class Judgment extends Topic{
     private Character difficulty;
 
     //为excel而备的构造函数
-    public Judgment(String question,char answer,String analyse,Character difficulty) throws ExcelFormatException {
+    public Judgment(String question,char answer,String analyse,Character difficulty,Long subjectId) throws ExcelFormatException {
         this.question=question;
         answer=Character.toLowerCase(answer);
         if(TopicConstant.JUDGMENT_ANSWER_LIST.contains(String.valueOf(answer)))
@@ -50,6 +50,7 @@ public class Judgment extends Topic{
             this.difficulty=difficulty;
         else
             this.difficulty=null;
+        this.subjectId=subjectId;
     }
 
     public Judgment setPublic(){
@@ -73,7 +74,7 @@ public class Judgment extends Topic{
                 Character difficulty = (linkedHashMap.get(3) != null) ? ((String) linkedHashMap.get(3)).charAt(0) : null;
 
                 list.add(new Judgment((String) linkedHashMap.get(0), answer,
-                        (String)linkedHashMap.get(2) , difficulty).setPublic());
+                        (String)linkedHashMap.get(2) , difficulty,Long.parseLong((String) linkedHashMap.get(4))).setPublic());
             }
             return list;
         }else

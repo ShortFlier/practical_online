@@ -13,6 +13,10 @@ import lombok.extern.slf4j.Slf4j;
 @Slf4j
 public class GradeCompute {
     public static void radioesGrade(Practice practice, Radioes radioes){
+        if(practice.getSubmitAnswer()==null){
+            practice.setGrade(0);
+            return;
+        }
         log.info("标准答案：{}\n用户答案：{}",radioes.getAnswer(),practice.getSubmitAnswer());
         if(practice.getSubmitAnswer().equals(String.valueOf(radioes.getAnswer()))){
             practice.setGrade(100);
@@ -21,6 +25,10 @@ public class GradeCompute {
         }
     }
     public static void mulChoGrade(Practice practice, MultipleChoices multipleChoices){
+        if(practice.getSubmitAnswer()==null){
+            practice.setGrade(0);
+            return;
+        }
         log.info("标准答案：{}\n用户答案：{}",multipleChoices.getAnswer(),practice.getSubmitAnswer());
         if(practice.getSubmitAnswer().equals(multipleChoices.getAnswer())){
             practice.setGrade(100);

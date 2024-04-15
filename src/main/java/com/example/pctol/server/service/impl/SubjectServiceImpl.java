@@ -66,7 +66,7 @@ public class SubjectServiceImpl implements SubjectService {
 
     @Override
     public Result getLikeName(String name) {
-        List<String> list=subjectMapper.getLikeName(name);
+        List<SubVO> list=subjectMapper.getLikeName(name);
         return new Result(StateCode.SUCCESS,list);
     }
 

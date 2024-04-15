@@ -39,7 +39,7 @@ public class FillInTheBlank extends Topic{
 
 
     //为excel而备的构造函数
-    public FillInTheBlank(String question,String answer,String analyse,Character difficulty) throws ExcelFormatException {
+    public FillInTheBlank(String question,String answer,String analyse,Character difficulty,Long subjectId) throws ExcelFormatException {
         this.question=question;
         if(!(answer==null))
             this.answer=answer;
@@ -50,6 +50,7 @@ public class FillInTheBlank extends Topic{
             this.difficulty=difficulty;
         else
             this.difficulty=null;
+        this.subjectId=subjectId;
     }
 
     public FillInTheBlank setPublic(){
@@ -72,7 +73,7 @@ public class FillInTheBlank extends Topic{
                 Character difficulty = (linkedHashMap.get(3) != null) ? ((String) linkedHashMap.get(3)).charAt(0) : null;
 
                 list.add(new FillInTheBlank((String) linkedHashMap.get(0), (String) linkedHashMap.get(1),
-                        (String)linkedHashMap.get(2) , difficulty).setPublic());
+                        (String)linkedHashMap.get(2) , difficulty,Long.parseLong((String) linkedHashMap.get(4))).setPublic());
             }
             return list;
         }else

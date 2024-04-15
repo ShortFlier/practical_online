@@ -58,8 +58,8 @@
         LIMIT #{start}, #{pageSize}
     </select>
 
-    <select id="getLikeName" parameterType="java.lang.String" resultType="java.lang.String">
-        select name
+    <select id="getLikeName" parameterType="java.lang.String" resultType="com.example.pctol.pojo.VO.SubVO">
+        select id,name
         from subject
         where audit_state=1 and lower(name) like concat('%', lower(#{name}), '%')
     </select>

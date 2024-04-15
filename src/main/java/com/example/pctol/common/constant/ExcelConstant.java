@@ -8,11 +8,11 @@ public class ExcelConstant {
     public static final String FAILED_TYPE="excel类型错误";
 
     //单选excel列数
-    public static final int RADIOES_COLUMN=8;
+    public static final int RADIOES_COLUMN=9;
     //多选excel列数
-    public static final int MULCHO_COLUMN=10;
+    public static final int MULCHO_COLUMN=11;
     //判断，填空，应用excel列数
-    public static final int ELSE_COLUMN=4;
+    public static final int ELSE_COLUMN=5;
 
     //单选答案错误
     public static final String RADIOES_ANSWER_ERROR="单选答案不为a、b、c、d中的任意一个";
