@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.example.pctol.server.mapper.PaperMapper">
+
+
+    <select id="count" resultType="java.lang.Integer">
+        select count(*)
+        from paper
+        <where>
+            <if test="subjectId!=null">
+                subject_id=#{subjectId}
+            </if>
+            <if test="difficulty!=null">
+                and difficulty=#{difficulty}
+            </if>
+            <if test="launcher!=null">
+                and launcher=#{launcher}
+            </if>
+            <if test="title!=null">
+                and title like concat('%',#{title},'%')
+            </if>
+        </where>
+    </select>
+
+    <select id="gets" parameterType="com.example.pctol.pojo.DTO.PaperSearchDTO" resultType="com.example.pctol.pojo.entity.Paper">
+        select id,title,description,create_time,update_time,duration,launcher,subject_id,total_marks,difficulty
+        from paper
+        <where>
+            <if test="paperSearchDTO.subjectId!=null">
+                subject_id=#{paperSearchDTO.subjectId}
+            </if>
+            <if test="paperSearchDTO.difficulty!=null">
+                and difficulty=#{paperSearchDTO.difficulty}
+            </if>
+            <if test="paperSearchDTO.launcher!=null">
+                and launcher=#{paperSearchDTO.launcher}
+            </if>
+            <if test="paperSearchDTO.title!=null">
+                and title like concat('%',#{paperSearchDTO.title},'%')
+            </if>
+        </where>
+        <if test="paperSearchDTO.pageInfo!=null">
+            limit #{start},#{pageSize}
+        </if>
+    </select>
+</mapper>

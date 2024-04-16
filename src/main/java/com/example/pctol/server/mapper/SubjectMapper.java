@@ -48,6 +48,6 @@ public interface SubjectMapper {
     @Select("select count(*) from subject where audit_state=#{auditState}")
     Integer getTotalByAudit(Integer auditState);
 
-    @Select("select id,name from subject where audit_state=1")
+    @Select("select id,name from subject where audit_state=1 order by id asc")
     List<SubVO> getList();
 }

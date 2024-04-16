@@ -41,6 +41,6 @@ public class PaperDetailVO {
         judgMarks= paperDetail.getJudgMarks();
         fitbMarks= paperDetail.getFitbMarks();
         vocMarks= paperDetail.getVocMarks();
-        difficulty=paperDetail.getDifficulty();
+        difficulty=paper.getDifficulty();
     }
 }

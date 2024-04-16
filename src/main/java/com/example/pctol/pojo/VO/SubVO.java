@@ -12,6 +12,6 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @Data
 public class SubVO {
-    private Integer id;
+    private Long id;
     private String name;
 }

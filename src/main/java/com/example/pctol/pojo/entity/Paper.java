@@ -23,4 +23,18 @@ public class Paper {
     private String launcher;
     private Long subjectId;
     private Integer totalMarks;     //试卷分数
+    private Character difficulty; // 难度，数字1-5表示
+
+    public Paper(Paper paper) {
+        this.id = paper.getId();
+        this.title = paper.getTitle();
+        this.description = paper.getDescription();
+        this.createTime = paper.getCreateTime();
+        this.updateTime = paper.getUpdateTime();
+        this.duration = paper.getDuration();
+        this.launcher = paper.getLauncher();
+        this.subjectId = paper.getSubjectId();
+        this.totalMarks = paper.getTotalMarks();
+        this.difficulty = paper.getDifficulty();
+    }
 }
