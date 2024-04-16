@@ -37,6 +37,10 @@ public class Judgment extends Topic{
     private Long subjectId;
     private Character difficulty;
 
+    public void setNullAnswer(){
+        answer=TopicConstant.NULL_CHAR;
+    }
+
     //为excel而备的构造函数
     public Judgment(String question,char answer,String analyse,Character difficulty,Long subjectId) throws ExcelFormatException {
         this.question=question;

@@ -5,4 +5,5 @@ package com.example.pctol.pojo.entity;
  * @date 2024/4/11
  */
 public abstract class Topic {
+    public abstract void setNullAnswer();
 }

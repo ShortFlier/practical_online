@@ -37,5 +37,5 @@ public interface RadioesMapper extends TopicPublic{
     //随机获取一个题目
     Topic getRandom(PracticalDTO practicalDTO);
 
-    List<Topic> getByIds(List<Integer> ids);
+    List<Topic> getByIds(List ids);
 }

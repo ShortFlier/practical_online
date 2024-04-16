@@ -18,5 +18,5 @@ public interface TopicPublic {
 
     List<TopicVO> getList(TopicSearchInfoDTO topicSearchInfoDTO);
 
-    List<Topic> getByIds(List<Integer> ids);
+    List<Topic> getByIds(List ids);
 }

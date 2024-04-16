@@ -9,4 +9,6 @@ import com.example.pctol.pojo.VO.Result;
  */
 public interface PaperService {
     Result gets(PaperSearchDTO paperSearchDTO);
+
+    Result getByIdNt(long id);
 }

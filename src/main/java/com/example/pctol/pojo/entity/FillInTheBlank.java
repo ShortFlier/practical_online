@@ -37,6 +37,9 @@ public class FillInTheBlank extends Topic{
     private Long subjectId;
     private Character difficulty;
 
+    public void setNullAnswer(){
+        answer=null;
+    }
 
     //为excel而备的构造函数
     public FillInTheBlank(String question,String answer,String analyse,Character difficulty,Long subjectId) throws ExcelFormatException {

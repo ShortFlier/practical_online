@@ -25,5 +25,6 @@ public class TopicConstant {
 
     public static final String ANSWER_APART="#answer#";
 
+    public static final char NULL_CHAR='\0';
 
 }

@@ -5,10 +5,7 @@ import com.example.pctol.pojo.VO.Result;
 import com.example.pctol.server.service.PaperService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 /**
  * @author hp
@@ -24,9 +21,18 @@ public class PaperController {
     //获取试卷信息，根据科目和难度,或者标题、上传者
     @PostMapping("/gets")
     public Result gets(@RequestBody PaperSearchDTO paperSearchDTO){
-        log.info("**********************************[/practice/add]************************************");
+        log.info("**********************************[/paper/gets]************************************");
         log.info("查询信息：{}",paperSearchDTO);
         Result result=paperService.gets(paperSearchDTO);
+        return result;
+    }
+
+    //获取试卷，不带答案
+    @GetMapping("/look/{id}")
+    public Result getByIdNotAnswer(@PathVariable long id){
+        log.info("**********************************[/paper/look/{id}]************************************");
+        log.info("试卷id：{}",id);
+        Result result=paperService.getByIdNt(id);
         return result;
     }
 }
