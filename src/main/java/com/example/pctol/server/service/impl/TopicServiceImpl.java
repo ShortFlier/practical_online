@@ -50,18 +50,19 @@ public class TopicServiceImpl implements TopicService {
     private TopicExcelService topicExcelService;
 
     public  TopicPublic getTopicMapper(int type){
-        if(type==TopicConstant.RADIOES){
-            return radioesMapper;
-        } else if (type==TopicConstant.MULTIPLE_CHOICES) {
-            return mulChoMapper;
-        }else if(type==TopicConstant.JUDGMENT){
-            return judgMapper;
-        } else if (type==TopicConstant.FILL_IN_THE_BLANK) {
-            return fitbMapper;
-        } else if (type==TopicConstant.VOCABULARY_QST) {
-            return vocaMapper;
-        }else {
-            return null;
+        switch (type) {
+            case TopicConstant.RADIOES:
+                return radioesMapper;
+            case TopicConstant.MULTIPLE_CHOICES:
+                return mulChoMapper;
+            case TopicConstant.JUDGMENT:
+                return judgMapper;
+            case TopicConstant.FILL_IN_THE_BLANK:
+                return fitbMapper;
+            case TopicConstant.VOCABULARY_QST:
+                return vocaMapper;
+            default:
+                return null;
         }
     }
 

@@ -1,5 +1,6 @@
 package com.example.pctol.pojo.entity;
 
+import com.example.pctol.common.constant.TopicConstant;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -33,5 +34,21 @@ public class PaperDetail {
 
     private LocalDateTime createTime; // 创建时间
     private LocalDateTime updateTime; // 更新时间
+
+    public String getIds(int type){
+        switch (type){
+            case TopicConstant.RADIOES:
+                return getRadioIds();
+            case TopicConstant.MULTIPLE_CHOICES:
+                return getMulIds();
+            case TopicConstant.JUDGMENT:
+                return getJudgIds();
+            case TopicConstant.FILL_IN_THE_BLANK:
+                return getFitbIds();
+            case TopicConstant.VOCABULARY_QST:
+                return getVocIds();
+            default: return null;
+        }
+    }
 
 }

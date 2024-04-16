@@ -1,5 +1,6 @@
 package com.example.pctol.pojo.VO;
 
+import com.example.pctol.common.constant.TopicConstant;
 import com.example.pctol.pojo.entity.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -41,6 +42,21 @@ public class PaperDetailVO {
         fitbMarks= paperDetail.getFitbMarks();
         vocMarks= paperDetail.getVocMarks();
         difficulty=paper.getDifficulty();
+    }
+
+    public void setTopicList(int type, List list){
+        switch (type){
+            case TopicConstant.RADIOES:
+                setRadioList(list); break;
+            case TopicConstant.MULTIPLE_CHOICES:
+                setMulList(list); break;
+            case TopicConstant.JUDGMENT:
+                setJudgList(list); break;
+            case TopicConstant.FILL_IN_THE_BLANK:
+                setFitbList(list); break;
+            case TopicConstant.VOCABULARY_QST:
+                setVocList(list); break;
+        }
     }
 
     public void setNullAnswer(){
