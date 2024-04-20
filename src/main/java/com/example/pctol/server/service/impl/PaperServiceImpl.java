@@ -22,6 +22,8 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import static com.example.pctol.common.constant.TopicConstant.TOPIC_TYPE_ARRAY;
+
 /**
  * @author hp
  * @date 2024/4/15
@@ -56,14 +58,14 @@ public class PaperServiceImpl implements PaperService {
     }
 
     @Override
-    public Result getByIdNt(long id) {
+    public Result getByIdNt(long id,boolean eraseAnswer) {
 //        获取Paper
         Paper paper=paperMapper.getPaper(id);
 //        获取PaperDetail
         PaperDetail paperDetail=paperMapper.getPaperDetail(id);
         PaperDetailVO paperDetailVO=new PaperDetailVO(paper,paperDetail);
         //填充paperDetailVO中的list字段
-        topicListFill(paperDetail,paperDetailVO,true);
+        topicListFill(paperDetail,paperDetailVO,eraseAnswer);
         return Result.success(paperDetailVO);
     }
 
@@ -113,8 +115,7 @@ public class PaperServiceImpl implements PaperService {
 //        }
         //优雅的重构上述代码************** ^_^
         List<List> idList=new ArrayList<>();
-        int[] types={TopicConstant.RADIOES,TopicConstant.MULTIPLE_CHOICES,TopicConstant.JUDGMENT,
-                TopicConstant.FILL_IN_THE_BLANK,TopicConstant.VOCABULARY_QST};
+        int[] types=TopicConstant.TOPIC_TYPE_ARRAY;
         //装填id_list
         for (int i = 0; i < 5; i++) {
             if(paperDetail.getIds(types[i])!=null){

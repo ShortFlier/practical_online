@@ -158,68 +158,82 @@ public class TopicServiceImpl implements TopicService {
         List<TopicVO> topicVOList=new ArrayList<>();
         Integer type=topicSearchInfoDTO.getType();
         //业务逻辑
+        int[] types=TopicConstant.TOPIC_TYPE_ARRAY;
         if(type==TopicConstant.ALL_TOPIC){
-            total=radioesMapper.getNumber(topicSearchInfoDTO)+mulChoMapper.getNumber(topicSearchInfoDTO)+
-                    judgMapper.getNumber(topicSearchInfoDTO)+fitbMapper.getNumber(topicSearchInfoDTO)+
-                    vocaMapper.getNumber(topicSearchInfoDTO);
-            topicVOList=radioesMapper.getList(topicSearchInfoDTO);
-            for (TopicVO value:topicVOList) {
-                value.setType(TopicConstant.RADIOES);
-            }
-            List<TopicVO> tempList;
-            tempList=mulChoMapper.getList(topicSearchInfoDTO);
-            for (TopicVO value:tempList) {
-                value.setType(TopicConstant.MULTIPLE_CHOICES);
-            }
-            topicVOList.addAll(tempList);
-            tempList=judgMapper.getList(topicSearchInfoDTO);
-            for (TopicVO value:tempList) {
-                value.setType(TopicConstant.JUDGMENT);
-            }
-            topicVOList.addAll(tempList);
-            tempList=fitbMapper.getList(topicSearchInfoDTO);
-            for (TopicVO value:tempList) {
-                value.setType(TopicConstant.FILL_IN_THE_BLANK);
-            }
-            topicVOList.addAll(tempList);
-            tempList=vocaMapper.getList(topicSearchInfoDTO);
-            for (TopicVO value:tempList) {
-                value.setType(TopicConstant.VOCABULARY_QST);
-            }
-            topicVOList.addAll(tempList);
-            topicVOList=topicVOList.subList(0, Math.min(topicVOList.size(), topicSearchInfoDTO.getPageSize()));
-        }else if(type==TopicConstant.RADIOES){
-            total=radioesMapper.getNumber(topicSearchInfoDTO);
-            topicVOList=radioesMapper.getList(topicSearchInfoDTO);
-            for (TopicVO value:topicVOList) {
-                value.setType(TopicConstant.RADIOES);
-            }
-        } else if (type==TopicConstant.MULTIPLE_CHOICES) {
-            total=mulChoMapper.getNumber(topicSearchInfoDTO);
-            topicVOList=mulChoMapper.getList(topicSearchInfoDTO);
-            for (TopicVO value:topicVOList) {
-                value.setType(TopicConstant.MULTIPLE_CHOICES);
-            }
-        }else if(type==TopicConstant.JUDGMENT){
-            total=judgMapper.getNumber(topicSearchInfoDTO);
-            topicVOList=judgMapper.getList(topicSearchInfoDTO);
-            for (TopicVO value:topicVOList) {
-                value.setType(TopicConstant.JUDGMENT);
-            }
-        } else if (type==TopicConstant.FILL_IN_THE_BLANK) {
-            total=fitbMapper.getNumber(topicSearchInfoDTO);
-            topicVOList=fitbMapper.getList(topicSearchInfoDTO);
-            for (TopicVO value:topicVOList) {
-                value.setType(TopicConstant.FILL_IN_THE_BLANK);
-            }
-        } else if (type==TopicConstant.VOCABULARY_QST) {
-            total=vocaMapper.getNumber(topicSearchInfoDTO);
-            topicVOList=vocaMapper.getList(topicSearchInfoDTO);
-            for (TopicVO value:topicVOList) {
-                value.setType(TopicConstant.VOCABULARY_QST);
+            for (int i = 0; i < 5; i++) {
+                total+=getTopicMapper(types[i]).getNumber(topicSearchInfoDTO);
+                topicVOList.addAll(getTopicMapper(types[i]).getList(topicSearchInfoDTO));
             }
         }else {
+            total=getTopicMapper(type).getNumber(topicSearchInfoDTO);
+            topicVOList=getTopicMapper(type).getList(topicSearchInfoDTO);
         }
+        for (TopicVO topicVO: topicVOList) {
+            topicVO.setType(type);
+        }
+        //end   重写以下代码堆 ^-^
+//        if(type==TopicConstant.ALL_TOPIC){
+//            total=radioesMapper.getNumber(topicSearchInfoDTO)+mulChoMapper.getNumber(topicSearchInfoDTO)+
+//                    judgMapper.getNumber(topicSearchInfoDTO)+fitbMapper.getNumber(topicSearchInfoDTO)+
+//                    vocaMapper.getNumber(topicSearchInfoDTO);
+//            topicVOList=radioesMapper.getList(topicSearchInfoDTO);
+//            for (TopicVO value:topicVOList) {
+//                value.setType(TopicConstant.RADIOES);
+//            }
+//            List<TopicVO> tempList;
+//            tempList=mulChoMapper.getList(topicSearchInfoDTO);
+//            for (TopicVO value:tempList) {
+//                value.setType(TopicConstant.MULTIPLE_CHOICES);
+//            }
+//            topicVOList.addAll(tempList);
+//            tempList=judgMapper.getList(topicSearchInfoDTO);
+//            for (TopicVO value:tempList) {
+//                value.setType(TopicConstant.JUDGMENT);
+//            }
+//            topicVOList.addAll(tempList);
+//            tempList=fitbMapper.getList(topicSearchInfoDTO);
+//            for (TopicVO value:tempList) {
+//                value.setType(TopicConstant.FILL_IN_THE_BLANK);
+//            }
+//            topicVOList.addAll(tempList);
+//            tempList=vocaMapper.getList(topicSearchInfoDTO);
+//            for (TopicVO value:tempList) {
+//                value.setType(TopicConstant.VOCABULARY_QST);
+//            }
+//            topicVOList.addAll(tempList);
+//            topicVOList=topicVOList.subList(0, Math.min(topicVOList.size(), topicSearchInfoDTO.getPageSize()));
+//        }else if(type==TopicConstant.RADIOES){
+//            total=radioesMapper.getNumber(topicSearchInfoDTO);
+//            topicVOList=radioesMapper.getList(topicSearchInfoDTO);
+//            for (TopicVO value:topicVOList) {
+//                value.setType(TopicConstant.RADIOES);
+//            }
+//        } else if (type==TopicConstant.MULTIPLE_CHOICES) {
+//            total=mulChoMapper.getNumber(topicSearchInfoDTO);
+//            topicVOList=mulChoMapper.getList(topicSearchInfoDTO);
+//            for (TopicVO value:topicVOList) {
+//                value.setType(TopicConstant.MULTIPLE_CHOICES);
+//            }
+//        }else if(type==TopicConstant.JUDGMENT){
+//            total=judgMapper.getNumber(topicSearchInfoDTO);
+//            topicVOList=judgMapper.getList(topicSearchInfoDTO);
+//            for (TopicVO value:topicVOList) {
+//                value.setType(TopicConstant.JUDGMENT);
+//            }
+//        } else if (type==TopicConstant.FILL_IN_THE_BLANK) {
+//            total=fitbMapper.getNumber(topicSearchInfoDTO);
+//            topicVOList=fitbMapper.getList(topicSearchInfoDTO);
+//            for (TopicVO value:topicVOList) {
+//                value.setType(TopicConstant.FILL_IN_THE_BLANK);
+//            }
+//        } else if (type==TopicConstant.VOCABULARY_QST) {
+//            total=vocaMapper.getNumber(topicSearchInfoDTO);
+//            topicVOList=vocaMapper.getList(topicSearchInfoDTO);
+//            for (TopicVO value:topicVOList) {
+//                value.setType(TopicConstant.VOCABULARY_QST);
+//            }
+//        }else {
+//        }
         //返回数据
         PageResult pageResult=new PageResult(total,topicVOList);
         return Result.success(pageResult);

@@ -17,6 +17,9 @@ public class TopicConstant {
     //应用题
     public static final int VOCABULARY_QST=5;
 
+    public static final int[] TOPIC_TYPE_ARRAY={TopicConstant.RADIOES,TopicConstant.MULTIPLE_CHOICES,TopicConstant.JUDGMENT,
+            TopicConstant.FILL_IN_THE_BLANK,TopicConstant.VOCABULARY_QST};
+
     public static final String RADIOES_ANSWER_LIST="abcd";
     public static final String MULTIPLE_CHOICES_ANSWER_LIST="abcdef";
     public static final String JUDGMENT_ANSWER_LIST="01";

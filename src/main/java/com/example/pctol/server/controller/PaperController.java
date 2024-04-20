@@ -32,7 +32,16 @@ public class PaperController {
     public Result getByIdNotAnswer(@PathVariable long id){
         log.info("**********************************[/paper/look/{id}]************************************");
         log.info("试卷id：{}",id);
-        Result result=paperService.getByIdNt(id);
+        Result result=paperService.getByIdNt(id,true);
+        return result;
+    }
+
+    //获取试卷，带答案
+    @GetMapping("/looks/{id}")
+    public Result getByIdAnswer(@PathVariable long id){
+        log.info("**********************************[/paper/looks/{id}]************************************");
+        log.info("试卷id：{}",id);
+        Result result=paperService.getByIdNt(id,false);
         return result;
     }
 }

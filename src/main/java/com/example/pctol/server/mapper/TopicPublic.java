@@ -14,6 +14,8 @@ import java.util.List;
  */
 
 public interface TopicPublic {
+
+    int getNumber(TopicSearchInfoDTO topicSearchInfoDTO);
     Topic getRandom(PracticalDTO practicalDTO);
 
     List<TopicVO> getList(TopicSearchInfoDTO topicSearchInfoDTO);
