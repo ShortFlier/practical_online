@@ -23,6 +23,7 @@ public class PaperController {
     public Result gets(@RequestBody PaperSearchDTO paperSearchDTO){
         log.info("**********************************[/paper/gets]************************************");
         log.info("查询信息：{}",paperSearchDTO);
+        paperSearchDTO.difCheck();
         Result result=paperService.gets(paperSearchDTO);
         return result;
     }

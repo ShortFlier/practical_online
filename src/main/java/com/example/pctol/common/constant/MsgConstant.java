@@ -16,4 +16,6 @@ public class MsgConstant {
     public static final String ACCOUNT_FORMAT_ERROR="账号格式错误，仅由数字、字母大小写、下划线组成";
     public static final String PASSWORD_FORMAT_ERROR="密码格式错误，仅由数字、字母大小写、下划线组成";
     public static final String EMAIL_FORMAT_ERROR="邮箱格式错误";
+
+    public static final String SUCCESS_SUBMIT_WAIT_AUDIT="提交成功，等待审核";
 }

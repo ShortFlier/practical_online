@@ -16,4 +16,10 @@ public class PracticalDTO {
     private Character difficulty;
     //题目类型
     private Integer type;
+
+    public void difCheck(){
+        if(difficulty!=null)
+            if(difficulty<'1'||difficulty>'5')
+                difficulty=null;
+    }
 }

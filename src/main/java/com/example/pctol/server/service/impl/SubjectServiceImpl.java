@@ -5,6 +5,7 @@ import com.example.pctol.common.constant.Constant;
 import com.example.pctol.common.constant.MsgConstant;
 import com.example.pctol.common.constant.StateCode;
 import com.example.pctol.common.properties.BaseContext;
+import com.example.pctol.pojo.DTO.PageInfo;
 import com.example.pctol.pojo.DTO.SubSearchDTO;
 import com.example.pctol.pojo.DTO.SubUpdateInfoDTO;
 import com.example.pctol.pojo.VO.PageResult;
@@ -101,6 +102,15 @@ public class SubjectServiceImpl implements SubjectService {
     public Result getList() {
         List<SubVO> list=subjectMapper.getList();
         return Result.success(list);
+    }
+
+    @Override
+    public Result thGet(PageInfo pageInfo) {
+        pageInfo.setStart();
+        int total=subjectMapper.thGetAut(BaseContext.getLoginInfo());
+        List sublist=subjectMapper.thGet(BaseContext.getLoginInfo(),pageInfo.getStart(),pageInfo.getPageSize());
+        PageResult pageResult=new PageResult(total,sublist);
+        return Result.success(pageResult);
     }
 
     private SubInfoVo selectNotNull(String name) throws Exception {

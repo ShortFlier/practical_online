@@ -2,6 +2,7 @@ package com.example.pctol.server.controller;
 
 import com.example.pctol.common.constant.MsgConstant;
 import com.example.pctol.common.constant.StateCode;
+import com.example.pctol.pojo.DTO.PageInfo;
 import com.example.pctol.pojo.DTO.SubSearchDTO;
 import com.example.pctol.pojo.DTO.SubUpdateInfoDTO;
 import com.example.pctol.pojo.VO.PageResult;
@@ -37,7 +38,7 @@ public class SubjectController {
     public Result add(@RequestBody Subject subject){
         log.info("**********************************[/subject/add]************************************");
         subjectService.add(subject);
-        return new Result(StateCode.SUCCESS);
+        return  Result.success(MsgConstant.SUCCESS_SUBMIT_WAIT_AUDIT);
     }
 
     //分页查询获取匹配的学科（审核通过)
@@ -84,6 +85,15 @@ public class SubjectController {
     public Result getSubList(){
         log.info("**********************************[/subject/list]************************************");
         Result result=subjectService.getList();
+        return result;
+    }
+
+    //教师获取自己上传的学科信息
+    @GetMapping("/th/get")
+    public Result thGet(PageInfo pageInfo){
+        log.info("**********************************[/subject/th/get]************************************");
+        log.info("pageInfo：{}",pageInfo);
+        Result result=subjectService.thGet(pageInfo);
         return result;
     }
 }

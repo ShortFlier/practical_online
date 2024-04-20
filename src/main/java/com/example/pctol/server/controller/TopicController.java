@@ -54,6 +54,7 @@ public class TopicController {
     public Result practice(PracticalDTO practicalDTO){
         log.info("**********************************[/topic/update]************************************");
         log.info("搜索信息：{}",practicalDTO);
+        practicalDTO.difCheck();
         Result result=topicService.practice(practicalDTO);
         return result;
     }

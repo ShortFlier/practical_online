@@ -1,6 +1,7 @@
 package com.example.pctol.server.mapper;
 
 import com.example.pctol.common.constant.OperationType;
+import com.example.pctol.pojo.DTO.PageInfo;
 import com.example.pctol.pojo.DTO.SubSearchDTO;
 import com.example.pctol.pojo.DTO.SubUpdateInfoDTO;
 import com.example.pctol.pojo.VO.SubInfoVo;
@@ -50,4 +51,10 @@ public interface SubjectMapper {
 
     @Select("select id,name from subject where audit_state=1 order by id asc")
     List<SubVO> getList();
+
+    @Select("select id,name,create_time,update_time,launcher,audit_state,audit_time from subject where launcher=#{launcher} limit #{start},#{pageSize}")
+    List<Subject> thGet(String launcher, Integer start, Integer pageSize);
+
+    @Select("select count(*) from subject where launcher=#{launcher}")
+    Integer thGetAut(String launcher);
 }

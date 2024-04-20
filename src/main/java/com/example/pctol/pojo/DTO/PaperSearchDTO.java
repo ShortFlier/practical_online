@@ -16,7 +16,15 @@ public class PaperSearchDTO {
     private Character difficulty;
     private String launcher;
     private String title;
+
+    private Character display;
     private PageInfo pageInfo;
+
+    public void difCheck(){
+        if(difficulty!=null)
+            if(difficulty<'1'||difficulty>'5')
+                difficulty=null;
+    }
 
     public Integer getStart(){
         if(pageInfo==null)

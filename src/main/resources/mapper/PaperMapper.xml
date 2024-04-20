@@ -21,11 +21,12 @@
             <if test="title!=null">
                 and title like concat('%',#{title},'%')
             </if>
+            and display=#{display}
         </where>
     </select>
 
     <select id="gets" parameterType="com.example.pctol.pojo.DTO.PaperSearchDTO" resultType="com.example.pctol.pojo.entity.Paper">
-        select id,title,description,create_time,update_time,duration,launcher,subject_id,total_marks,difficulty
+        select id,title,description,create_time,update_time,duration,launcher,subject_id,total_marks,difficulty,display
         from paper
         <where>
             <if test="paperSearchDTO.subjectId!=null">
@@ -40,6 +41,7 @@
             <if test="paperSearchDTO.title!=null">
                 and title like concat('%',#{paperSearchDTO.title},'%')
             </if>
+            and display=#{paperSearchDTO.display}
         </where>
         <if test="paperSearchDTO.pageInfo!=null">
             limit #{start},#{pageSize}

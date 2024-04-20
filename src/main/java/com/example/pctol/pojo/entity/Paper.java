@@ -24,6 +24,7 @@ public class Paper {
     private Long subjectId;
     private Integer totalMarks;     //试卷分数
     private Character difficulty; // 难度，数字1-5表示
+    private Character display; // 0私有，1公开
 
     public Paper(Paper paper) {
         this.id = paper.getId();
@@ -36,5 +37,6 @@ public class Paper {
         this.subjectId = paper.getSubjectId();
         this.totalMarks = paper.getTotalMarks();
         this.difficulty = paper.getDifficulty();
+        this.display=paper.getDisplay();
     }
 }

@@ -18,7 +18,7 @@ public interface PaperMapper {
 
     List<Paper> gets(PaperSearchDTO paperSearchDTO,Integer start,Integer pageSize);
 
-    @Select("select id,title,description,create_time,update_time,duration,launcher,subject_id,total_marks,difficulty" +
+    @Select("select id,title,description,create_time,update_time,duration,launcher,subject_id,total_marks,difficulty,display" +
             " from paper where id=#{id}")
     Paper getPaper(long id);
 
