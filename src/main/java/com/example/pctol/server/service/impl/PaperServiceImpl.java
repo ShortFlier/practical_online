@@ -4,19 +4,21 @@ import com.example.pctol.common.constant.MsgConstant;
 import com.example.pctol.common.constant.PaperConstant;
 import com.example.pctol.common.constant.StateCode;
 import com.example.pctol.common.constant.TopicConstant;
+import com.example.pctol.common.utils.GradeCompute;
 import com.example.pctol.common.utils.Util;
 import com.example.pctol.pojo.DTO.PaperSearchDTO;
+import com.example.pctol.pojo.DTO.SmtAswListDTO;
 import com.example.pctol.pojo.DTO.SmtPaperDTO;
 import com.example.pctol.pojo.VO.*;
-import com.example.pctol.pojo.entity.FillInTheBlank;
-import com.example.pctol.pojo.entity.Paper;
-import com.example.pctol.pojo.entity.Topic;
+import com.example.pctol.pojo.entity.*;
+
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
-import com.example.pctol.pojo.entity.PaperDetail;
 import com.example.pctol.server.mapper.PaperMapper;
 import com.example.pctol.server.mapper.SubjectMapper;
+import com.example.pctol.server.mapper.TestMapper;
 import com.example.pctol.server.mapper.TopicPublic;
 import com.example.pctol.server.service.PaperService;
 import com.example.pctol.server.service.TopicService;
@@ -39,6 +41,8 @@ public class PaperServiceImpl implements PaperService {
     private SubjectMapper subjectMapper;
     @Autowired
     private TopicService topicService;
+    @Autowired
+    private TestMapper testMapper;
 
     @Override
     public Result gets(PaperSearchDTO paperSearchDTO) {
@@ -94,7 +98,34 @@ public class PaperServiceImpl implements PaperService {
     //交卷
     @Override
     public void testSubmit(SmtPaperDTO smtPaperDTO) {
-
+        //保存到test表
+        Test test=new Test(smtPaperDTO);
+        testMapper.insert(test);
+        //保存paper_topic表
+        Long id=test.getId();
+        List<PaperTopic> paperTopics=new ArrayList<>();
+        //装填list，给选择，判断打分
+        //装填
+        for (Object value: smtPaperDTO.getSmtAswListDTOList()) {
+            paperTopics.add(new PaperTopic(smtPaperDTO).setTopic((SmtAswListDTO) value));
+        }
+        //打分
+        for (PaperTopic paperTopic: paperTopics) {
+            //打分选择和判断
+            if(paperTopic.getType()>=TopicConstant.RADIOES&&paperTopic.getType()<=TopicConstant.JUDGMENT){
+                TopicPublic topicMapper= topicService.getTopicMapper(paperTopic.getType());
+                Topic topic=topicMapper.getByIds(Collections.singletonList(paperTopic.getTopicId())).get(0);
+                if(paperTopic.getType()==TopicConstant.MULTIPLE_CHOICES){ //多选
+                    GradeCompute.mulChoGrade(paperTopic, (MultipleChoices) topic);
+                }else if(paperTopic.getType()==TopicConstant.RADIOES){ //单选
+                    GradeCompute.radioesGrade(paperTopic, (Radioes) topic);
+                }else { //判断
+                    GradeCompute.judgeGrade(paperTopic, (Judgment) topic);
+                }
+            }
+        }
+        //保存到paper_topic
+        paperMapper.insertPaperTopic(paperTopics);
     }
 
     //填充paperDetailVO中的list字段

@@ -1,5 +1,7 @@
 package com.example.pctol.pojo.entity;
 
+import com.example.pctol.pojo.DTO.SmtAswListDTO;
+import com.example.pctol.pojo.DTO.SmtPaperDTO;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -24,4 +26,18 @@ public class PaperTopic {
     private LocalDateTime createTime;
     private LocalDateTime updateTime;
     private Integer grade;
+
+    public PaperTopic(SmtPaperDTO smtPaperDTO){
+        paperId= smtPaperDTO.getPaperId();
+        submitId= smtPaperDTO.getSubmitId();
+        createTime= LocalDateTime.now();
+        updateTime= LocalDateTime.now();
+    }
+
+    public PaperTopic setTopic(SmtAswListDTO smtAswListDTO){
+        type=smtAswListDTO.getType();
+        topicId=smtAswListDTO.getTopicId();
+        submitAnswer=smtAswListDTO.getSubmitAnswer();
+        return this;
+    }
 }

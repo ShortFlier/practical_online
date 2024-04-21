@@ -1,5 +1,7 @@
 package com.example.pctol.pojo.entity;
 
+import com.example.pctol.common.properties.BaseContext;
+import com.example.pctol.pojo.DTO.SmtPaperDTO;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -21,4 +23,12 @@ public class Test {
     private LocalDateTime createTime;
     private LocalDateTime updateTime;
     private Integer grade;
+
+    public Test(SmtPaperDTO smtPaperDTO){
+        paperId=smtPaperDTO.getPaperId();
+        studentId= smtPaperDTO.getSubmitId();
+        createTime=smtPaperDTO.getCreateTime();
+        updateTime=LocalDateTime.now();
+        launcher= BaseContext.getLoginInfo();
+    }
 }
