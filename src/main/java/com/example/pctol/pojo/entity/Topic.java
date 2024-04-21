@@ -6,4 +6,8 @@ package com.example.pctol.pojo.entity;
  */
 public abstract class Topic {
     public abstract void setNullAnswer();
+
+    public abstract void setAnswer(String answer);
+
+    public abstract String getAnswer();
 }

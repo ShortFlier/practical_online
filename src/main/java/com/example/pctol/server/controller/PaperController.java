@@ -1,6 +1,8 @@
 package com.example.pctol.server.controller;
 
+import com.example.pctol.common.constant.MsgConstant;
 import com.example.pctol.pojo.DTO.PaperSearchDTO;
+import com.example.pctol.pojo.DTO.SmtPaperDTO;
 import com.example.pctol.pojo.VO.Result;
 import com.example.pctol.server.service.PaperService;
 import lombok.extern.slf4j.Slf4j;
@@ -44,5 +46,23 @@ public class PaperController {
         log.info("试卷id：{}",id);
         Result result=paperService.getByIdNt(id,false);
         return result;
+    }
+
+    //考试
+    @GetMapping("/test/{id}")
+    public Result test(@PathVariable long id){
+        log.info("**********************************[/paper/test/{id}]************************************");
+        log.info("试卷id：{}",id);
+        Result result=paperService.test(id);
+        return result;
+    }
+
+    //提交试卷
+    @PutMapping("/test/submit")
+    public Result testSubmit(@RequestBody SmtPaperDTO smtPaperDTO){
+        log.info("**********************************[/paper/test/submit]************************************");
+        log.info("交卷信息：{}",smtPaperDTO);
+        paperService.testSubmit(smtPaperDTO);
+        return Result.success(MsgConstant.SUCCESS);
     }
 }

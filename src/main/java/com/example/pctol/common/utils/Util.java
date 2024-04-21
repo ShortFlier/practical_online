@@ -1,6 +1,9 @@
 package com.example.pctol.common.utils;
 
+import com.example.pctol.common.constant.PaperConstant;
+import com.example.pctol.common.constant.TopicConstant;
 import com.example.pctol.pojo.VO.SubVO;
+import com.example.pctol.server.controller.PaperController;
 import lombok.extern.slf4j.Slf4j;
 
 import java.util.Optional;
@@ -41,5 +44,20 @@ public class Util {
                 return subvo.getName();
         }
         return null;
+    }
+
+    //将答案替换
+    public static String hideAnswer(String answer){
+        String[] answerArr=answer.split(TopicConstant.ANSWER_APART);
+        for (int i = 0; i < answerArr.length; i++) {
+            answerArr[i]= PaperConstant.ANSWER_REPLACE;
+        }
+        return connectAnswer(answerArr);
+    }
+
+    //答案拼接
+    public static String connectAnswer(String[] answerArr){
+        String answer=String.join(TopicConstant.ANSWER_APART,answerArr);
+        return answer;
     }
 }

@@ -6,7 +6,9 @@ import com.example.pctol.common.constant.StateCode;
 import com.example.pctol.common.constant.TopicConstant;
 import com.example.pctol.common.utils.Util;
 import com.example.pctol.pojo.DTO.PaperSearchDTO;
+import com.example.pctol.pojo.DTO.SmtPaperDTO;
 import com.example.pctol.pojo.VO.*;
+import com.example.pctol.pojo.entity.FillInTheBlank;
 import com.example.pctol.pojo.entity.Paper;
 import com.example.pctol.pojo.entity.Topic;
 import java.util.ArrayList;
@@ -67,6 +69,32 @@ public class PaperServiceImpl implements PaperService {
         //填充paperDetailVO中的list字段
         topicListFill(paperDetail,paperDetailVO,eraseAnswer);
         return Result.success(paperDetailVO);
+    }
+
+    @Override
+    public Result test(long id) {
+        Result result=getByIdNt(id,false);
+        PaperDetailVO paperDetailVO= (PaperDetailVO) result.getData();
+        //将paperDetailVo的list中填空，应用题的答案answer以特殊字符替换
+        if(paperDetailVO.getFitbList()!=null&&paperDetailVO.getFitbList().size()>0){
+            for (Topic fillInTheBlank : paperDetailVO.getFitbList()) {
+                String answer= fillInTheBlank.getAnswer();
+                fillInTheBlank.setAnswer(Util.hideAnswer(answer));
+            }
+        }
+        if(paperDetailVO.getVocList()!=null&&paperDetailVO.getVocList().size()>0){
+            for (Topic vocalQst : paperDetailVO.getVocList()) {
+                String answer= vocalQst.getAnswer();
+                vocalQst.setAnswer(Util.hideAnswer(answer));
+            }
+        }
+        return Result.success(paperDetailVO);
+    }
+
+    //交卷
+    @Override
+    public void testSubmit(SmtPaperDTO smtPaperDTO) {
+
     }
 
     //填充paperDetailVO中的list字段

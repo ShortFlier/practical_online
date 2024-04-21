@@ -6,4 +6,6 @@ package com.example.pctol.common.constant;
  */
 public class PaperConstant {
     public static final String ID_APART="#id#";
+
+    public static final String ANSWER_REPLACE="replace";
 }
