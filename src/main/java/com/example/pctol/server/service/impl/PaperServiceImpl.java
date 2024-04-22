@@ -222,7 +222,8 @@ public class PaperServiceImpl implements PaperService {
             if(paperDetail.getMask(TOPIC_TYPE_ARRAY[i])==0)
                 maskArr[i]=0;
             else {
-                idList=Util.idStrToArr(paperDetail.getIds(TOPIC_TYPE_ARRAY[i]));
+                idList= List.of((paperDetail.getIds(TOPIC_TYPE_ARRAY[i]).split(PaperConstant.ID_APART)));
+                log.info("idList:{}",idList);
                 maskArr[i]=paperDetail.getMask(TOPIC_TYPE_ARRAY[i])/idList.size();
             }
         }

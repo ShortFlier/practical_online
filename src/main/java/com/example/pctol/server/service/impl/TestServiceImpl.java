@@ -53,7 +53,7 @@ public class TestServiceImpl implements TestService {
             if(paperDetailVO.getMask(TopicConstant.TOPIC_TYPE_ARRAY[i])!=0){
                 List<TopicTestVO> topicTestVOList=new ArrayList<>();
                 for (Topic topic: paperDetailVO.getTopicList(TopicConstant.TOPIC_TYPE_ARRAY[i])) {
-                    topicTestVO=testMapper.getSmtAsw(testId,topic.getId());
+                    topicTestVO=testMapper.getSmtAsw(testId,topic.getId(),TopicConstant.TOPIC_TYPE_ARRAY[i]);
                     topicTestVO.setTopic(topic);
                     topicTestVOList.add(topicTestVO);
                 }

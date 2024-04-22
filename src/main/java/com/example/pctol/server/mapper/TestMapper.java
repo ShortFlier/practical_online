@@ -32,6 +32,6 @@ public interface TestMapper {
     @Select("SELECT id, paper_id, launcher, student_id, create_time, update_time, grade FROM test WHERE id = #{testId}")
     Test getById(Long testId);
 
-    @Select("select submit_answer,grade from paper_topic where test_id=#{testId} and topic_id=#{topicId}")
-    TopicTestVO getSmtAsw(Long testId, Long topicId);
+    @Select("select submit_answer,grade from paper_topic where test_id=#{testId} and topic_id=#{topicId} and type=#{type}")
+    TopicTestVO getSmtAsw(Long testId, Long topicId,int type);
 }
