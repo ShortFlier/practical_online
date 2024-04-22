@@ -8,4 +8,21 @@
         insert into test(paper_id,launcher,student_id,create_time,update_time,grade)
         values (#{paperId},#{launcher},#{studentId},#{createTime},#{updateTime},#{grade})
     </insert>
+
+
+    <select id="getHis" resultType="com.example.pctol.pojo.VO.TestVO">
+        select title, test.id, grade, test.create_time, subject_id
+        from test left outer join paper on test.paper_id=paper.id
+        <where>
+            <if test="studentId!=null">
+                student_id=#{studentId}
+            </if>
+            <if test="subjectId!=null">
+              and  subject_id=#{subjectId}
+            </if>
+        </where>
+        <if test="page!=null">
+            limit #{start},#{pageSize}
+        </if>
+    </select>
 </mapper>

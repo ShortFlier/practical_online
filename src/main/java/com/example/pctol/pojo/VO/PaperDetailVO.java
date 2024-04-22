@@ -44,6 +44,38 @@ public class PaperDetailVO {
         difficulty=paper.getDifficulty();
     }
 
+    public Integer getMask(int type){
+        switch (type){
+            case TopicConstant.RADIOES:
+                return radioMarks;
+            case TopicConstant.MULTIPLE_CHOICES:
+                return mulMarks;
+            case TopicConstant.JUDGMENT:
+                return judgMarks;
+            case TopicConstant.FILL_IN_THE_BLANK:
+                return fitbMarks;
+            case TopicConstant.VOCABULARY_QST:
+                return vocMarks;
+            default: return 0;
+        }
+    }
+
+    public List<Topic> getTopicList(int type){
+        switch (type){
+            case TopicConstant.RADIOES:
+                return radioList;
+            case TopicConstant.MULTIPLE_CHOICES:
+                return mulList;
+            case TopicConstant.JUDGMENT:
+                return judgList;
+            case TopicConstant.FILL_IN_THE_BLANK:
+                return fitbList;
+            case TopicConstant.VOCABULARY_QST:
+                return vocList;
+            default: return null;
+        }
+    }
+
     public void setTopicList(int type, List list){
         switch (type){
             case TopicConstant.RADIOES:

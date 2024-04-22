@@ -10,4 +10,6 @@ public abstract class Topic {
     public abstract void setAnswer(String answer);
 
     public abstract String getAnswer();
+
+    public abstract Long getId();
 }
