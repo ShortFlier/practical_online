@@ -12,6 +12,8 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @Data
 public class StuTestHisDTO {
+
+    private Long testId;
     private Long studentId;
     private Long subjectId;
 
@@ -21,6 +23,7 @@ public class StuTestHisDTO {
     private Integer start;
 
     public void setStart(){
-        start= (page-1)*pageSize;
+        if(page!=null)
+            start= (page-1)*pageSize;
     }
 }

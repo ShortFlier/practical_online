@@ -11,11 +11,16 @@
 
 
     <select id="getHis" resultType="com.example.pctol.pojo.VO.TestVO">
-        select title, test.id, grade, test.create_time, subject_id
-        from test left outer join paper on test.paper_id=paper.id
+        select title, test.id, grade, test.create_time, subject_id, total_marks, account, name
+        from test
+            left outer join paper on test.paper_id=paper.id
+            left outer join student on test.student_id=student.stu_id
         <where>
+            <if test="testId!=null">
+                test.id=#{testId}
+            </if>
             <if test="studentId!=null">
-                student_id=#{studentId}
+              and  student_id=#{studentId}
             </if>
             <if test="subjectId!=null">
               and  subject_id=#{subjectId}

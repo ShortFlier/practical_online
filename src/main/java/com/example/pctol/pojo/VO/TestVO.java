@@ -19,6 +19,11 @@ public class TestVO {
     private Integer grade;
     private LocalDateTime createTime; //考试时间
 
+    private String account;
+    private String name;
+
+    private Integer totalMarks;
+
     private String subjectName;
     private Long subjectId;
 }
