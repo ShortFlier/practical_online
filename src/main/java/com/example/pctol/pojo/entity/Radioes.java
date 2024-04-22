@@ -50,10 +50,15 @@ public class Radioes extends Topic{
 
     @Override
     public void setAnswer(String answer) {
+        this.answer=answer.charAt(0);
+    }
+
+    public void setAnswer(char answer){
+        this.answer=answer;
     }
 
     public String getAnswer(){
-        return null;
+        return String.valueOf(answer);
     }
     //为excel而备的构造函数
     public Radioes(String question,char answer,String analyse,Character difficulty,String optionA,String optionB,String optionC,String optionD,Long subjectId) throws ExcelFormatException {

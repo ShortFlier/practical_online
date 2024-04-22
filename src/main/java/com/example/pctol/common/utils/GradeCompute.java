@@ -26,7 +26,7 @@ public class GradeCompute {
         Practice practice=new Practice();
         practice.setSubmitAnswer(paperTopic.getSubmitAnswer());
         radioesGrade(practice,radioes);
-        paperTopic.setGrade(paperTopic.getGrade());
+        paperTopic.setGrade(practice.getGrade());
     }
 
     public static void mulChoGrade(Practice practice, MultipleChoices multipleChoices){
@@ -47,7 +47,7 @@ public class GradeCompute {
         Practice practice=new Practice();
         practice.setSubmitAnswer(paperTopic.getSubmitAnswer());
         mulChoGrade(practice,multipleChoices);
-        paperTopic.setGrade(paperTopic.getGrade());
+        paperTopic.setGrade(practice.getGrade());
     }
 
     public static void judgeGrade(Practice practice, Judgment judgment){
@@ -63,6 +63,6 @@ public class GradeCompute {
         Practice practice=new Practice();
         practice.setSubmitAnswer(paperTopic.getSubmitAnswer());
         judgeGrade(practice,judgment);
-        paperTopic.setGrade(paperTopic.getGrade());
+        paperTopic.setGrade(practice.getGrade());
     }
 }

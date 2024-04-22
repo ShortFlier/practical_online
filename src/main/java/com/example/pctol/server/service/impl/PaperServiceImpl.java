@@ -107,7 +107,7 @@ public class PaperServiceImpl implements PaperService {
         //装填list，给选择，判断打分
         //装填
         for (Object value: smtPaperDTO.getSmtAswListDTOList()) {
-            paperTopics.add(new PaperTopic(smtPaperDTO).setTopic((SmtAswListDTO) value));
+            paperTopics.add(new PaperTopic(smtPaperDTO).setTopic((SmtAswListDTO) value).setTestId(id));
         }
         //打分
         for (PaperTopic paperTopic: paperTopics) {
@@ -115,6 +115,8 @@ public class PaperServiceImpl implements PaperService {
             if(paperTopic.getType()>=TopicConstant.RADIOES&&paperTopic.getType()<=TopicConstant.JUDGMENT){
                 TopicPublic topicMapper= topicService.getTopicMapper(paperTopic.getType());
                 Topic topic=topicMapper.getByIds(Collections.singletonList(paperTopic.getTopicId())).get(0);
+                System.out.println(topic);
+                System.out.println(paperTopic);
                 if(paperTopic.getType()==TopicConstant.MULTIPLE_CHOICES){ //多选
                     GradeCompute.mulChoGrade(paperTopic, (MultipleChoices) topic);
                 }else if(paperTopic.getType()==TopicConstant.RADIOES){ //单选
@@ -126,6 +128,8 @@ public class PaperServiceImpl implements PaperService {
         }
         //保存到paper_topic
         paperMapper.insertPaperTopic(paperTopics);
+        //给test打分
+
     }
 
     //填充paperDetailVO中的list字段

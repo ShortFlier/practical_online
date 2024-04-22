@@ -40,4 +40,9 @@ public class PaperTopic {
         submitAnswer=smtAswListDTO.getSubmitAnswer();
         return this;
     }
+
+    public PaperTopic setTestId(Long testId){
+        this.testId=testId;
+        return this;
+    }
 }

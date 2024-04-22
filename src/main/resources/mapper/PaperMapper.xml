@@ -6,7 +6,7 @@
     <insert id="insertPaperTopic">
         insert into paper_topic(test_id,paper_id,type,topic_id,submit_id,submit_answer,create_time,update_time,grade)
         VALUES
-        <foreach collection="list" item="item" separator="," >
+        <foreach collection="paperTopics" item="item" separator="," >
             (
             #{item.testId},
             #{item.paperId},

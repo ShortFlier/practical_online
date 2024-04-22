@@ -4,8 +4,8 @@
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.example.pctol.server.mapper.TestMapper">
 
-    <insert id="insert" useGeneratedKeys="true">
+    <insert id="insert" useGeneratedKeys="true" keyColumn="id" keyProperty="id">
         insert into test(paper_id,launcher,student_id,create_time,update_time,grade)
-        values (#{paperId},#{launcher},#{studentId},#{createTime},#{updateTime},{grade})
+        values (#{paperId},#{launcher},#{studentId},#{createTime},#{updateTime},#{grade})
     </insert>
 </mapper>

@@ -41,12 +41,17 @@ public class Judgment extends Topic{
         answer=TopicConstant.NULL_CHAR;
     }
 
+    public void setAnswer(char answer){
+        this.answer=answer;
+    }
+
     @Override
     public void setAnswer(String answer) {
+        this.answer=answer.charAt(0);
     }
 
     public String getAnswer(){
-        return null;
+        return String.valueOf(answer);
     }
 
     //为excel而备的构造函数
