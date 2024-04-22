@@ -30,4 +30,5 @@ public class TopicConstant {
 
     public static final char NULL_CHAR='\0';
 
+
 }

@@ -115,21 +115,32 @@ public class PaperServiceImpl implements PaperService {
             if(paperTopic.getType()>=TopicConstant.RADIOES&&paperTopic.getType()<=TopicConstant.JUDGMENT){
                 TopicPublic topicMapper= topicService.getTopicMapper(paperTopic.getType());
                 Topic topic=topicMapper.getByIds(Collections.singletonList(paperTopic.getTopicId())).get(0);
-                System.out.println(topic);
-                System.out.println(paperTopic);
+                int[] maskArr=getMask(paperTopic.getPaperId());
                 if(paperTopic.getType()==TopicConstant.MULTIPLE_CHOICES){ //多选
                     GradeCompute.mulChoGrade(paperTopic, (MultipleChoices) topic);
+                    //精确计算分数
+                    int grade=GradeCompute.testTopicGrade(maskArr[1],paperTopic.getGrade());
+                    paperTopic.setGrade(grade);
                 }else if(paperTopic.getType()==TopicConstant.RADIOES){ //单选
                     GradeCompute.radioesGrade(paperTopic, (Radioes) topic);
+                    //精确计算分数
+                    int grade=GradeCompute.testTopicGrade(maskArr[0],paperTopic.getGrade());
+                    paperTopic.setGrade(grade);
                 }else { //判断
                     GradeCompute.judgeGrade(paperTopic, (Judgment) topic);
+                    //精确计算分数
+                    int grade=GradeCompute.testTopicGrade(maskArr[2],paperTopic.getGrade());
+                    paperTopic.setGrade(grade);
                 }
             }
         }
         //保存到paper_topic
         paperMapper.insertPaperTopic(paperTopics);
         //给test打分
-
+        Integer totalGrade=testMapper.totalGrade(id);
+        test.setGrade(totalGrade);
+        //更新test
+        testMapper.updateGrade(test);
     }
 
     //填充paperDetailVO中的list字段
@@ -200,5 +211,21 @@ public class PaperServiceImpl implements PaperService {
         }
         if(eraseAnswer)
             paperDetailVO.setNullAnswer();
+    }
+
+    //根据paper_id获取paper每种题型每个多少分
+    public int[]  getMask(Long paperId){
+        int[] maskArr=new int[5];
+        PaperDetail paperDetail=paperMapper.getPaperDetail(paperId);
+        List idList;
+        for (int i = 0; i < 5; i++) {
+            if(paperDetail.getMask(TOPIC_TYPE_ARRAY[i])==0)
+                maskArr[i]=0;
+            else {
+                idList=Util.idStrToArr(paperDetail.getIds(TOPIC_TYPE_ARRAY[i]));
+                maskArr[i]=paperDetail.getMask(TOPIC_TYPE_ARRAY[i])/idList.size();
+            }
+        }
+        return maskArr;
     }
 }

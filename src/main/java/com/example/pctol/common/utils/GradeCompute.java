@@ -65,4 +65,10 @@ public class GradeCompute {
         judgeGrade(practice,judgment);
         paperTopic.setGrade(practice.getGrade());
     }
+
+    //mask为题目分值，grade为0-100，描述为准确率
+    public static int testTopicGrade(int mask, int grade){
+        float rate= (float) (grade/100.0);
+        return (int) (mask*rate+0.5);
+    }
 }

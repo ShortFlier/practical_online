@@ -51,4 +51,20 @@ public class PaperDetail {
         }
     }
 
+    public int getMask(int type){
+        switch (type){
+            case TopicConstant.RADIOES:
+                return getRadioMarks();
+            case TopicConstant.MULTIPLE_CHOICES:
+                return getMulMarks();
+            case TopicConstant.JUDGMENT:
+                return getJudgMarks();
+            case TopicConstant.FILL_IN_THE_BLANK:
+                return getFitbMarks();
+            case TopicConstant.VOCABULARY_QST:
+                return getVocMarks();
+            default: return 0;
+        }
+    }
+
 }

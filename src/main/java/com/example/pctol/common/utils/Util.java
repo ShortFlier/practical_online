@@ -60,4 +60,14 @@ public class Util {
         String answer=String.join(TopicConstant.ANSWER_APART,answerArr);
         return answer;
     }
+
+    //String的ids转换list
+    public static List idStrToArr(String ids){
+        return List.of(ids.split(TopicConstant.ANSWER_APART));
+    }
+
+    //String答案转换list
+    public static List anwStrToArr(String answer){
+        return List.of(answer.split(TopicConstant.ANSWER_APART));
+    }
 }
