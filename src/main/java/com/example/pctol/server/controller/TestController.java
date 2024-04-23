@@ -1,14 +1,12 @@
 package com.example.pctol.server.controller;
 
 import com.example.pctol.pojo.DTO.StuTestHisDTO;
+import com.example.pctol.pojo.DTO.TestRdmDTO;
 import com.example.pctol.pojo.VO.Result;
 import com.example.pctol.server.service.TestService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 /**
  * @author hp
@@ -37,5 +35,14 @@ public class TestController {
         log.info("test_id：{}",testId);
         Result result=testService.testLook(testId,false);
         return result;
+    }
+
+
+    @PutMapping("/random")
+    public Result randomCrt(@RequestBody TestRdmDTO testRdmDTO){
+        log.info("**********************************[/test/random]************************************");
+        log.info("组卷信息：{}",testRdmDTO);
+        Result result;
+        return null;
     }
 }
