@@ -63,7 +63,14 @@ public class Util {
 
     //String的ids转换list
     public static List idStrToArr(String ids){
-        return List.of(ids.split(TopicConstant.ANSWER_APART));
+        return List.of(ids.split(PaperConstant.ID_APART));
+    }
+
+    //list的ids转String
+    public static String idArrToStr(List<Integer> idList){
+        return idList.stream()
+                .map(Object::toString)
+                .collect(Collectors.joining(PaperConstant.ID_APART));
     }
 
     //String答案转换list

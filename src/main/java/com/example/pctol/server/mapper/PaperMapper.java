@@ -1,9 +1,12 @@
 package com.example.pctol.server.mapper;
 
+import com.example.pctol.common.constant.OperationType;
 import com.example.pctol.pojo.DTO.PaperSearchDTO;
 import com.example.pctol.pojo.entity.Paper;
 import com.example.pctol.pojo.entity.PaperDetail;
 import com.example.pctol.pojo.entity.PaperTopic;
+import com.example.pctol.server.annotation.AutoFill;
+import org.apache.ibatis.annotations.Insert;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Select;
 
@@ -29,4 +32,11 @@ public interface PaperMapper {
 
     //保存到paper_topic
     void insertPaperTopic(List<PaperTopic> paperTopics);
+
+    @AutoFill(OperationType.INSERT)
+    void insert(Paper paper);
+
+    @AutoFill(OperationType.INSERT)
+    @Insert("insert into paper_detail")
+    void insertDetail(PaperDetail paperDetail);
 }

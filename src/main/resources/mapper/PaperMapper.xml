@@ -20,6 +20,10 @@
             )
         </foreach>
     </insert>
+    <insert id="insert" useGeneratedKeys="true" keyProperty="id" keyColumn="id">
+        insert into paper(title,description,create_time,update_time,duration,launcher,subject_id,total_marks,difficulty,display)
+        values(#{title},#{description},#{createTime},#{updateTime},#{duration},#{launcher},#{subjectId},#{totalMarks},#{difficulty},#{display})
+    </insert>
 
 
     <select id="count" resultType="java.lang.Integer">

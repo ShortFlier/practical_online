@@ -9,6 +9,7 @@ import com.example.pctol.common.utils.Util;
 import com.example.pctol.pojo.DTO.PaperSearchDTO;
 import com.example.pctol.pojo.DTO.SmtAswListDTO;
 import com.example.pctol.pojo.DTO.SmtPaperDTO;
+import com.example.pctol.pojo.DTO.TestRdmDTO;
 import com.example.pctol.pojo.VO.*;
 import com.example.pctol.pojo.entity.*;
 
@@ -25,6 +26,7 @@ import com.example.pctol.server.service.TopicService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import static com.example.pctol.common.constant.TopicConstant.TOPIC_TYPE_ARRAY;
 
@@ -228,5 +230,65 @@ public class PaperServiceImpl implements PaperService {
             }
         }
         return maskArr;
+    }
+
+    //随机组卷
+    @Transactional(rollbackFor = Exception.class)
+    @Override
+    public Result randomC(TestRdmDTO testRdmDTO) throws Exception {
+        Paper paper=new Paper(testRdmDTO);
+        //写入paper表，获取写入id
+        paperMapper.insert(paper);
+        PaperDetail paperDetail=new PaperDetail(testRdmDTO, paper.getId());
+        //随机组卷
+        List topicList=new ArrayList<>();
+        for(int i=0; i<5; ++i){
+            int[] topicDistr;
+            if(paperDetail.getMask(i)>0){
+                //获取难度分布数据
+                topicDistr=topicCountCompute(Character.getNumericValue(paper.getDifficulty()),testRdmDTO.getTopicNumbers().get(i));
+                for (int j = 0; j < 5; j++) {   //检索不同难度数据库，随机获取题目id
+                    if(topicDistr[j]>0){
+//                        System.out.println(TOPIC_TYPE_ARRAY[j]+"——difficulty："+j+1+"——count："+topicDistr[j]);
+                        List<Integer> list=topicService.getTopicMapper(TOPIC_TYPE_ARRAY[i]).randomC(j+1,topicDistr[j]);
+                        if(list.size()<topicDistr[j])
+                            throw new Exception(MsgConstant.Lack_TOPIC);
+                        topicList.add(list);
+                    }
+                }
+                //题目检索完毕，转箱成String保存
+                paperDetail.setIds(TOPIC_TYPE_ARRAY[i],topicList);
+                topicList.clear();
+            }
+        }
+        paperMapper.insertDetail(paperDetail);
+        return Result.success(paper);
+    }
+
+    //传入难度，总题目数，输出各个难度题目数
+    private int[] topicCountCompute(int difficulty,int topicTotal){
+        int[] topicDistr=new int[5];
+        double[] difficultyDistr ;
+        switch (difficulty) {
+            case 1:
+                difficultyDistr = new double[]{0.4, 0.3, 0.1, 0.1, 0.1};break;
+            case 2:
+                difficultyDistr = new double[]{0.2, 0.4, 0.2, 0.1, 0.1};break;
+            case 3:
+                difficultyDistr = new double[]{0.1, 0.2, 0.4, 0.2, 0.1};break;
+            case 4:
+                difficultyDistr = new double[]{0.1, 0.1, 0.2, 0.4, 0.2};break;
+            case 5:
+                difficultyDistr = new double[]{0.1, 0.1, 0.1, 0.3, 0.4};break;
+            default:
+                difficultyDistr = new double[]{0.2, 0.2, 0.2, 0.2, 0.2};
+        }
+        int sum=0;
+        for (int i = 0; i < 5; i++) {
+            topicDistr[i]= (int) (topicTotal*difficultyDistr[i]);
+            sum+=topicDistr[i];
+        }
+        topicDistr[difficulty-1]+=(topicTotal-sum);
+        return topicDistr;
     }
 }

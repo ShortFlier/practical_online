@@ -21,4 +21,6 @@ public interface TopicPublic {
     List<TopicVO> getList(TopicSearchInfoDTO topicSearchInfoDTO);
 
     List<Topic> getByIds(List ids);
+
+    List<Integer> randomC(int difficulty, int count);
 }

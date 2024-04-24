@@ -3,6 +3,7 @@ package com.example.pctol.server.controller;
 import com.example.pctol.common.constant.MsgConstant;
 import com.example.pctol.pojo.DTO.PaperSearchDTO;
 import com.example.pctol.pojo.DTO.SmtPaperDTO;
+import com.example.pctol.pojo.DTO.TestRdmDTO;
 import com.example.pctol.pojo.VO.Result;
 import com.example.pctol.server.service.PaperService;
 import lombok.extern.slf4j.Slf4j;
@@ -64,5 +65,13 @@ public class PaperController {
         log.info("交卷信息：{}",smtPaperDTO);
         paperService.testSubmit(smtPaperDTO);
         return Result.success(MsgConstant.SUCCESS);
+    }
+
+    @PutMapping("/random")
+    public Result randomCrt(@RequestBody TestRdmDTO testRdmDTO) throws Exception {
+        log.info("**********************************[/paper/random]************************************");
+        log.info("组卷信息：{}",testRdmDTO);
+        Result result=paperService.randomC(testRdmDTO);
+        return result;
     }
 }

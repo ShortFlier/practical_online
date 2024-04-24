@@ -19,7 +19,7 @@ public class TestRdmDTO {
     private List<Integer> topicNumbers;
     private char difficulty;
     private List<Integer> topicMarks;
-    private int subjectId;
+    private long subjectId;
     private int totalMarks;
     private char display;
     private String title;

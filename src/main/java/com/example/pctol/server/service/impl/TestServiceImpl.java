@@ -3,7 +3,9 @@ package com.example.pctol.server.service.impl;
 import com.example.pctol.common.constant.TopicConstant;
 import com.example.pctol.common.utils.Util;
 import com.example.pctol.pojo.DTO.StuTestHisDTO;
+import com.example.pctol.pojo.DTO.TestRdmDTO;
 import com.example.pctol.pojo.VO.*;
+import com.example.pctol.pojo.entity.Paper;
 import com.example.pctol.pojo.entity.Test;
 import com.example.pctol.pojo.entity.Topic;
 import com.example.pctol.server.mapper.SubjectMapper;
@@ -12,6 +14,7 @@ import com.example.pctol.server.service.PaperService;
 import com.example.pctol.server.service.TestService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -63,4 +66,6 @@ public class TestServiceImpl implements TestService {
 
         return Result.success(paperDetailVO);
     }
+
+
 }

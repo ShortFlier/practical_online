@@ -18,4 +18,6 @@ public class MsgConstant {
     public static final String EMAIL_FORMAT_ERROR="邮箱格式错误";
 
     public static final String SUCCESS_SUBMIT_WAIT_AUDIT="提交成功，等待审核";
+
+    public static final String Lack_TOPIC="题库题目数目不足！！！";
 }

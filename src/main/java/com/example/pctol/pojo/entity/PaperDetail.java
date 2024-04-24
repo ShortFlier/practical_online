@@ -1,11 +1,14 @@
 package com.example.pctol.pojo.entity;
 
 import com.example.pctol.common.constant.TopicConstant;
+import com.example.pctol.common.utils.Util;
+import com.example.pctol.pojo.DTO.TestRdmDTO;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import java.time.LocalDateTime;
+import java.util.List;
 
 /**
  * @author hp
@@ -34,6 +37,15 @@ public class PaperDetail {
 
     private LocalDateTime createTime; // 创建时间
     private LocalDateTime updateTime; // 更新时间
+
+    public PaperDetail(TestRdmDTO testRdmDTO, Long id) {
+        paperId=id;
+        radioMarks= testRdmDTO.getTopicNumbers().get(0);
+        mulMarks= testRdmDTO.getTopicNumbers().get(1);
+        judgMarks= testRdmDTO.getTopicNumbers().get(2);
+        fitbMarks= testRdmDTO.getTopicNumbers().get(3);
+        vocMarks= testRdmDTO.getTopicNumbers().get(4);
+    }
 
     public String getIds(int type){
         switch (type){
@@ -64,6 +76,22 @@ public class PaperDetail {
             case TopicConstant.VOCABULARY_QST:
                 return getVocMarks();
             default: return 0;
+        }
+    }
+
+    public void setIds(int type, List<Integer> list){
+        switch (type){
+            case TopicConstant.RADIOES:
+                radioIds= Util.idArrToStr(list);break;
+            case TopicConstant.MULTIPLE_CHOICES:
+                mulIds= Util.idArrToStr(list);break;
+            case TopicConstant.JUDGMENT:
+                judgIds= Util.idArrToStr(list);break;
+            case TopicConstant.FILL_IN_THE_BLANK:
+                fitbIds= Util.idArrToStr(list);break;
+            case TopicConstant.VOCABULARY_QST:
+                vocIds= Util.idArrToStr(list);break;
+            default: ;
         }
     }
 

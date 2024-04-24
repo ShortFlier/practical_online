@@ -8,6 +8,7 @@ import com.example.pctol.pojo.VO.TopicVO;
 import com.example.pctol.pojo.entity.Topic;
 import com.example.pctol.server.annotation.AutoFill;
 import org.apache.ibatis.annotations.Mapper;
+import org.apache.ibatis.annotations.Select;
 import org.apache.ibatis.annotations.Update;
 
 import java.time.LocalDateTime;
@@ -37,4 +38,7 @@ public interface JudgMapper extends TopicPublic{
     Topic getRandom(PracticalDTO practicalDTO);
 
     List<Topic> getByIds(List ids);
+
+    @Select("select id from judgment where difficulty=#{difficulty} order by rand() limit 0,#{count}")
+    List<Integer> randomC(int difficulty, int count);
 }

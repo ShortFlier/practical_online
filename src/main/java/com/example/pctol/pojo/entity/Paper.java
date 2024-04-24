@@ -1,5 +1,7 @@
 package com.example.pctol.pojo.entity;
 
+import com.example.pctol.common.properties.BaseContext;
+import com.example.pctol.pojo.DTO.TestRdmDTO;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -38,5 +40,16 @@ public class Paper {
         this.totalMarks = paper.getTotalMarks();
         this.difficulty = paper.getDifficulty();
         this.display=paper.getDisplay();
+    }
+
+    public Paper(TestRdmDTO testRdmDTO){
+        title=testRdmDTO.getTitle();
+        description= testRdmDTO.getDescription();
+        duration= testRdmDTO.getDuration();
+        subjectId=testRdmDTO.getSubjectId();
+        difficulty=testRdmDTO.getDifficulty();
+        display=testRdmDTO.getDisplay();
+        totalMarks= testRdmDTO.getTotalMarks();
+        launcher= BaseContext.getLoginInfo();
     }
 }

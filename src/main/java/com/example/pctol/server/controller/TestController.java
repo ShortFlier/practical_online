@@ -38,11 +38,5 @@ public class TestController {
     }
 
 
-    @PutMapping("/random")
-    public Result randomCrt(@RequestBody TestRdmDTO testRdmDTO){
-        log.info("**********************************[/test/random]************************************");
-        log.info("组卷信息：{}",testRdmDTO);
-        Result result;
-        return null;
-    }
+
 }
