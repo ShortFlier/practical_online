@@ -68,9 +68,11 @@ public class Util {
 
     //list的ids转String
     public static String idArrToStr(List<Integer> idList){
-        return idList.stream()
-                .map(Object::toString)
-                .collect(Collectors.joining(PaperConstant.ID_APART));
+        String ids="";
+        for (int i=0;i<idList.size();++i) {
+            ids+=idList.get(i)+PaperConstant.ID_APART;
+        }
+        return ids;
     }
 
     //String答案转换list

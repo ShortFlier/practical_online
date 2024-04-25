@@ -244,16 +244,16 @@ public class PaperServiceImpl implements PaperService {
         List topicList=new ArrayList<>();
         for(int i=0; i<5; ++i){
             int[] topicDistr;
-            if(paperDetail.getMask(i)>0){
+            if(paperDetail.getMask(TOPIC_TYPE_ARRAY[i])>0){
                 //获取难度分布数据
                 topicDistr=topicCountCompute(Character.getNumericValue(paper.getDifficulty()),testRdmDTO.getTopicNumbers().get(i));
                 for (int j = 0; j < 5; j++) {   //检索不同难度数据库，随机获取题目id
                     if(topicDistr[j]>0){
-//                        System.out.println(TOPIC_TYPE_ARRAY[j]+"——difficulty："+j+1+"——count："+topicDistr[j]);
+                        System.out.println(TOPIC_TYPE_ARRAY[j]+"——difficulty："+(j+1)+"——count："+topicDistr[j]);
                         List<Integer> list=topicService.getTopicMapper(TOPIC_TYPE_ARRAY[i]).randomC(j+1,topicDistr[j]);
                         if(list.size()<topicDistr[j])
                             throw new Exception(MsgConstant.Lack_TOPIC);
-                        topicList.add(list);
+                        topicList.addAll(list);
                     }
                 }
                 //题目检索完毕，转箱成String保存

@@ -30,7 +30,7 @@ public class LoginCheckInterceptor implements HandlerInterceptor {
         String url=request.getRequestURL().toString();
 
 
-        if (url.contains("login")|url.contains("register")){
+        if (url.contains("login")|url.contains("register")|url.contains("/paper/look/")){
 
             return true;
         }
