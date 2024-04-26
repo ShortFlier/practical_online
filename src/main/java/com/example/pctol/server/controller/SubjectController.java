@@ -96,4 +96,6 @@ public class SubjectController {
         Result result=subjectService.thGet(pageInfo);
         return result;
     }
+
+    //根据id获取学科信息
 }

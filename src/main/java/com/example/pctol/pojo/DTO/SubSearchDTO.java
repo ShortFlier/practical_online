@@ -12,6 +12,8 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @Data
 public class SubSearchDTO {
+
+    private Long id;
     private String key;
     private PageInfo pageInfo;
 

@@ -53,9 +53,14 @@
             <if test="subSearchDTO.key!=null">
                 and lower(subject.name) LIKE concat('%',lower(#{subSearchDTO.key}),'%')
             </if>
+            <if test="subSearchDTO.id!=null">
+                and subject.id=#{subSearchDTO.id}
+            </if>
         </where>
         GROUP BY subject.id, subject.name, subject.create_time, subject.launcher
-        LIMIT #{start}, #{pageSize}
+        <if test="pageSize!=0">
+            LIMIT #{start}, #{pageSize}
+        </if>
     </select>
 
     <select id="getLikeName" parameterType="java.lang.String" resultType="com.example.pctol.pojo.VO.SubVO">

@@ -1,5 +1,6 @@
 package com.example.pctol.pojo.DTO;
 
+import com.example.pctol.common.utils.Util;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -14,4 +15,8 @@ import lombok.NoArgsConstructor;
 public class LoginDTO {
     private String account;
     private String password;
+
+    public void md5Pwd(){
+        password= Util.encrypt(password);
+    }
 }

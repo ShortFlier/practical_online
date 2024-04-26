@@ -2,6 +2,7 @@ package com.example.pctol.server.service.impl;
 
 import com.example.pctol.common.constant.StateCode;
 import com.example.pctol.common.properties.JWTproperties;
+import com.example.pctol.common.utils.Util;
 import com.example.pctol.pojo.DTO.LoginDTO;
 import com.example.pctol.pojo.VO.Result;
 import com.example.pctol.pojo.entity.Admin;
@@ -26,6 +27,7 @@ public class AdminServiceImpl implements AdminService {
     private AdminMapper adminMapper;
     @Override
     public Result login(LoginDTO admin) {
+        admin.setPassword(Util.encrypt(admin.getPassword()));
         Admin adminInfo=adminMapper.login(admin.getAccount());
         //账号不存在
         if (adminInfo==null)

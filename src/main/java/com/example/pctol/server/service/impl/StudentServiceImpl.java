@@ -4,6 +4,7 @@ import com.example.pctol.common.constant.MsgConstant;
 import com.example.pctol.common.constant.StateCode;
 import com.example.pctol.common.properties.JWTproperties;
 import com.example.pctol.common.utils.FormatCheck;
+import com.example.pctol.common.utils.Util;
 import com.example.pctol.pojo.DTO.LoginDTO;
 import com.example.pctol.pojo.DTO.StuSearchDTO;
 import com.example.pctol.pojo.VO.PageResult;
@@ -31,6 +32,7 @@ public class StudentServiceImpl implements StudentService {
     private StudentMapper studentMapper;
     @Override
     public Result login(LoginDTO loginInfo) {
+        loginInfo.md5Pwd();
         Student student=studentMapper.login(loginInfo.getAccount());
         //账号不存在
         if (student==null)
@@ -79,6 +81,7 @@ public class StudentServiceImpl implements StudentService {
         //校验账号、密码、邮箱是否合法
         FormatCheck.checkAccount(student.getAccount());
         FormatCheck.checkPsd(student.getPassword());
+        student.setPassword(Util.encrypt(student.getPassword()));
         FormatCheck.checkEmail(student.getEmail());
         studentMapper.insert(student);
         //获取id

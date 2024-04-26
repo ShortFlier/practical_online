@@ -5,11 +5,14 @@ import com.example.pctol.common.constant.TopicConstant;
 import com.example.pctol.pojo.VO.SubVO;
 import com.example.pctol.server.controller.PaperController;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.util.DigestUtils;
 
 import java.util.Optional;
 import java.util.Random;
 import java.util.stream.Collectors;
 import java.util.List;
+
+import static org.apache.poi.poifs.crypt.HashAlgorithm.md5;
 
 /**
  * @author hp
@@ -78,5 +81,10 @@ public class Util {
     //String答案转换list
     public static List anwStrToArr(String answer){
         return List.of(answer.split(TopicConstant.ANSWER_APART));
+    }
+
+    //md5加密
+    public static String encrypt(String target){
+        return DigestUtils.md5DigestAsHex(target.getBytes());
     }
 }

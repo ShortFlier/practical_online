@@ -114,7 +114,7 @@ public class SubjectServiceImpl implements SubjectService {
     }
 
     private SubInfoVo selectNotNull(String name) throws Exception {
-        SubSearchDTO subSearchDTO=new SubSearchDTO(name,null);
+        SubSearchDTO subSearchDTO=new SubSearchDTO(null,name,null);
         List<SubInfoVo> list=subjectMapper.getData(subSearchDTO, Constant.DEFAULT_PAGE_START,Constant.DEFAULT_PAGE_SIZE);
         System.out.println("subInfoVO-list:"+list);
         SubInfoVo subInfoVo=list.get(0);
