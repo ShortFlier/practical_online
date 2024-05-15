@@ -5,6 +5,7 @@ import com.example.pctol.pojo.DTO.PaperSearchDTO;
 import com.example.pctol.pojo.DTO.SmtPaperDTO;
 import com.example.pctol.pojo.DTO.TestRdmDTO;
 import com.example.pctol.pojo.VO.Result;
+import com.example.pctol.pojo.entity.Paper;
 import com.example.pctol.server.service.PaperService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -72,6 +73,14 @@ public class PaperController {
         log.info("**********************************[/paper/random]************************************");
         log.info("组卷信息：{}",testRdmDTO);
         Result result=paperService.randomC(testRdmDTO);
+        return result;
+    }
+
+    @PutMapping("/update")
+    public Result update(@RequestBody Paper paper){
+        log.info("**********************************[/paper/update]************************************");
+        log.info("更新信息：{}",paper);
+        Result result=paperService.update(paper);
         return result;
     }
 }

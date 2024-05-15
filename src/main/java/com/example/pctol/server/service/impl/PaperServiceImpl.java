@@ -265,6 +265,12 @@ public class PaperServiceImpl implements PaperService {
         return Result.success(paper);
     }
 
+    @Override
+    public Result update(Paper paper) {
+        paperMapper.update(paper);
+        return Result.success();
+    }
+
     //传入难度，总题目数，输出各个难度题目数
     private int[] topicCountCompute(int difficulty,int topicTotal){
         int[] topicDistr=new int[5];

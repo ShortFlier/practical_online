@@ -40,4 +40,7 @@ public interface PaperMapper {
     @Insert("insert into paper_detail(paper_id,radio_marks,radio_ids,mul_marks,mul_ids,judg_marks,judg_ids,fitb_marks,fitb_ids,voc_marks,voc_ids,create_time,update_time) " +
             "values (#{paperId},#{radioMarks},#{radioIds},#{mulMarks},#{mulIds},#{judgMarks},#{judgIds},#{fitbMarks},#{fitbIds},#{vocMarks},#{vocIds},#{createTime},#{updateTime})")
     void insertDetail(PaperDetail paperDetail);
+
+    @AutoFill(OperationType.UPDATE)
+    void update(Paper paper);
 }

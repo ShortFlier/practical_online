@@ -83,7 +83,7 @@ public class Radioes extends Topic{
     public Radioes setPublic(){
         createTime=updateTime=LocalDateTime.now();
         launcher= BaseContext.getLoginInfo().split("#")[1];
-        auditState= AuditState.AWAIT;
+        auditState= subjectId==null?AuditState.AWAIT:AuditState.ACCESS;
         return this;
     }
 

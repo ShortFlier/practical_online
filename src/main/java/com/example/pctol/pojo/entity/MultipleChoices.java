@@ -85,7 +85,7 @@ public class MultipleChoices extends Topic{
             throw new ExcelFormatException(ExcelConstant.MULTIPLE_CHOICES_ANSWER_ERROR);
         createTime=updateTime=LocalDateTime.now();
         launcher= BaseContext.getLoginInfo().split("#")[1];
-        auditState= AuditState.AWAIT;
+        auditState= subjectId==null?AuditState.AWAIT:AuditState.ACCESS;
         return this;
     }
 

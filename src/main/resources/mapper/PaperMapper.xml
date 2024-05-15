@@ -25,6 +25,17 @@
         values(#{title},#{description},#{createTime},#{updateTime},#{duration},#{launcher},#{subjectId},#{totalMarks},#{difficulty},#{display})
     </insert>
 
+    <update id="update">
+        update paper
+        <set>
+            update_time=#{updateTime},display=#{display}
+            <if test="subjectId!=null">
+                ,subject_id=#{subjectId}
+            </if>
+        </set>
+        where id=#{id}
+    </update>
+
 
     <select id="count" resultType="java.lang.Integer">
         select count(*)

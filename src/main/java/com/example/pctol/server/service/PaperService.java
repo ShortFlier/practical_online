@@ -20,4 +20,6 @@ public interface PaperService {
     void testSubmit(SmtPaperDTO smtPaperDTO);
 
     Result randomC(TestRdmDTO testRdmDTO) throws Exception;
+
+    Result update(Paper paper);
 }
