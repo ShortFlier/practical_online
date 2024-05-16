@@ -8,4 +8,41 @@
         insert into team(name,description,th_id,invitation_code,create_time,update_time)
         values(#{name},#{description},#{thId},#{invitationCode},#{createTime},#{updateTime})
     </insert>
+
+
+    <update id="workUpdate">
+        update homework
+        <set>
+            update_time=#{updateTime}
+            <if test="difficulty!=null">
+                ,difficulty=#{difficulty}
+            </if>
+            <if test="subjectId!=null">
+                ,subject_id=#{subjectId}
+            </if>
+            <if test="createTime!=null">
+                ,create_time=#{createTime}
+            </if>
+            <if test="overTime!=null">
+                ,over_time=#{overTime}
+            </if>
+            <if test="radios!=null">
+                ,radios=#{radios}
+            </if>
+            <if test="muls!=null">
+                ,muls=#{muls}
+            </if>
+            <if test="judg!=null">
+                ,judg=#{judg}
+            </if>
+            <if test="fitb!=null">
+                ,fitb=#{fitb}
+            </if>
+            <if test="vocal!=null">
+                ,vocal=#{vocal}
+            </if>
+        </set>
+        where
+            team_id=#{teamId}
+    </update>
 </mapper>

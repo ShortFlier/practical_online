@@ -1,6 +1,8 @@
 package com.example.pctol.server.controller;
 
 import com.example.pctol.pojo.VO.Result;
+import com.example.pctol.pojo.VO.StuTeamVO;
+import com.example.pctol.pojo.entity.Homework;
 import com.example.pctol.pojo.entity.Team;
 import com.example.pctol.server.service.TeamService;
 import lombok.extern.slf4j.Slf4j;
@@ -61,10 +63,45 @@ public class TeamController {
     }
 
     @GetMapping("/memberGet")
-    public Result memberGet(int teamID,int page, int pageSize){
+    public Result memberGet(int teamId,int page, int pageSize){
         log.info("**********************************[/team/memberGet]************************************");
-        log.info("teamId：{}，page：{}，pageSize：{}",teamID,page,pageSize);
-        List list=teamService.memberGet(teamID,page,pageSize);
+        log.info("teamId：{}，page：{}，pageSize：{}",teamId,page,pageSize);
+        List list=teamService.memberGet(teamId,page,pageSize);
         return Result.success(list);
+    }
+
+    //加入学习小组
+    @PostMapping("/join")
+    public Result join(String code,Long stuId){
+        log.info("**********************************[/team/join]************************************");
+        log.info("code：{}，stuId：{}，",code,stuId);
+        Result result=teamService.join(code,stuId);
+        return result;
+    }
+
+    //作业
+    @GetMapping("/homework/{teamId}")
+    public Result workGet(@PathVariable long teamId){
+        log.info("**********************************[/team/homework/{teamId}]************************************");
+        log.info("teamId：{}，",teamId);
+        Result result=teamService.workGet(teamId);
+        return result;
+    }
+
+    //作业布置
+    @PutMapping("/homework/set")
+    public Result workSet(@RequestBody Homework homework){
+        log.info("**********************************[/team/homework/set]************************************");
+        log.info("作业布置信息：{}，",homework);
+        Result result=teamService.workSet(homework);
+        return result;
+    }
+
+    @GetMapping("/stuTeam")
+    public Result stuTeam(long stuId){
+        log.info("**********************************[/team/stuTeam]************************************");
+        log.info("stuId：{}，",stuId);
+        List<StuTeamVO> stuTeamVOList=teamService.stuTeam(stuId);
+        return Result.success(stuTeamVOList);
     }
 }

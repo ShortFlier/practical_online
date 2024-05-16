@@ -31,6 +31,10 @@ public class Result {
         this.code=code;
     }
 
+    public static Result error(String msg){
+        return new Result(StateCode.FAILED,msg,null);
+    }
+
     public static Result success(String msg){
         return new Result(StateCode.SUCCESS,msg);
     }

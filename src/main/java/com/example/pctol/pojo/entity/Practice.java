@@ -22,4 +22,6 @@ public class Practice {
     private LocalDateTime createTime;
     private LocalDateTime updateTime;
     private Integer grade;
+
+    private Long subjectId;
 }

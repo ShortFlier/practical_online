@@ -27,4 +27,7 @@ public interface TeacherMapper {
     @Insert("insert into teacher(account,name,password,email,phone,create_time,update_time)" +
             "values (#{account},#{name},#{password},#{email},#{phone},#{createTime},#{updateTime})")
     void insert(Teacher teacher);
+
+    @Select("select th_id,account,name,email,phone,create_time,update_time from teacher where th_id=#{id}")
+    Teacher getById(long id);
 }
