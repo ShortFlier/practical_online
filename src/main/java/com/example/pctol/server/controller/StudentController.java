@@ -56,4 +56,12 @@ public class StudentController {
         Result result=studentService.regist(student);
         return result;
     }
+
+    @GetMapping("/idGet")
+    public Result getById(long id){
+        log.info("**********************************[/student/register]************************************");
+        log.info("学生id：{}",id);
+        Student student=studentService.getById(id);
+        return Result.success(student);
+    }
 }

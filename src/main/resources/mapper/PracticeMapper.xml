@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.example.pctol.server.mapper.PracticeMapper">
+
+    <select id="all" resultType="com.example.pctol.pojo.VO.TopicVO">
+        select type,id
+        from practice
+        <where>
+            submit_id=#{gradeSechVO.stuId}  and type=#{type}
+            <if test="gradeSechVO.subjectId!=null">
+                and subject_id=#{gradeSechVO.subjectId}
+            </if>
+            <if test="gradeSechVO.begin!=null">
+                and create_time >= #{gradeSechVO.begin}
+            </if>
+            <if test="gradeSechVO.end!=null">
+                and create_time <![CDATA[<=]]> #{gradeSechVO.end}
+            </if>
+        </where>
+    </select>
+
+    <select id="rate" resultType="com.example.pctol.pojo.entity.Practice">
+        select grade
+        from practice
+        <where>
+            submit_id=#{gradeSechVO.stuId}  and type=#{type}
+            <if test="gradeSechVO.subjectId!=null">
+                and subject_id=#{gradeSechVO.subjectId}
+            </if>
+            <if test="gradeSechVO.begin!=null">
+                and create_time >= #{gradeSechVO.begin}
+            </if>
+            <if test="gradeSechVO.end!=null">
+                and create_time <![CDATA[<=]]> #{gradeSechVO.end}
+            </if>
+        </where>
+    </select>
+    <select id="dateGet" resultType="java.time.LocalDate" >
+        select create_time
+        from practice
+        <where>
+            submit_id=#{stuId}
+            <if test="subjectId!=null">
+                and subject_id=#{subjectId}
+            </if>
+            <if test="begin!=null">
+                and create_time >= #{begin}
+            </if>
+            <if test="end!=null">
+                and create_time <![CDATA[<=]]> #{end}
+            </if>
+        </where>
+        order by create_time
+    </select>
+</mapper>

@@ -88,4 +88,9 @@ public class StudentServiceImpl implements StudentService {
         long id=studentMapper.login(student.getAccount()).getStuId();
         return Result.success(MsgConstant.SUCCESS,id);
     }
+
+    @Override
+    public Student getById(long id) {
+        return studentMapper.getById(id);
+    }
 }

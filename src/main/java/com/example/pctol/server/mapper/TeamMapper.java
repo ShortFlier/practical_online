@@ -55,4 +55,7 @@ public interface TeamMapper {
 
     @Select("select id,name,description,th_id,invitation_code,team.create_time,update_time from team,members where team.id=members.team_id and stu_id=#{stuId}")
     List<Team> getsByStu(long stuId);
+
+    @Delete("delete from members where team_id=#{teamId} and stu_id=#{stuId}")
+    void dleMeber(long teamId, long stuId);
 }

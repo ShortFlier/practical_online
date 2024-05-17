@@ -31,4 +31,8 @@ public interface TeamService {
     Result workSet(Homework homework);
 
     List<StuTeamVO> stuTeam(long stuId);
+
+    void exit(long teamId, long stuId);
+
+    StuTeamVO stuWork(long teamId, long stuId);
 }

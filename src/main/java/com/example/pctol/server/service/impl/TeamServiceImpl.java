@@ -74,6 +74,12 @@ public class TeamServiceImpl implements TeamService {
     @Override
     public List memberGet(int teamId, int page, int pageSize) {
         List<MemberVO> memberVOList=teamMapper.memberGet(teamId,pageSize,(page-1)*pageSize);
+        for (int i = 0; i < memberVOList.size(); i++) {
+            Homework homework=teamMapper.getHomeworkById(teamId);
+            if(homework!=null){
+                memberVOList.get(i).setFinish(workSts(homework,memberVOList.get(i).getStuId()));
+            }
+        }
         return memberVOList;
     }
 
@@ -138,10 +144,24 @@ public class TeamServiceImpl implements TeamService {
             //作业完成率计算
             //获取作业信息
             Homework homework=teamMapper.getHomeworkById(teamList.get(i).getId());
-            stuTeamVO.setFinish(workSts(homework,stuId));
+            if(homework!=null)
+                stuTeamVO.setFinish(workSts(homework,stuId));
             stuTeamVOList.add(stuTeamVO);
         }
         return stuTeamVOList;
+    }
+
+    @Override
+    public void exit(long teamId, long stuId) {
+        teamMapper.dleMeber(teamId,stuId);
+    }
+
+    @Override
+    public StuTeamVO stuWork(long teamId, long stuId) {
+        Homework homework=teamMapper.getHomeworkById(teamId);
+        StuTeamVO stuTeamVO=new StuTeamVO();
+        stuTeamVO.setFinish(workSts(homework,stuId));
+        return stuTeamVO;
     }
 
     private int[] workSts(Homework homework,long stuId){

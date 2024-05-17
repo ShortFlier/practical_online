@@ -19,4 +19,6 @@ public interface StudentService {
     Result getInfoByAct(String account);
 
     Result regist(Student student) throws Exception;
+
+    Student getById(long id);
 }

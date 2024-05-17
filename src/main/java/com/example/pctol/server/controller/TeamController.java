@@ -104,4 +104,20 @@ public class TeamController {
         List<StuTeamVO> stuTeamVOList=teamService.stuTeam(stuId);
         return Result.success(stuTeamVOList);
     }
+
+    @DeleteMapping("/exit")
+    public Result exit(long teamId,long stuId){
+        log.info("**********************************[/team/exit]************************************");
+        log.info("stuId：{}，teamId：{}",stuId,teamId);
+        teamService.exit(teamId,stuId);
+        return Result.success("已退出小组");
+    }
+
+    @GetMapping("/stuWork")
+    public Result workInfoGet(long teamId,long stuId){
+        log.info("**********************************[/team/stuWork]************************************");
+        log.info("stuId：{}，teamId：{}",stuId,teamId);
+        StuTeamVO arr=teamService.stuWork(teamId,stuId);
+        return Result.success(arr);
+    }
 }

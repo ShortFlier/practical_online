@@ -17,12 +17,12 @@ public class StuTeamVO {
     private Long th_id;
     private String thName;
     //完成，数字表示
-    private int[] finish;
+    private int[] finishs;
     //完成，百分比表示
     private String finishRate;
 
     public void setFinish(int[] arr){
-        finish=arr;
+        finishs=arr;
         //计算完成率
         int u=0,v=0;
         for (int i = 0; i < 5; i++) {

@@ -27,4 +27,7 @@ public interface StudentMapper {
     @Insert("insert into student(account,name,password,email,phone,create_time,update_time)" +
             "values (#{account},#{name},#{password},#{email},#{phone},#{createTime},#{updateTime})")
     void insert(Student student);
+
+    @Select("select stu_id,account,name,email,phone,create_time,update_time from student where stu_id=#{id}")
+    Student getById(long id);
 }
