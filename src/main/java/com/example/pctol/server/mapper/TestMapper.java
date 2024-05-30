@@ -34,4 +34,6 @@ public interface TestMapper {
 
     @Select("select submit_answer,grade from paper_topic where test_id=#{testId} and topic_id=#{topicId} and type=#{type}")
     TopicTestVO getSmtAsw(Long testId, Long topicId,int type);
+
+    Integer totalHis(StuTestHisDTO stuTestHisDTO);
 }

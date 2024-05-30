@@ -30,4 +30,23 @@
             limit #{start},#{pageSize}
         </if>
     </select>
+
+
+    <select id="totalHis" resultType="java.lang.Integer">
+        select count(*)
+        from test
+        left outer join paper on test.paper_id=paper.id
+        left outer join student on test.student_id=student.stu_id
+        <where>
+            <if test="testId!=null">
+                test.id=#{testId}
+            </if>
+            <if test="studentId!=null">
+                and  student_id=#{studentId}
+            </if>
+            <if test="subjectId!=null">
+                and  subject_id=#{subjectId}
+            </if>
+        </where>
+    </select>
 </mapper>

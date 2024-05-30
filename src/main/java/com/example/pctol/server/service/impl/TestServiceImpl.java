@@ -12,6 +12,7 @@ import com.example.pctol.server.mapper.SubjectMapper;
 import com.example.pctol.server.mapper.TestMapper;
 import com.example.pctol.server.service.PaperService;
 import com.example.pctol.server.service.TestService;
+import org.ehcache.shadow.org.terracotta.offheapstore.paging.Page;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -35,13 +36,15 @@ public class TestServiceImpl implements TestService {
     @Override
     public Result getHis(StuTestHisDTO stuTestHisDTO) {
         List<TestVO> testVOs=testMapper.getHis(stuTestHisDTO);
+        //获取number
+        Integer total=testMapper.totalHis(stuTestHisDTO);
         //获取SubVO数组
         List<SubVO> subVOList=subjectMapper.getList();
         for (TestVO testVO: testVOs) {
             String name= Util.getSubjectName(testVO.getSubjectId(), subVOList);
             testVO.setSubjectName(name);
         }
-        return Result.success(testVOs);
+        return Result.success(new PageResult(total,testVOs));
     }
 
     @Override
